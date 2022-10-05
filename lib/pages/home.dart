@@ -1,4 +1,4 @@
-import 'package:binokor_web/pages/imagecatalog_page.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
@@ -48,7 +48,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               padding: EdgeInsets.only(left: 100),
               child: Row(children: [
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Home()));
+                  },
                   child: Container(
                     child: Image.asset('assets/images/logo1.png'),
                     width: 200,
@@ -90,9 +93,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                       child: Tab(
                           child: Text('Каталоги',
                               style: TextStyle(
-                                  fontSize: 25,
-                                  fontFamily: UiJ.font,
-                                 ))),
+                                fontSize: 25,
+                                fontFamily: UiJ.font,
+                              ))),
                     ),
                     Container(
                       width: 200,
@@ -100,9 +103,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                           child: Text(
                         'Строительство',
                         style: TextStyle(
-                            fontSize: 25,
-                            fontFamily: UiJ.font,
-                            ),
+                          fontSize: 25,
+                          fontFamily: UiJ.font,
+                        ),
                       )),
                     ),
                     Container(
@@ -111,9 +114,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                           child: Text(
                         'Производство',
                         style: TextStyle(
-                            fontSize: 25,
-                            fontFamily: UiJ.font,
-                            ),
+                          fontSize: 25,
+                          fontFamily: UiJ.font,
+                        ),
                       )),
                     ),
                     Container(
@@ -122,9 +125,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                           child: Text(
                         'Контакты',
                         style: TextStyle(
-                            fontSize: 25,
-                            fontFamily: UiJ.font,
-                            ),
+                          fontSize: 25,
+                          fontFamily: UiJ.font,
+                        ),
                       )),
                     ),
                     // Wrap(
@@ -173,8 +176,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         );
       case 2:
         return MenegersPage();
-      case 3:
-        return ImageCatalogPage();
+      // case 3:
+      //   return ImageCatalogPage();
     }
   }
 }
