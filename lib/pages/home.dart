@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
@@ -37,128 +36,263 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     tabController.index = context.watch<SimpleProvider>().getindextab;
     return Scaffold(
-        backgroundColor: Colors.white,
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(150),
-          child: AppBar(
-            backgroundColor: Colors.white,
-            centerTitle: false,
-            elevation: 0,
-            flexibleSpace: Padding(
-              padding: EdgeInsets.only(left: 100),
-              child: Row(children: [
-                InkWell(
-                  onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Home()));
-                  },
-                  child: Container(
-                    child: Image.asset('assets/images/logo1.png'),
+      backgroundColor: Colors.white,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(150),
+        child: AppBar(
+          backgroundColor: Colors.white,
+          centerTitle: false,
+          elevation: 0,
+          iconTheme: IconThemeData(color: Colors.black, size: 40),
+          flexibleSpace: Padding(
+            padding: EdgeInsets.only(left: 100),
+            child: Row(children: [
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => Home()));
+                },
+                child: Container(
+                  child: Image.asset('assets/images/logo1.png'),
+                  width: 200,
+                  height: 150,
+                ),
+              ),
+              Spacer(),
+              TabBar(
+                controller: tabController,
+                indicatorColor: Colors.white,
+                labelColor: Colors.red,
+                unselectedLabelColor: Colors.black,
+                indicatorWeight: 1,
+                isScrollable: true,
+
+                // indicator: Decoration(BoxPainter(paintBorder())),
+                onTap: (int idx) {
+                  // setState(() {
+                  //
+
+                  // });
+                  tabController.index = idx;
+                  if (idx == 1) {
+                    catalogBloc.add(DskLoadEvent());
+                  }
+                  context.read<SimpleProvider>().changeindextab(idx);
+                  context.read<SimpleProvider>().changeindexpage(1);
+                },
+
+                tabs: [
+                  Container(
+                      width: 200,
+                      child: Tab(
+                          child: AboutMenu_DropDown(
+                        vertical: false,
+                      ))),
+                  Container(
                     width: 200,
-                    height: 150,
+                    child: Tab(
+                        child: Text('Каталоги',
+                            style: TextStyle(
+                              fontSize: 25,
+                              fontFamily: UiJ.font,
+                            ))),
                   ),
-                ),
-                Spacer(),
-                TabBar(
-                  controller: tabController,
-                  indicatorColor: Colors.white,
-                  labelColor: Colors.red,
-                  unselectedLabelColor: Colors.black,
-                  indicatorWeight: 1,
-                  isScrollable: true,
-
-                  // indicator: Decoration(BoxPainter(paintBorder())),
-                  onTap: (int idx) {
-                    // setState(() {
-                    //
-
-                    // });
-                    tabController.index = idx;
-                    if (idx == 1) {
-                      catalogBloc.add(DskLoadEvent());
-                    }
-                    context.read<SimpleProvider>().changeindextab(idx);
-                    context.read<SimpleProvider>().changeindexpage(1);
-                  },
-
-                  tabs: [
-                    Container(
-                        width: 200,
-                        child: Tab(
-                            child: AboutMenu_DropDown(
-                          vertical: false,
-                        ))),
-                    Container(
-                      width: 200,
-                      child: Tab(
-                          child: Text('Каталоги',
-                              style: TextStyle(
-                                fontSize: 25,
-                                fontFamily: UiJ.font,
-                              ))),
-                    ),
-                    Container(
-                      width: 200,
-                      child: Tab(
-                          child: Text(
-                        'Строительство',
-                        style: TextStyle(
-                          fontSize: 25,
-                          fontFamily: UiJ.font,
-                        ),
-                      )),
-                    ),
-                    Container(
-                      width: 200,
-                      child: Tab(
-                          child: Text(
-                        'Производство',
-                        style: TextStyle(
-                          fontSize: 25,
-                          fontFamily: UiJ.font,
-                        ),
-                      )),
-                    ),
-                    Container(
-                      width: 200,
-                      child: Tab(
-                          child: Text(
-                        'Контакты',
-                        style: TextStyle(
-                          fontSize: 25,
-                          fontFamily: UiJ.font,
-                        ),
-                      )),
-                    ),
-                    // Wrap(
-                    //     direction: Axis.horizontal,
-                    //     children: [
-                    //       Text("Личный кабинет",
-                    //           style: TextStyle(
-                    //               fontSize: 25,
-                    //               fontFamily: UiJ.font,
-                    //               color: Colors.black)),
-                    //       // IconButton(
-                    //       //   onPressed: () {},
-                    //       //   icon: Icon(
-                    //       //     Icons.person,
-                    //       //     color: Colors.black,
-                    //       //     size: 50,
-                    //       //   ),
-                    //       // ),
-                    //     ],
-                    //   ),
-                  ],
-                ),
-              ]),
-            ),
-            actions: [],
-            titleTextStyle:
-                TextStyle(fontWeight: FontWeight.w200, fontSize: 45),
+                  Container(
+                    width: 200,
+                    child: Tab(
+                        child: Text(
+                      'Строительство',
+                      style: TextStyle(
+                        fontSize: 25,
+                        fontFamily: UiJ.font,
+                      ),
+                    )),
+                  ),
+                  Container(
+                    width: 200,
+                    child: Tab(
+                        child: Text(
+                      'Производство',
+                      style: TextStyle(
+                        fontSize: 25,
+                        fontFamily: UiJ.font,
+                      ),
+                    )),
+                  ),
+                  Container(
+                    width: 200,
+                    child: Tab(
+                        child: Text(
+                      'Контакты',
+                      style: TextStyle(
+                        fontSize: 25,
+                        fontFamily: UiJ.font,
+                      ),
+                    )),
+                  ),
+                  // Wrap(
+                  //     direction: Axis.horizontal,
+                  //     children: [
+                  //       Text("Личный кабинет",
+                  //           style: TextStyle(
+                  //               fontSize: 25,
+                  //               fontFamily: UiJ.font,
+                  //               color: Colors.black)),
+                  //       // IconButton(
+                  //       //   onPressed: () {},
+                  //       //   icon: Icon(
+                  //       //     Icons.person,
+                  //       //     color: Colors.black,
+                  //       //     size: 50,
+                  //       //   ),
+                  //       // ),
+                  //     ],
+                  //   ),
+                ],
+              ),
+            ]),
           ),
+          actions: [],
+          titleTextStyle: TextStyle(fontWeight: FontWeight.w200, fontSize: 45),
         ),
-        body: selectionPage(context.watch<SimpleProvider>().getindexpage),
-        drawer: DrowerPage());
+      ),
+      body: ListView(
+        children: [
+          Expanded(
+              child: Container(
+                  height: MediaQuery.of(context).size.height,
+                  child: selectionPage(
+                      context.watch<SimpleProvider>().getindexpage))),
+          SizedBox(
+            height: 20,
+          ),
+          Container(
+            color: Colors.black,
+            padding: EdgeInsets.only(left: 100, right: 100, top: 50),
+            child: Column(
+              children: [
+                Container(
+                    alignment: Alignment.topLeft,
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Адрес компании:',
+                              style: TextStyle(
+                                  fontSize: 30,
+                                  fontFamily: UiJ.fontbold,
+                                  color: Colors.white)),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          RichText(
+                            text: TextSpan(children: [
+                              WidgetSpan(
+                                  child: Icon(Icons.location_on_rounded,
+                                      color: Colors.blue)),
+                              TextSpan(
+                                  text: '${UiJ.adress}',
+                                  style: TextStyle(
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.w200,
+                                      fontFamily: UiJ.font,
+                                      color: Colors.white))
+                            ]),
+                          )
+                        ])),
+                SizedBox(
+                  height: 20,
+                ),
+                Container(
+                    alignment: Alignment.topLeft,
+                    child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Icon(
+                            Icons.phone,
+                            color: Colors.blue,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          RichText(
+                            text: TextSpan(children: [
+                              TextSpan(
+                                  text: '${UiJ.phone}  ',
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w200,
+                                      fontFamily: UiJ.font,
+                                      color: Colors.white)),
+                            ]),
+                          )
+                        ])),
+                SizedBox(height: 20,),
+
+                Container(
+                  alignment: Alignment.topLeft,
+                  child: InkWell(
+                      onTap: () {
+                        UiJ.callTelegram;
+                      },
+                      child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Icon(
+                              Icons.telegram,
+                              color: Colors.blue,
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            RichText(
+                              text: TextSpan(children: [
+                                TextSpan(
+                                    text: UiJ.telegram,
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w200,
+                                        fontFamily: UiJ.font,
+                                        color: Colors.white))
+                              ]),
+                            )
+                          ])),
+                ),
+                SizedBox(height: 20,),
+                Container(
+                  alignment: Alignment.topLeft,
+                  child: InkWell(
+                      onTap: () {
+                        // UiJ.callTelegram;
+                      },
+                      child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Icon(
+                              Icons.email,
+                              color: Colors.blue,
+                            ),
+                            SizedBox(width: 10,),
+                            RichText(
+                              text: TextSpan(children: [
+
+                                TextSpan(
+                                    text: "info@dsk.uz",
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w200,
+                                        fontFamily: UiJ.font,
+                                        color: Colors.white))
+                              ]),
+                            )
+                          ])),
+                )
+              ],
+            ),
+          ),
+        ],
+      ),
+      drawer: DrowerPage(),
+    );
   }
 
   selectionPage(int page) {

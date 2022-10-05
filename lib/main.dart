@@ -28,6 +28,7 @@ void main() {
   // client.badCertificateCallback =
   //     (X509Certificate cert, String host, int port) => true;
   HttpOverrides.global = MyHttpOverrides();
+  WidgetsFlutterBinding.ensureInitialized();
 
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (_) => SimpleProvider()),
@@ -46,8 +47,8 @@ class MyApp extends StatelessWidget {
             providers: [
               BlocProvider(
                   create: (context) =>
-                  MakeBloc(repository: context.read<Repository>())
-                    ..add(DskLoadEvent())),
+                      MakeBloc(repository: context.read<Repository>())
+                        ..add(DskLoadEvent())),
               BlocProvider(
                   create: (context) =>
                       CatalogBloc(repository: context.read<Repository>())),
@@ -64,9 +65,10 @@ class MyApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               title: UiJ.companyName,
               theme: ThemeData(
-                  backgroundColor: Colors.black, bottomAppBarColor: Colors.black
-                  //primarySwatch: Colors.black87,
-                  ),
+                backgroundColor: Colors.black, bottomAppBarColor: Colors.black,
+                visualDensity: VisualDensity.adaptivePlatformDensity,
+                //primarySwatch: Colors.black87,
+              ),
               // home: Home(),
               initialRoute: '/',
               routes: {

@@ -22,10 +22,11 @@ class DrowerPage extends StatelessWidget {
       scrollDirection: Axis.vertical,
       children: [
         Container(
-            color: UiJ.color,
+            // color: UiJ.color,
             child: DrawerHeader(
                 decoration: BoxDecoration(
-                    color: Colors.black54,
+                    color: Colors.white,
+
 
                     // borderRadius: BorderRadius.circular(20),
                     border: Border.all(color: Colors.white, width: 0.5)),
@@ -33,7 +34,7 @@ class DrowerPage extends StatelessWidget {
                   children: [
                     Container(
                       child: Image.asset(
-                        'assets/images/logo.png',
+                        'assets/images/logo1.png',
                         width: 200,
                       ),
                     ),
