@@ -11,7 +11,7 @@ import '../widgets/drower.dart';
 import 'catalog_page.dart';
 import 'contact_page.dart';
 import 'first_page.dart';
-import 'house_page.dart';
+import 'kompleks_page.dart';
 import 'menegers_page.dart';
 
 class Home extends StatefulWidget {
@@ -158,11 +158,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
       ),
       body: ListView(
         children: [
-          Expanded(
-              child: Container(
+           Container(
                   height: MediaQuery.of(context).size.height,
                   child: selectionPage(
-                      context.watch<SimpleProvider>().getindexpage))),
+                      context.watch<SimpleProvider>().getindexpage)),
           SizedBox(
             height: 20,
           ),
@@ -226,8 +225,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                             ]),
                           )
                         ])),
-                SizedBox(height: 20,),
-
+                SizedBox(
+                  height: 20,
+                ),
                 Container(
                   alignment: Alignment.topLeft,
                   child: InkWell(
@@ -257,7 +257,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                             )
                           ])),
                 ),
-                SizedBox(height: 20,),
+                SizedBox(
+                  height: 20,
+                ),
                 Container(
                   alignment: Alignment.topLeft,
                   child: InkWell(
@@ -271,10 +273,11 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                               Icons.email,
                               color: Colors.blue,
                             ),
-                            SizedBox(width: 10,),
+                            SizedBox(
+                              width: 10,
+                            ),
                             RichText(
                               text: TextSpan(children: [
-
                                 TextSpan(
                                     text: "info@dsk.uz",
                                     style: TextStyle(
@@ -303,7 +306,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           children: [
             FirstPage(),
             CatalogPage(),
-            HousePage(),
+            KompleksPage(),
             Container(),
             ContactPage(),
           ],

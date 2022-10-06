@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 import 'api/repository.dart';
 import 'bloc/catalog_bloc.dart';
 import 'bloc/dsk_event.dart';
-import 'bloc/house_bloc.dart';
+import 'bloc/Kompleks_bloc.dart';
 import 'bloc/meneger_bloc.dart';
 import 'models/uij.dart';
 
@@ -58,7 +58,7 @@ class MyApp extends StatelessWidget {
                         ..add(DskLoadEvent())),
               BlocProvider(
                   create: (context) =>
-                      HouseBloc(repository: context.read<Repository>())
+                  KompleksBloc(repository: context.read<Repository>())
                         ..add(DskLoadEvent()))
             ],
             child: MaterialApp(

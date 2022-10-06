@@ -7,19 +7,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 import '../bloc/dsk_state.dart';
-import '../bloc/house_bloc.dart';
+import '../bloc/Kompleks_bloc.dart';
 import '../models/Kompleks.dart';
 import '../models/uij.dart';
 
 List<Kompleks> _list = [];
 DateFormat formattedDate = DateFormat('dd-MM-yyyy');
 
-class HousePage extends StatelessWidget {
-  const HousePage({Key? key}) : super(key: key);
+class KompleksPage extends StatelessWidget {
+  const KompleksPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<HouseBloc, DskState>(
+    return BlocConsumer<KompleksBloc, DskState>(
         builder: (context, state) {
           if (state is DskEmtyState) {
             return Center(child: Text("No data!"));
@@ -83,7 +83,7 @@ class HousePage extends StatelessWidget {
                       child: Card(
                           elevation: 5,
                           child: Image.network(
-                              '${UiJ.url}house/download/house/${_list[index].mainimagepath}'))),
+                              '${UiJ.url}kompleks/download/house/${_list[index].mainimagepath}'))),
                   SizedBox(
                     width: 30,
                   ),

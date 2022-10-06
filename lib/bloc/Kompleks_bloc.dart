@@ -6,10 +6,10 @@ import '../models/Kompleks.dart';
 import 'dsk_event.dart';
 import 'dsk_state.dart';
 
-class HouseBloc extends Bloc<DskEvent, DskState> {
+class KompleksBloc extends Bloc<DskEvent, DskState> {
   final Repository repository;
 
-  HouseBloc({required this.repository}) : super(DskEmtyState()) {
+  KompleksBloc({required this.repository}) : super(DskEmtyState()) {
     on<DskLoadEvent>((event, emit) async {
       emit(DskLoadingState());
       try {
