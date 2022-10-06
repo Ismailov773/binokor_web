@@ -1,8 +1,8 @@
-import 'ImageData.dart';
+import 'ImageDom.dart';
 
 class Dom {
     int? id;
-    List<ImageData>? imageDataList;
+    List<ImageDom>? imageDataList;
     String? name;
 
     Dom({this.id, this.imageDataList, this.name});
@@ -10,7 +10,7 @@ class Dom {
     factory Dom.fromJson(Map<String, dynamic> json) {
         return Dom(
             id: json['id'], 
-            imageDataList: json['imageDataList'] != null ? (json['imageDataList'] as List).map((i) => ImageData.fromJson(i)).toList() : null,
+            imageDataList: json['imageDataList'] != null ? (json['imageDataList'] as List).map((i) => ImageDom.fromJson(i)).toList() : null,
             name: json['name'], 
         );
     }

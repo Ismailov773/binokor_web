@@ -1,5 +1,6 @@
+
+
 import 'dart:html';
-import 'dart:js';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,11 +9,13 @@ import 'package:intl/intl.dart';
 
 import '../bloc/dsk_state.dart';
 import '../bloc/Kompleks_bloc.dart';
+import '../models/Dom.dart';
 import '../models/Kompleks.dart';
 import '../models/uij.dart';
 
-List<Kompleks> _list = [];
+List<Kompleks> _listKompleks = [];
 DateFormat formattedDate = DateFormat('dd-MM-yyyy');
+List<ImageData> _listImage = [];
 
 class KompleksPage extends StatelessWidget {
   const KompleksPage({Key? key}) : super(key: key);
@@ -28,8 +31,8 @@ class KompleksPage extends StatelessWidget {
             return Center(child: CircularProgressIndicator());
           }
           if (state is HouseLoadedSatate) {
-            _list = state.loadedHouse;
-            if (_list.length != 0) {
+            _listKompleks = state.loadedHouse;
+            if (_listKompleks.length != 0) {
               return Container(
                 alignment: Alignment.center,
                 padding: EdgeInsets.only(left: 100, right: 100),
@@ -72,7 +75,7 @@ class KompleksPage extends StatelessWidget {
 
   Widget mainPage() {
     return ListView.builder(
-        itemCount: _list.length,
+        itemCount: _listKompleks.length,
         itemBuilder: (context, index) {
           return Container(
               child: Column(
@@ -83,7 +86,7 @@ class KompleksPage extends StatelessWidget {
                       child: Card(
                           elevation: 5,
                           child: Image.network(
-                              '${UiJ.url}kompleks/download/house/${_list[index].mainimagepath}'))),
+                              '${UiJ.url}kompleks/download/house/${_listKompleks[index].mainimagepath}'))),
                   SizedBox(
                     width: 30,
                   ),
@@ -94,7 +97,7 @@ class KompleksPage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(
-                            child: Text(_list[index].typehouse!,
+                            child: Text(_listKompleks[index].typehouse!,
                                 style: TextStyle(
                                     color: Colors.redAccent,
                                     fontWeight: FontWeight.w900,
@@ -105,7 +108,7 @@ class KompleksPage extends StatelessWidget {
                             height: 10,
                           ),
                           Container(
-                            child: Text(_list[index].title!,
+                            child: Text(_listKompleks[index].title!,
                                 style: TextStyle(
                                     fontSize: 40,
                                     fontWeight: FontWeight.w900,
@@ -117,7 +120,7 @@ class KompleksPage extends StatelessWidget {
                           ),
                           Container(
                             // padding: EdgeInsets.only(right: 400),
-                            child: Text(_list[index].description!,
+                            child: Text(_listKompleks[index].description!,
                                 style: TextStyle(
                                     fontSize: 25,
                                     fontFamily: 'Times New Roman')),
@@ -147,7 +150,7 @@ class KompleksPage extends StatelessWidget {
                                   ),
                                   TextSpan(
                                       text: formattedDate.format(DateTime.parse(
-                                          _list[index].dateproject!)),
+                                          _listKompleks[index].dateproject!)),
                                       style: TextStyle(
                                           fontFamily: UiJ.font, fontSize: 20))
                                 ]),
@@ -172,7 +175,7 @@ class KompleksPage extends StatelessWidget {
                                     text: "  Заказчик:  ",
                                   ),
                                   TextSpan(
-                                      text: _list[index].customer!,
+                                      text: _listKompleks[index].customer!,
                                       style: TextStyle(
                                           fontFamily: UiJ.font, fontSize: 20))
                                 ]),
@@ -225,8 +228,13 @@ class KompleksPage extends StatelessWidget {
                                   height: 50,
                                   child: ElevatedButton(
                                       onPressed: () {
+                                        for(Dom dom in _listKompleks[index].domSet!){
+                                          if(dom.imageDataList!.length == 0) { continue;}
+
+                                            // _listImage.addAll(dom.imageDataList));
+                                        }
                                         showDialogphoto(
-                                            context, _list[index].title!);
+                                            context, _listKompleks[index].title!);
                                       },
                                       child: Text(
                                         "Процесс строительство",
@@ -261,7 +269,8 @@ class KompleksPage extends StatelessWidget {
                 title,
                 style: TextStyle(fontSize: 25, fontFamily: UiJ.fontbold),
               ),
-              Divider()
+              Divider(),
+              Image.network('${UiJ.url}')
             ],
           ),
           content: SizedBox(
