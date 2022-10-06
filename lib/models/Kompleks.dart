@@ -1,4 +1,4 @@
-class House {
+class Kompleks {
 
     String? customer;
     String? dateproject;
@@ -10,7 +10,7 @@ class House {
     String? mainimagepath;
 
 
-    House({this.customer,
+    Kompleks({this.customer,
         this.dateproject,
         this.description,
         this.id,
@@ -19,8 +19,8 @@ class House {
         this.typehouse,
     this.mainimagepath});
 
-    factory House.fromJson(Map<String, dynamic> json) {
-        return House(
+    factory Kompleks.fromJson(Map<String, dynamic> json) {
+        return Kompleks(
             customer: json['customer'],
             dateproject: json['dateproject'], 
             description: json['description'], 

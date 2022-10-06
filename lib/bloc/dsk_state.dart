@@ -1,7 +1,7 @@
 
 
 import '../models/Catalog.dart';
-import '../models/House.dart';
+import '../models/Kompleks.dart';
 import '../models/Make.dart';
 import '../models/Meneger.dart';
 
@@ -24,7 +24,7 @@ class MenegerLoadedState extends DskState {
 }
 
 class HouseLoadedSatate extends DskState{
-  List<House> loadedHouse;
+  List<Kompleks> loadedHouse;
   HouseLoadedSatate({required this.loadedHouse});
 }
 

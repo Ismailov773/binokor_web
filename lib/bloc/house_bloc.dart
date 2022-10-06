@@ -2,7 +2,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../api/repository.dart';
-import '../models/House.dart';
+import '../models/Kompleks.dart';
 import 'dsk_event.dart';
 import 'dsk_state.dart';
 
@@ -13,9 +13,9 @@ class HouseBloc extends Bloc<DskEvent, DskState> {
     on<DskLoadEvent>((event, emit) async {
       emit(DskLoadingState());
       try {
-        final json = await repository.getall("house/get");
+        final json = await repository.getall("kompleks/get");
 
-        final loadedHouse = json.map((e) => House.fromJson(e)).toList();
+        final loadedHouse = json.map((e) => Kompleks.fromJson(e)).toList();
         emit(HouseLoadedSatate(loadedHouse: loadedHouse));
       } catch (_) {
         throw Exception(DskErrorState());

@@ -1,7 +1,6 @@
 import 'dart:html';
 import 'dart:js';
 
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,10 +8,10 @@ import 'package:intl/intl.dart';
 
 import '../bloc/dsk_state.dart';
 import '../bloc/house_bloc.dart';
-import '../models/House.dart';
+import '../models/Kompleks.dart';
 import '../models/uij.dart';
 
-List<House> _list = [];
+List<Kompleks> _list = [];
 DateFormat formattedDate = DateFormat('dd-MM-yyyy');
 
 class HousePage extends StatelessWidget {
@@ -206,16 +205,36 @@ class HousePage extends StatelessWidget {
                           SizedBox(
                             height: 20,
                           ),
-                          SizedBox(
-                              width: 300,
-                              height: 50,
-                              child: ElevatedButton(
-                                  onPressed: () {},
-                                  child: Text(
-                                    "Приобрести квартиру",
-                                    style: TextStyle(
-                                        fontFamily: UiJ.font, fontSize: 20),
-                                  )))
+                          Row(
+                            children: [
+                              SizedBox(
+                                  width: 300,
+                                  height: 50,
+                                  child: ElevatedButton(
+                                      onPressed: () {},
+                                      child: Text(
+                                        "Приобрести квартиру",
+                                        style: TextStyle(
+                                            fontFamily: UiJ.font, fontSize: 20),
+                                      ))),
+                              SizedBox(
+                                width: 20,
+                              ),
+                              SizedBox(
+                                  width: 300,
+                                  height: 50,
+                                  child: ElevatedButton(
+                                      onPressed: () {
+                                        showDialogphoto(
+                                            context, _list[index].title!);
+                                      },
+                                      child: Text(
+                                        "Процесс строительство",
+                                        style: TextStyle(
+                                            fontFamily: UiJ.font, fontSize: 20),
+                                      )))
+                            ],
+                          )
                         ],
                       )),
                 ],
@@ -227,5 +246,43 @@ class HousePage extends StatelessWidget {
             ],
           ));
         });
+  }
+
+  Future<void> showDialogphoto(BuildContext context, String title) async {
+    return await showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      // false = user must tap button, true = tap outside dialog
+      builder: (BuildContext dialogContext) {
+        return AlertDialog(
+          title: Column(
+            children: [
+              Text(
+                title,
+                style: TextStyle(fontSize: 25, fontFamily: UiJ.fontbold),
+              ),
+              Divider()
+            ],
+          ),
+          content: SizedBox(
+            width: 1200,
+            child: ListView(
+              children: [],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text(
+                'Закрыть',
+                style: TextStyle(fontSize: 20, fontFamily: UiJ.fontbold),
+              ),
+              onPressed: () {
+                Navigator.of(dialogContext).pop(); // Dismiss alert dialog
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }
