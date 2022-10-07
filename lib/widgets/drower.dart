@@ -1,3 +1,4 @@
+import 'package:binokor_web/bloc/make_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,6 +12,7 @@ import '../provider/simple_provider.dart';
 String? dropname1;
 CatalogBloc? catalogBloc;
 List<String> listdrop = ['Руководство', 'Новости', 'Вакансии'];
+MakeBloc? makeBloc;
 
 class DrowerPage extends StatelessWidget {
   const DrowerPage({Key? key}) : super(key: key);
@@ -26,7 +28,6 @@ class DrowerPage extends StatelessWidget {
             child: DrawerHeader(
                 decoration: BoxDecoration(
                     color: Colors.white,
-
 
                     // borderRadius: BorderRadius.circular(20),
                     border: Border.all(color: Colors.white, width: 0.5)),
@@ -76,7 +77,13 @@ class DrowerPage extends StatelessWidget {
             style: TextStyle(
                 fontSize: 25, fontFamily: UiJ.font, color: Colors.black),
           ),
-          onTap: () {},
+          onTap: () {
+            context.read<SimpleProvider>().changeindexpage(1);
+            context.read<SimpleProvider>().changeindextab(2);
+            makeBloc = BlocProvider.of<MakeBloc>(context);
+            makeBloc?.add(DskLoadEvent());
+            Navigator.pop(context);
+          },
         ),
         Divider(),
 

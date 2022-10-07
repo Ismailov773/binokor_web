@@ -1,7 +1,3 @@
-
-
-import 'dart:html';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,12 +6,13 @@ import 'package:intl/intl.dart';
 import '../bloc/dsk_state.dart';
 import '../bloc/Kompleks_bloc.dart';
 import '../models/Dom.dart';
+import '../models/ImageDom.dart';
 import '../models/Kompleks.dart';
 import '../models/uij.dart';
 
 List<Kompleks> _listKompleks = [];
 DateFormat formattedDate = DateFormat('dd-MM-yyyy');
-List<ImageData> _listImage = [];
+List<ImageDom> _listImage = [];
 
 class KompleksPage extends StatelessWidget {
   const KompleksPage({Key? key}) : super(key: key);
@@ -33,6 +30,7 @@ class KompleksPage extends StatelessWidget {
           if (state is HouseLoadedSatate) {
             _listKompleks = state.loadedHouse;
             if (_listKompleks.length != 0) {
+              _listKompleks.sort((a, b) => a.id!.compareTo(b.id!));
               return Container(
                 alignment: Alignment.center,
                 padding: EdgeInsets.only(left: 100, right: 100),
@@ -86,7 +84,13 @@ class KompleksPage extends StatelessWidget {
                       child: Card(
                           elevation: 5,
                           child: Image.network(
-                              '${UiJ.url}kompleks/download/house/${_listKompleks[index].mainimagepath}'))),
+                            '${UiJ.url}kompleks/download/house/${_listKompleks[index].mainimagepath}',
+                            errorBuilder: (context, exception, stackTrace) {
+                              return Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            },
+                          ))),
                   SizedBox(
                     width: 30,
                   ),
@@ -228,13 +232,16 @@ class KompleksPage extends StatelessWidget {
                                   height: 50,
                                   child: ElevatedButton(
                                       onPressed: () {
-                                        for(Dom dom in _listKompleks[index].domSet!){
-                                          if(dom.imageDataList!.length == 0) { continue;}
+                                        for (Dom dom
+                                            in _listKompleks[index].domSet!) {
+                                          if (dom.imageDataList!.length == 0) {
+                                            continue;
+                                          }
 
-                                            // _listImage.addAll(dom.imageDataList));
+                                          _listImage.addAll(dom.imageDataList!);
                                         }
-                                        showDialogphoto(
-                                            context, _listKompleks[index].title!);
+                                        showDialogphoto(context,
+                                            _listKompleks[index].title!);
                                       },
                                       child: Text(
                                         "Процесс строительство",
@@ -270,15 +277,57 @@ class KompleksPage extends StatelessWidget {
                 style: TextStyle(fontSize: 25, fontFamily: UiJ.fontbold),
               ),
               Divider(),
-              Image.network('${UiJ.url}')
             ],
           ),
           content: SizedBox(
-            width: 1200,
-            child: ListView(
-              children: [],
-            ),
-          ),
+              width: 1200,
+              child: ListView.builder(
+                  itemCount: _listImage.length,
+                  itemBuilder: (context, idx) {
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          // mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+
+                          children: [
+                            Image.network(
+                              '${UiJ.url}api/les/download/images/${_listImage[idx].imagepath}',
+                              height: 600,
+                              errorBuilder: (context, exception, stackTrace) {
+                                return Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              },
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                              Container(
+                                  child: Text(
+                                      formattedDate.format(DateTime.parse(
+                                          _listImage[idx].datacreate!)),
+                                      style: TextStyle(
+                                          fontFamily: UiJ.fontbold,
+                                          fontSize: 20))),
+                              SizedBox(height: 20,),
+                              Container(
+                                  child: Text(_listImage[idx].name!,
+                                      style: TextStyle(
+                                          fontFamily: UiJ.fontbold,
+                                          fontSize: 20))),
+                            ],)
+
+                          ],
+                        ),
+                        Divider()
+                      ],
+                    );
+                  })),
           actions: <Widget>[
             TextButton(
               child: Text(
