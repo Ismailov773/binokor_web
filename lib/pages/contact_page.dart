@@ -24,7 +24,8 @@ class ContactPage extends StatelessWidget {
                       children: [
                         Text('Адрес компании:',
                             style:
-                                TextStyle(fontSize: 30, fontFamily: UiJ.fontbold)),
+                                TextStyle(fontSize: 30, fontWeight: FontWeight.bold,
+                                    fontFamily: UiJ.fontbold)),
                         SizedBox(
                           height: 10,
                         ),

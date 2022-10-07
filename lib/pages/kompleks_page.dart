@@ -58,9 +58,9 @@ class KompleksPage extends StatelessWidget {
           alignment: Alignment.topLeft,
           child: Text("Строительство",
               style: TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.w900,
-                  fontFamily: UiJ.font)),
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: UiJ.fontbold)),
         ),
         Divider(),
         SizedBox(

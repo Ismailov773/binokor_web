@@ -72,9 +72,9 @@ class _CatalogPageState extends State<CatalogPage> {
           alignment: Alignment.topLeft,
           child: Text("Каталоги",
               style: TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.w900,
-                  fontFamily: 'Noto')),
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: UiJ.fontbold)),
         ),
         Divider(),
         SizedBox(

@@ -26,7 +26,8 @@ class MenegersPage extends StatelessWidget {
           if (state is MenegerLoadedState) {
             _list = state.loadedMeneger;
 
-            return Container(padding: EdgeInsets.all(20), child: main());
+            return Container(
+                padding: EdgeInsets.only(left: 100, right: 100), child: main());
           }
 
           if (state is DskErrorState) {
@@ -43,12 +44,16 @@ class MenegersPage extends StatelessWidget {
     return Column(
       children: [
         Container(
-          // alignment: Alignment.topLeft,
+          alignment: Alignment.topLeft,
           child: Text(
             "Руководство:",
-            style: TextStyle(fontFamily: UiJ.fontbold, fontSize: 30),
+            style: TextStyle(
+                fontFamily: UiJ.fontbold,
+                fontSize: 30,
+                fontWeight: FontWeight.bold),
           ),
         ),
+        Divider(),
         SizedBox(
           height: 50,
         ),
@@ -69,16 +74,23 @@ class MenegersPage extends StatelessWidget {
                                   //     borderRadius: BorderRadius.circular(15)),
                                   elevation: 5,
                                   child: Container(
+
+                                    // padding: EdgeInsets.all(20),
                                       // decoration: BoxDecoration(
                                       //     borderRadius:
                                       //         BorderRadius.circular(15)),
                                       child: Image.network(
-                                    '${UiJ.url}meneger/download/meneger/${_list[index].imagepath}',
-                                    width: 300,
-                                    height: 300,
-                                  ))))),
+                                          '${UiJ.url}meneger/download/meneger/${_list[index].imagepath}',
+                                          width: 300,
+                                          height: 300,
+                                           errorBuilder:
+                                              (context, exception, stackTrace) {
+                                    return Center(
+                                      child: CircularProgressIndicator(),
+                                    );
+                                  }))))),
                       SizedBox(
-                        width: 50,
+                        width: 150,
                       ),
                       Expanded(
                           child: Column(
@@ -156,6 +168,7 @@ class MenegersPage extends StatelessWidget {
                                         height: 2))
                               ]),
                             ),
+                            // Spacer(),
                             Divider()
                           ])),
                     ],
