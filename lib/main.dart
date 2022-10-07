@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:binokor_web/bloc/make_bloc.dart';
 import 'package:binokor_web/pages/home.dart';
+import 'package:binokor_web/pages/zero_page.dart';
 import 'package:binokor_web/provider/simple_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -73,7 +74,7 @@ class MyApp extends StatelessWidget {
               initialRoute: '/',
               routes: {
                 // '/': (context) => LoginPage(),
-                '/': (context) => Home(),
+                '/': (context) => ZeroPage(),
                 // '/catalogimage': (context) => ImageCatalogPage(catalog: null,),
               },
             )));

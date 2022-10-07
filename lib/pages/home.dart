@@ -62,6 +62,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               Spacer(),
               TabBar(
                 controller: tabController,
+
                 indicatorColor: Colors.white,
                 labelColor: Colors.red,
                 unselectedLabelColor: Colors.black,
@@ -86,9 +87,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   Container(
                       width: 200,
                       child: Tab(
-                          child: AboutMenu_DropDown(
-                        vertical: false,
-                      ))),
+                        child: AboutMenu_DropDown(
+                          vertical: false,
+                        ),
+                      )),
                   Container(
                     width: 200,
                     child: Tab(
