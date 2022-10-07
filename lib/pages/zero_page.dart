@@ -50,7 +50,7 @@ class _ZeroPageState extends State<ZeroPage> {
 
   Future<Widget> getHomePage() async {
     _changeOpacity();
-    return await Future.delayed(Duration(seconds: 4), () {})
+    return await Future.delayed(Duration(seconds: 1), () {})
         .then((value) => Home());
   }
 }

@@ -51,7 +51,11 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               InkWell(
                 onTap: () {
                   Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => Home()));
+                      context, MaterialPageRoute(builder: (context) {
+                    context.read<SimpleProvider>().changeindexpage(1);
+                    context.read<SimpleProvider>().changeindextab(0);
+                        return Home();
+                  }));
                 },
                 child: Container(
                   child: Image.asset('assets/images/logo1.png'),

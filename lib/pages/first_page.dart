@@ -1,4 +1,4 @@
-
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
@@ -10,42 +10,42 @@ class FirstPage extends StatefulWidget {
 }
 
 class _FirstPageState extends State<FirstPage> {
-  // late VideoPlayerController _playerController;
+  List<Image> _items = [
+   Image.asset('assets/images/kompleks.png'),
+    Image.asset('assets/images/production.png'),
+    Image.asset('assets/images/production.png'),
+    Image.asset('assets/images/production.png'),
 
-  @override
-  void initState() {
-    super.initState();
-    // _playerController = VideoPlayerController.network('assets/video/4dsk.mp4')
-    //   ..addListener(() {
-    //    print(_playerController.value);
-    //   })
-    //   ..setLooping(true)
-    //   ..initialize().then((_) {
-    //     setState(() {
-    //       _playerController.play();
-    //     });
-    //   });
-  }
+  ];
 
-  @override
-  void dispose() {
-    // _playerController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      // width: 800,
-      //   height: 800,
-        child: Column(children:
-        [
-      // if (_playerController.value.isInitialized)
-      //   AspectRatio(
-      //     aspectRatio: _playerController.value.aspectRatio,
-      //     child: VideoPlayer(_playerController),
-      //   ),
-      // VideoProgressIndicator(_playerController, allowScrubbing: true),
+        // width: 800,
+        //   height: 800,
+        child: Column(children: [
+      CarouselSlider(
+          items: _items.map((e) {
+            return Builder(builder: (BuildContext context){
+              return Container(child: e,);
+            });
+          }).toList(),
+          options: CarouselOptions(
+            height: 600,
+            aspectRatio: 16 / 9,
+            viewportFraction: 0.8,
+            initialPage: 0,
+            enableInfiniteScroll: true,
+            reverse: false,
+            autoPlay: true,
+            autoPlayInterval: Duration(seconds: 3),
+            autoPlayAnimationDuration: Duration(milliseconds: 800),
+            autoPlayCurve: Curves.fastOutSlowIn,
+            enlargeCenterPage: true,
+            onPageChanged: (int? value, page) {},
+            scrollDirection: Axis.horizontal,
+          ))
     ]));
   }
 }
