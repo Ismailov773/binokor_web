@@ -37,6 +37,20 @@ class _FirstPageState extends State<FirstPage> {
         //   height: 800,
         child: Column(
       children: [
+        // Container(
+        //     alignment: Alignment.centerLeft,
+        //     child: IconButton(
+        //       icon: Icon(
+        //         Icons.navigate_before,
+        //         size: 50,
+        //       ),
+        //       color: Colors.black,
+        //       onPressed: () {
+        //         setState(() {
+        //           _current++;
+        //         });
+        //       },
+        //     )),
         CarouselSlider(
             items: _items.map((e) {
               return Builder(builder: (BuildContext context) {
@@ -52,7 +66,7 @@ class _FirstPageState extends State<FirstPage> {
               height: 600,
               aspectRatio: 16 / 9,
               viewportFraction: 0.5,
-              initialPage: 0,
+              initialPage: _current,
               enableInfiniteScroll: true,
               reverse: false,
               autoPlay: true,
@@ -68,6 +82,16 @@ class _FirstPageState extends State<FirstPage> {
               },
               scrollDirection: Axis.horizontal,
             )),
+        // Container(
+        //     alignment: Alignment.centerRight,
+        //     child: IconButton(
+        //       icon: Icon(
+        //         Icons.navigate_next,
+        //         size: 50,
+        //       ),
+        //       color: Colors.black26,
+        //       onPressed: () {},
+        //     )),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: _items.map(

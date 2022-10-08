@@ -170,8 +170,11 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               child:
                   selectionPage(context.watch<SimpleProvider>().getindexpage)),
           SizedBox(
-            height: 20,
+            height: 50,
           ),
+          // CatalogPage(),
+          //  Container(child: KompleksPage()),
+          // ProductionPage(),
           Container(
             color: Colors.black,
             padding: EdgeInsets.only(left: 100, right: 100, top: 50),

@@ -8,7 +8,7 @@ class ProductionPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Container(
         padding: EdgeInsets.only(left: 100, right: 100),
         child: ListView(
           children: [
@@ -45,6 +45,8 @@ class ProductionPage extends StatelessWidget {
                     flex: 1,
                     child: Image.asset(
                       'assets/images/production.png',
+                      width: 400,
+                      height: 400,
                     ),
                   ),
                   SizedBox(
@@ -189,7 +191,9 @@ class ProductionPage extends StatelessWidget {
               height: 30,
             ),
             Divider(),
-
+            SizedBox(
+              height: 30,
+            ),
             Container(
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -198,6 +202,8 @@ class ProductionPage extends StatelessWidget {
                     flex: 1,
                     child: Image.asset(
                       'assets/images/technology.png',
+                      width: 400,
+                      height: 400,
                     ),
                   ),
                   SizedBox(
