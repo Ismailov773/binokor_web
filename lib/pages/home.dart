@@ -72,8 +72,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 labelColor: Colors.red,
                 unselectedLabelColor: Colors.black,
                 indicatorWeight: 1,
-                labelStyle:
-                    TextStyle(fontSize: UiJ.sizeweight(context) ? 20 : 25, fontFamily: UiJ.font),
+                labelStyle: TextStyle(
+                    fontSize: UiJ.sizeweight(context) ? 20 : 25,
+                    fontFamily: UiJ.font),
                 isScrollable: true,
 
                 // indicator: Decoration(BoxPainter(paintBorder())),
@@ -105,8 +106,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   Container(
                     // width: 200,
                     child: Tab(
-                        child: Text('Каталоги',
-                            )),
+                        child: Text(
+                      'Каталоги',
+                    )),
                   ),
                   Container(
                     // width: 200,
@@ -130,7 +132,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                     child: Tab(
                         child: Text(
                       'Контакты',
-
                     )),
                   ),
                   // Wrap(
@@ -183,7 +184,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                         children: [
                           Text('Адрес компании:',
                               style: TextStyle(
-                                  fontSize: 30,
+                                  fontSize: UiJ.sizeweight(context)?25:30,
                                   fontFamily: UiJ.fontbold,
                                   color: Colors.white)),
                           SizedBox(
@@ -197,7 +198,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                               TextSpan(
                                   text: '${UiJ.adress}',
                                   style: TextStyle(
-                                      fontSize: 25,
+                                      fontSize: UiJ.sizeweight(context)?20:25,
                                       fontWeight: FontWeight.w200,
                                       fontFamily: UiJ.font,
                                       color: Colors.white))

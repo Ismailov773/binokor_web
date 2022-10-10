@@ -103,7 +103,7 @@ class MenegersPage extends StatelessWidget {
                                     child: Text(
                                   _list[index].name!,
                                   style: TextStyle(
-                                      fontFamily: UiJ.fontbold, fontSize: 30),
+                                      fontFamily: UiJ.fontbold, fontSize: UiJ.sizeweight(context)?25:30),
                                 )),
                                 SizedBox(
                                   height: 20,

@@ -52,7 +52,12 @@ class DrowerPage extends StatelessWidget {
             style: TextStyle(
                 fontSize: 25, fontFamily: UiJ.font, color: Colors.black),
           ),
-          onTap: () {},
+          onTap: () {
+            context.read<SimpleProvider>().changeindexpage(1);
+            context.read<SimpleProvider>().changeindextab(0);
+            Navigator.pop(context);
+
+          },
         ),
 
         Divider(),
