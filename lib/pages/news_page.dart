@@ -3,11 +3,13 @@ import 'package:binokor_web/bloc/news_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
 import '../models/News.dart';
 import '../models/uij.dart';
 
 List<News> _listnews = [];
+DateFormat formattedDate = DateFormat('dd-MM-yyyy');
 
 class NewsPage extends StatelessWidget {
   const NewsPage({Key? key}) : super(key: key);
@@ -60,74 +62,82 @@ class NewsPage extends StatelessWidget {
         Expanded(
             child: ListView.builder(
                 itemCount: _listnews.length,
-
                 itemBuilder: (context, index) {
-                  return Container(
-                      child: Row(
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                          // padding: EdgeInsets.only(left: 100, right: 100),
-                          margin: EdgeInsets.all(20),
-                          child: Container(
-                              // decoration: BoxDecoration(
-                              //     borderRadius: BorderRadius.circular(15)),
-                              child: Card(
-                                  // shape: RoundedRectangleBorder(
+                          child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        // mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Expanded(
+                              // padding: EdgeInsets.only(left: 100, right: 100),
+                              // margin: EdgeInsets.all(20),
+                              child: Container(
+                                  // decoration: BoxDecoration(
                                   //     borderRadius: BorderRadius.circular(15)),
-                                  elevation: 5,
-                                  child: Container(
+                                  child: Card(
+                                      // shape: RoundedRectangleBorder(
+                                      //     borderRadius: BorderRadius.circular(15)),
+                                      elevation: 5,
+                                      child: Container(
 
-                                      // padding: EdgeInsets.all(20),
-                                      // decoration: BoxDecoration(
-                                      //     borderRadius:
-                                      //         BorderRadius.circular(15)),
-                                      child: Image.network(
-                                          '${UiJ.url}news/download/news/${_listnews[index].imagepath}',
-                                          width: 500,
-                                          height: 300, errorBuilder:
-                                              (context, exception, stackTrace) {
-                                    return Center(
-                                      child: CircularProgressIndicator(),
-                                    );
-                                  }))))),
-                      SizedBox(
-                        width: 50,
-                      ),
-                      Expanded(
-                          child: Column(
-                               crossAxisAlignment: CrossAxisAlignment.start,
-                              // mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                            Container(
-                                child: Text(
-                              _listnews[index].title!,
-                              style: TextStyle(
-                                  fontFamily: UiJ.fontbold, fontSize: 30),
-                            )),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            RichText(
-                              text: TextSpan(children: [
-                                // TextSpan(
-                                //     text: "должность:  ",
-                                //     style: TextStyle(
-                                //         fontSize: 20,
-                                //         fontWeight: FontWeight.bold,
-                                //         fontFamily: UiJ.font)),
-                                TextSpan(
-                                    text: _listnews[index].description,
-                                    style: TextStyle(
-                                        fontSize: 25,
-                                        fontWeight: FontWeight.w200,
-                                        fontFamily: UiJ.font))
-                              ]),
-                            ),
-                            // Spacer(),
-                            Divider(),
-                          ])),
+                                          // padding: EdgeInsets.all(20),
+                                          // decoration: BoxDecoration(
+                                          //     borderRadius:
+                                          //         BorderRadius.circular(15)),
+                                          child: Image.network(
+                                              '${UiJ.url}news/download/news/${_listnews[index].imagepath}',
+                                              width: 500,
+                                              height: 300, errorBuilder:
+                                                  (context, exception,
+                                                      stackTrace) {
+                                        return Center(
+                                          child: CircularProgressIndicator(),
+                                        );
+                                      }))))),
+                          SizedBox(
+                            width: 50,
+                          ),
+                          Expanded(
+                              flex: 3,
+                              child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  // mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      child: Text(
+                                        formattedDate.format(DateTime.parse(
+                                            _listnews[index].datacreate!)),
+                                        style: TextStyle(fontSize: 20),
+                                      ),
+                                      alignment: Alignment.topRight,
+                                    ),
+
+                                    Container(
+                                        child: Text(
+                                      _listnews[index].title!,
+                                      style: TextStyle(
+                                          fontFamily: UiJ.fontbold,
+                                          fontSize: 30),
+                                    )),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    Text(_listnews[index].description!,
+                                        textAlign: TextAlign.justify,
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w200,
+                                            fontFamily: UiJ.font))
+                                    // Spacer(),
+                                  ])),
+                        ],
+                      )),
+                      Divider()
                     ],
-                  ));
+                  );
                 }))
       ],
     );
