@@ -1,3 +1,4 @@
+import 'package:binokor_web/pages/imagenews_page.dart';
 import 'package:binokor_web/pages/production_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -329,6 +330,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         return MenegersPage();
       case 3:
         return NewsPage();
+      // case 4:
+      //   return ImageNewsPage(news: news);
     }
   }
 }
