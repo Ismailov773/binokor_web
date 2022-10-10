@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:binokor_web/bloc/make_bloc.dart';
+import 'package:binokor_web/bloc/news_bloc.dart';
 import 'package:binokor_web/pages/zero_page.dart';
 import 'package:binokor_web/provider/simple_provider.dart';
 import 'package:flutter/material.dart';
@@ -58,7 +59,11 @@ class MyApp extends StatelessWidget {
                         ..add(DskLoadEvent())),
               BlocProvider(
                   create: (context) =>
-                  KompleksBloc(repository: context.read<Repository>())
+                      KompleksBloc(repository: context.read<Repository>())
+                        ..add(DskLoadEvent())),
+              BlocProvider(
+                  create: (context) =>
+                      NewsBloc(repository: context.read<Repository>())
                         ..add(DskLoadEvent()))
             ],
             child: MaterialApp(

@@ -4,6 +4,7 @@ import '../models/Catalog.dart';
 import '../models/Kompleks.dart';
 import '../models/Make.dart';
 import '../models/Meneger.dart';
+import '../models/News.dart';
 
 abstract class DskState {}
 
@@ -29,7 +30,13 @@ class HouseLoadedSatate extends DskState{
 }
 
 class MakeLoadedState extends DskState{
-  List<Make> loadedMake;
 
+  List<Make> loadedMake;
   MakeLoadedState({ required this.loadedMake});
+}
+
+class NewsLoadedSatate extends DskState{
+
+  List<News> loadedNews;
+  NewsLoadedSatate({required this.loadedNews});
 }

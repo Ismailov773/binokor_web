@@ -14,6 +14,7 @@ import 'contact_page.dart';
 import 'first_page.dart';
 import 'kompleks_page.dart';
 import 'menegers_page.dart';
+import 'news_page.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -326,8 +327,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         );
       case 2:
         return MenegersPage();
-      // case 3:
-      //   return ImageCatalogPage();
+      case 3:
+        return NewsPage();
     }
   }
 }

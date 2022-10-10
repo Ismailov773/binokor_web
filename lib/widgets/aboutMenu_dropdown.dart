@@ -60,6 +60,10 @@ class _AboutMenu_DropDownState extends State<AboutMenu_DropDown> {
                           color: Colors.black))),
               PopupMenuItem(
                   textStyle: TextStyle(fontSize: 20),
+                  onTap: (){
+                    context.read<SimpleProvider>().changeindexpage(3);
+                    context.read<SimpleProvider>().changeindextab(0);
+                  },
                   value: Menu.News,
                   child: Text("Новости",
                       style: TextStyle(
