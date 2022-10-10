@@ -50,11 +50,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             child: Row(children: [
               InkWell(
                 onTap: () {
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (context) {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
                     context.read<SimpleProvider>().changeindexpage(1);
                     context.read<SimpleProvider>().changeindextab(0);
-                        return Home();
+                    return Home();
                   }));
                 },
                 child: Container(
@@ -82,9 +81,13 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   tabController.index = idx;
                   if (idx == 1) {
                     catalogBloc.add(DskLoadEvent());
+                  } else if (idx == 0) {
+                    context.read<SimpleProvider>().changeindexpage(1);
+                    context.read<SimpleProvider>().changeindextab(0);
+                  } else {
+                    context.read<SimpleProvider>().changeindextab(idx);
+                    context.read<SimpleProvider>().changeindexpage(1);
                   }
-                  context.read<SimpleProvider>().changeindextab(idx);
-                  context.read<SimpleProvider>().changeindexpage(1);
                 },
 
                 tabs: [

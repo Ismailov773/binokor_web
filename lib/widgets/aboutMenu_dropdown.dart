@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../models/uij.dart';
 import '../provider/simple_provider.dart';
 
-enum Menu { Menegers, News, Vacansy }
+enum Menu {About, Menegers, News, Vacansy }
 
 class AboutMenu_DropDown extends StatefulWidget {
   final bool vertical;
@@ -28,14 +28,23 @@ class _AboutMenu_DropDownState extends State<AboutMenu_DropDown> {
     vertical = widget.vertical;
   }
 
+
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton<Menu>(
         position: PopupMenuPosition.under,
         elevation: 0,
-        offset: const Offset(0,20),
-        child: Text("О Компании",
-            style: TextStyle(fontSize: 25)),
+        offset: const Offset(0, 20),
+        // onSelected: (Menu menu) {
+        //   if(Menu.About == menu){
+        //     context.read<SimpleProvider>().changeindexpage(1);
+        //     context.read<SimpleProvider>().changeindextab(0);
+        //   }
+        // },
+        child: Text(
+          "О Компании",
+          style: TextStyle(fontSize: 25),
+        ),
         itemBuilder: (BuildContext context) => <PopupMenuEntry<Menu>>[
               PopupMenuItem(
                   onTap: () {

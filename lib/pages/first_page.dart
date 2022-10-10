@@ -63,15 +63,15 @@ class _FirstPageState extends State<FirstPage> {
               });
             }).toList(),
             options: CarouselOptions(
-              height: 600,
+              height: MediaQuery.of(context).size.height/1.3,
               aspectRatio: 16 / 9,
               viewportFraction: 0.5,
               initialPage: _current,
               enableInfiniteScroll: true,
               reverse: false,
               autoPlay: true,
-              autoPlayInterval: Duration(seconds: 2),
-              autoPlayAnimationDuration: Duration(milliseconds: 1000),
+              autoPlayInterval: Duration(seconds: 5),
+              autoPlayAnimationDuration: Duration(milliseconds: 5000),
               autoPlayCurve: Curves.fastOutSlowIn,
               enlargeCenterPage: true,
               onPageChanged: (int? value, page) {
