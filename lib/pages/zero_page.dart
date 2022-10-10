@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../models/uij.dart';
@@ -34,7 +35,7 @@ class _ZeroPageState extends State<ZeroPage> {
                     height: 400,
                   ),
 
-                  Text(UiJ.lozung, style: TextStyle(fontSize: 30, fontFamily: UiJ.font),)
+                  Text(UiJ.lozung, style: TextStyle(fontSize: UiJ.sizeweight(context)?20:30, fontFamily: UiJ.font),)
                     ],
                   ),
                 ));

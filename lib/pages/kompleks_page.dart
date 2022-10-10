@@ -34,7 +34,7 @@ class KompleksPage extends StatelessWidget {
               return Container(
                 alignment: Alignment.center,
                 padding: EdgeInsets.only(left: 100, right: 100),
-                child: main(),
+                child: main(context),
               );
             }
           }
@@ -48,7 +48,7 @@ class KompleksPage extends StatelessWidget {
         listener: (context, state) {});
   }
 
-  Widget main() {
+  Widget main(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -58,7 +58,7 @@ class KompleksPage extends StatelessWidget {
           alignment: Alignment.topLeft,
           child: Text("Строительство",
               style: TextStyle(
-                  fontSize: 30,
+                  fontSize: UiJ.sizeweight(context) ? 20 : 30,
                   fontWeight: FontWeight.bold,
                   fontFamily: UiJ.fontbold)),
         ),
@@ -114,7 +114,7 @@ class KompleksPage extends StatelessWidget {
                           Container(
                             child: Text(_listKompleks[index].title!,
                                 style: TextStyle(
-                                    fontSize: 40,
+                                    fontSize: UiJ.sizeweight(context) ? 30 : 40,
                                     fontWeight: FontWeight.w900,
                                     fontFamily: UiJ.fontbold)),
                             alignment: Alignment.topLeft,
@@ -126,8 +126,8 @@ class KompleksPage extends StatelessWidget {
                             // padding: EdgeInsets.only(right: 400),
                             child: Text(_listKompleks[index].description!,
                                 style: TextStyle(
-                                    fontSize: 25,
-                                    fontFamily: 'Times New Roman')),
+                                    fontSize:  UiJ.sizeweight(context) ? 20 : 25,
+                                    fontFamily: UiJ.font)),
                             alignment: Alignment.topLeft,
                           ),
                           SizedBox(
@@ -307,21 +307,23 @@ class KompleksPage extends StatelessWidget {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                              Container(
-                                  child: Text(
-                                      formattedDate.format(DateTime.parse(
-                                          _listImage[idx].datacreate!)),
-                                      style: TextStyle(
-                                          fontFamily: UiJ.fontbold,
-                                          fontSize: 20))),
-                              SizedBox(height: 20,),
-                              Container(
-                                  child: Text(_listImage[idx].name!,
-                                      style: TextStyle(
-                                          fontFamily: UiJ.fontbold,
-                                          fontSize: 20))),
-                            ],)
-
+                                Container(
+                                    child: Text(
+                                        formattedDate.format(DateTime.parse(
+                                            _listImage[idx].datacreate!)),
+                                        style: TextStyle(
+                                            fontFamily: UiJ.fontbold,
+                                            fontSize: 20))),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Container(
+                                    child: Text(_listImage[idx].name!,
+                                        style: TextStyle(
+                                            fontFamily: UiJ.fontbold,
+                                            fontSize: 20))),
+                              ],
+                            )
                           ],
                         ),
                         Divider()

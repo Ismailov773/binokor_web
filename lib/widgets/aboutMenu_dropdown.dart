@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../models/uij.dart';
 import '../provider/simple_provider.dart';
 
-enum Menu {About, Menegers, News, Vacansy }
+enum Menu { About, Menegers, News, Vacansy }
 
 class AboutMenu_DropDown extends StatefulWidget {
   final bool vertical;
@@ -28,7 +28,6 @@ class _AboutMenu_DropDownState extends State<AboutMenu_DropDown> {
     vertical = widget.vertical;
   }
 
-
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton<Menu>(
@@ -43,7 +42,7 @@ class _AboutMenu_DropDownState extends State<AboutMenu_DropDown> {
         // },
         child: Text(
           "О Компании",
-          style: TextStyle(fontSize: 25),
+          style: TextStyle(fontSize: UiJ.sizeweight(context) ? 20 : 25),
         ),
         itemBuilder: (BuildContext context) => <PopupMenuEntry<Menu>>[
               PopupMenuItem(
@@ -51,23 +50,24 @@ class _AboutMenu_DropDownState extends State<AboutMenu_DropDown> {
                     context.read<SimpleProvider>().changeindexpage(2);
                     context.read<SimpleProvider>().changeindextab(0);
                   },
-                  textStyle: TextStyle(fontSize: 20),
+                  textStyle:
+                      TextStyle(fontSize: UiJ.sizeweight(context) ? 20 : 25),
                   value: Menu.Menegers,
                   child: Text("Руководство",
                       style: TextStyle(
-                          fontSize: 25,
+                          fontSize: UiJ.sizeweight(context) ? 20 : 25,
                           // fontFamily: UiJ.fontbold,
                           color: Colors.black))),
               PopupMenuItem(
                   textStyle: TextStyle(fontSize: 20),
-                  onTap: (){
+                  onTap: () {
                     context.read<SimpleProvider>().changeindexpage(3);
                     context.read<SimpleProvider>().changeindextab(0);
                   },
                   value: Menu.News,
                   child: Text("Новости",
                       style: TextStyle(
-                          fontSize: 25,
+                          fontSize: UiJ.sizeweight(context) ? 20 : 25,
                           // fontFamily: UiJ.fontbold,
                           color: Colors.black))),
               PopupMenuItem(
@@ -75,7 +75,7 @@ class _AboutMenu_DropDownState extends State<AboutMenu_DropDown> {
                   value: Menu.Vacansy,
                   child: Text("Вакансия",
                       style: TextStyle(
-                          fontSize: 25,
+                          fontSize: UiJ.sizeweight(context) ? 20 : 25,
                           // fontFamily: UiJ.fontbold,
                           color: Colors.black))),
             ]);

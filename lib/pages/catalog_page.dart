@@ -190,7 +190,9 @@ class _CatalogPageState extends State<CatalogPage> {
                   // controller: _tabcontroller,
                   labelColor: Colors.red,
                   unselectedLabelColor: Colors.black,
-                  labelStyle: TextStyle(fontSize: 25, fontFamily: UiJ.font),
+                  labelStyle: TextStyle(
+                      fontSize: UiJ.sizeweight(context) ? 15 : 20,
+                      fontFamily: UiJ.font),
                   indicatorColor: Colors.white,
                   isScrollable: false,
                   tabs: [
@@ -201,7 +203,7 @@ class _CatalogPageState extends State<CatalogPage> {
                         children: [
                           Icon(
                             Icons.view_module,
-                            size: 50,
+                            size: UiJ.sizeweight(context) ? 30 : 50,
                           ),
                           SizedBox(
                             width: 20,
@@ -217,7 +219,7 @@ class _CatalogPageState extends State<CatalogPage> {
                         children: [
                           Icon(
                             Icons.view_list,
-                            size: 50,
+                            size: UiJ.sizeweight(context) ? 30 : 50,
                           ),
                           SizedBox(
                             width: 20,
@@ -248,35 +250,59 @@ class _CatalogPageState extends State<CatalogPage> {
       child: DataTable(
         headingTextStyle: TextStyle(
             fontWeight: FontWeight.bold,
-            fontSize: 20,
-            fontFamily: UiJ.fontbold),
+            fontSize: UiJ.sizeweight(context) ? 13 : 20,
+            fontFamily: UiJ.font),
+
+        horizontalMargin: 3,
+        // headingRowHeight: 100,
         columns: [
-          DataColumn(label: Text("Марка изделия")),
-          DataColumn(label: Text("Длина")),
-          DataColumn(label: Text("Ширина")),
-          DataColumn(label: Text("Высота")),
-          DataColumn(label: Text("Объём, м3")),
-          DataColumn(label: Text("Масса, т")),
-          DataColumn(label: Text("Класс бетона"))
+          DataColumn(
+              label: Center(
+                  child: Text(
+            "Марка изделия",
+          ))),
+          DataColumn(label: Center(child: Text("Длина"))),
+          DataColumn(label: Center(child: Text("Ширина"))),
+          DataColumn(label: Center(child: Text("Высота"))),
+          DataColumn(label: Center(child: Text("Объём, м3"))),
+          DataColumn(label: Center(child: Text("Масса, т"))),
+          DataColumn(label: Center(child: Text("Класс бетона")))
         ],
         rows: _make!.catalogs!.map((e) {
           return DataRow(cells: [
-            DataCell(Text(
+            DataCell(Center(child: Text(
               e.name!,
-              style: TextStyle(fontSize: 20, fontFamily: UiJ.font),
-            )),
-            DataCell(Text(e.length!,
-                style: TextStyle(fontSize: 20, fontFamily: UiJ.font))),
-            DataCell(Text(e.weigth!,
-                style: TextStyle(fontSize: 20, fontFamily: UiJ.font))),
-            DataCell(Text(e.heigth!,
-                style: TextStyle(fontSize: 20, fontFamily: UiJ.font))),
-            DataCell(Text(e.volume!,
-                style: TextStyle(fontSize: 20, fontFamily: UiJ.font))),
-            DataCell(Text(e.mass!,
-                style: TextStyle(fontSize: 20, fontFamily: UiJ.font))),
-            DataCell(Text(e.concrete!,
-                style: TextStyle(fontSize: 20, fontFamily: UiJ.font))),
+              style: TextStyle(
+                  fontSize: UiJ.sizeweight(context) ? 15 : 20,
+                  fontFamily: UiJ.font),
+            ))),
+            DataCell(Center(child: Text(
+              e.length!,
+              style: TextStyle(
+                  fontSize: UiJ.sizeweight(context) ? 15 : 20,
+                  fontFamily: UiJ.font),
+              textAlign: TextAlign.center,
+            ))),
+            DataCell(Center(child: Text(e.weigth!,
+                style: TextStyle(
+                    fontSize: UiJ.sizeweight(context) ? 15 : 20,
+                    fontFamily: UiJ.font)))),
+            DataCell(Center(child: Text(e.heigth!,
+                style: TextStyle(
+                    fontSize: UiJ.sizeweight(context) ? 15 : 20,
+                    fontFamily: UiJ.font)))),
+            DataCell(Center(child: Text(e.volume!,
+                style: TextStyle(
+                    fontSize: UiJ.sizeweight(context) ? 15 : 20,
+                    fontFamily: UiJ.font)))),
+            DataCell(Center(child: Text(e.mass!,
+                style: TextStyle(
+                    fontSize: UiJ.sizeweight(context) ? 15 : 20,
+                    fontFamily: UiJ.font)))),
+            DataCell(Center(child: Text(e.concrete!,
+                style: TextStyle(
+                    fontSize: UiJ.sizeweight(context) ? 15 : 20,
+                    fontFamily: UiJ.font)))),
           ]);
         }).toList(),
       ),
@@ -289,7 +315,9 @@ class _CatalogPageState extends State<CatalogPage> {
       child: Text(
         _make!.description!,
         style: TextStyle(
-            fontFamily: UiJ.font, fontSize: 25, fontStyle: FontStyle.italic),
+            fontFamily: UiJ.font,
+            fontSize: UiJ.sizeweight(context) ? 20 : 25,
+            fontStyle: FontStyle.italic),
         textAlign: TextAlign.justify,
       ),
     );

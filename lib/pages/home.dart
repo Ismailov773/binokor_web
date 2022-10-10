@@ -72,6 +72,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 labelColor: Colors.red,
                 unselectedLabelColor: Colors.black,
                 indicatorWeight: 1,
+                labelStyle:
+                    TextStyle(fontSize: UiJ.sizeweight(context) ? 20 : 25, fontFamily: UiJ.font),
                 isScrollable: true,
 
                 // indicator: Decoration(BoxPainter(paintBorder())),
@@ -94,52 +96,41 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
                 tabs: [
                   Container(
-                      width: 200,
+                      // width: 200,
                       child: Tab(
-                        child: AboutMenu_DropDown(
-                          vertical: false,
-                        ),
-                      )),
+                    child: AboutMenu_DropDown(
+                      vertical: false,
+                    ),
+                  )),
                   Container(
-                    width: 200,
+                    // width: 200,
                     child: Tab(
                         child: Text('Каталоги',
-                            style: TextStyle(
-                              fontSize: 25,
-                              fontFamily: UiJ.font,
-                            ))),
+                            )),
                   ),
                   Container(
-                    width: 200,
+                    // width: 200,
                     child: Tab(
                         child: Text(
                       'Строительство',
                       style: TextStyle(
-                        fontSize: 25,
                         fontFamily: UiJ.font,
                       ),
                     )),
                   ),
                   Container(
-                    width: 200,
+                    // width: 200,
                     child: Tab(
                         child: Text(
                       'Производство',
-                      style: TextStyle(
-                        fontSize: 25,
-                        fontFamily: UiJ.font,
-                      ),
                     )),
                   ),
                   Container(
-                    width: 200,
+                    // width: 200,
                     child: Tab(
                         child: Text(
                       'Контакты',
-                      style: TextStyle(
-                        fontSize: 25,
-                        fontFamily: UiJ.font,
-                      ),
+
                     )),
                   ),
                   // Wrap(

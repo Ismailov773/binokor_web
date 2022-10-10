@@ -1,6 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
+import '../models/uij.dart';
+
 class FirstPage extends StatefulWidget {
   const FirstPage({Key? key}) : super(key: key);
 
@@ -54,16 +56,12 @@ class _FirstPageState extends State<FirstPage> {
         CarouselSlider(
             items: _items.map((e) {
               return Builder(builder: (BuildContext context) {
-                return Container(
-                  child: Card(
-                    elevation: 5,
-                    child: e,
-                  ),
-                );
+                return Container(child: e);
               });
             }).toList(),
             options: CarouselOptions(
-              height: MediaQuery.of(context).size.height/1.3,
+              height: MediaQuery.of(context).size.height /
+                  (UiJ.sizeweight(context) ? 1.4 : 1.3),
               aspectRatio: 16 / 9,
               viewportFraction: 0.5,
               initialPage: _current,

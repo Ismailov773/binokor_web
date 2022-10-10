@@ -54,6 +54,14 @@ class UiJ {
       throw 'Could not url';
     }
   }
+
+  static bool sizeweight(BuildContext context) {
+    if (MediaQuery.of(context).size.width < 1300) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
 
 class HexColor extends Color {
