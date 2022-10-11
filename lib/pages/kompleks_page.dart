@@ -71,6 +71,158 @@ class KompleksPage extends StatelessWidget {
     );
   }
 
+  Widget getCar(int index) {
+    return Expanded(
+        child: Card(
+            elevation: 5,
+            child: Image.network(
+              '${UiJ.url}kompleks/download/house/${_listKompleks[index].mainimagepath}',
+              errorBuilder: (context, exception, stackTrace) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              },
+            )));
+  }
+
+  Widget getText(BuildContext context, int index) {
+    return Expanded(
+        flex: 2,
+        child: Column(
+          // mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              child: Text(_listKompleks[index].typehouse!,
+                  style: TextStyle(
+                      color: Colors.redAccent,
+                      fontWeight: FontWeight.w900,
+                      fontFamily: UiJ.font)),
+              alignment: Alignment.topLeft,
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Container(
+              child: Text(_listKompleks[index].title!,
+                  style: TextStyle(
+                      fontSize: UiJ.sizeweight(context) ? 30 : 40,
+                      fontWeight: FontWeight.w900,
+                      fontFamily: UiJ.fontbold)),
+              alignment: Alignment.topLeft,
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Container(
+              // padding: EdgeInsets.only(right: 400),
+              child: Text(_listKompleks[index].description!,
+                  style: TextStyle(
+                      fontSize: UiJ.sizeweight(context) ? 20 : 25,
+                      fontFamily: UiJ.font)),
+              alignment: Alignment.topLeft,
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Container(
+                alignment: Alignment.topLeft,
+                padding: EdgeInsets.only(right: 400),
+                child: RichText(
+                  text: TextSpan(children: [
+                    WidgetSpan(
+                      child: Icon(
+                        Icons.square,
+                        color: Colors.amber,
+                        size: 20,
+                      ),
+                    ),
+                    TextSpan(
+                      style: TextStyle(
+                        fontFamily: UiJ.fontbold,
+                        fontSize: 20,
+                      ),
+                      text: "  Дата проекта:  ",
+                    ),
+                    TextSpan(
+                        text: formattedDate.format(
+                            DateTime.parse(_listKompleks[index].dateproject!)),
+                        style: TextStyle(fontFamily: UiJ.font, fontSize: 20))
+                  ]),
+                )),
+            Container(
+                alignment: Alignment.topLeft,
+                padding: EdgeInsets.only(right: 400),
+                child: RichText(
+                  text: TextSpan(children: [
+                    WidgetSpan(
+                      child: Icon(
+                        Icons.square,
+                        color: Colors.amber,
+                        size: 20,
+                      ),
+                    ),
+                    TextSpan(
+                      style: TextStyle(
+                        fontFamily: UiJ.fontbold,
+                        fontSize: 20,
+                      ),
+                      text: "  Заказчик:  ",
+                    ),
+                    TextSpan(
+                        text: _listKompleks[index].customer!,
+                        style: TextStyle(fontFamily: UiJ.font, fontSize: 20))
+                  ]),
+                )),
+            Container(
+                alignment: Alignment.topLeft,
+                padding: EdgeInsets.only(right: 400),
+                child: RichText(
+                  text: TextSpan(children: [
+                    WidgetSpan(
+                      child: Icon(
+                        Icons.square,
+                        color: Colors.amber,
+                        size: 20,
+                      ),
+                    ),
+                    TextSpan(
+                      style: TextStyle(
+                        fontFamily: UiJ.fontbold,
+                        fontSize: 20,
+                      ),
+                      text: "  Подрядчик:  ",
+                    ),
+                    TextSpan(
+                        text: UiJ.companyName,
+                        style: TextStyle(fontFamily: UiJ.font, fontSize: 20))
+                  ]),
+                )),
+            SizedBox(
+              height: 20,
+            ),
+            SizedBox(
+                width: 300,
+                height: 50,
+                child: ElevatedButton(
+                    onPressed: () {
+                      for (Dom dom in _listKompleks[index].domSet!) {
+                        if (dom.imageDataList!.length == 0) {
+                          continue;
+                        }
+
+                        _listImage.addAll(dom.imageDataList!);
+                      }
+                      showDialogphoto(context, _listKompleks[index].title!);
+                    },
+                    child: Text(
+                      "Процесс строительство",
+                      style: TextStyle(fontFamily: UiJ.font, fontSize: 20),
+                    )))
+          ],
+        ));
+  }
+
   Widget mainPage() {
     return ListView.builder(
         itemCount: _listKompleks.length,
@@ -80,178 +232,11 @@ class KompleksPage extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Expanded(
-                      child: Card(
-                          elevation: 5,
-                          child: Image.network(
-                            '${UiJ.url}kompleks/download/house/${_listKompleks[index].mainimagepath}',
-                            errorBuilder: (context, exception, stackTrace) {
-                              return Center(
-                                child: CircularProgressIndicator(),
-                              );
-                            },
-                          ))),
+                  index % 2 == 0 ? getCar(index) : getText(context, index),
                   SizedBox(
                     width: 30,
                   ),
-                  Expanded(
-                      flex: 2,
-                      child: Column(
-                        // mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            child: Text(_listKompleks[index].typehouse!,
-                                style: TextStyle(
-                                    color: Colors.redAccent,
-                                    fontWeight: FontWeight.w900,
-                                    fontFamily: UiJ.font)),
-                            alignment: Alignment.topLeft,
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Container(
-                            child: Text(_listKompleks[index].title!,
-                                style: TextStyle(
-                                    fontSize: UiJ.sizeweight(context) ? 30 : 40,
-                                    fontWeight: FontWeight.w900,
-                                    fontFamily: UiJ.fontbold)),
-                            alignment: Alignment.topLeft,
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Container(
-                            // padding: EdgeInsets.only(right: 400),
-                            child: Text(_listKompleks[index].description!,
-                                style: TextStyle(
-                                    fontSize:  UiJ.sizeweight(context) ? 20 : 25,
-                                    fontFamily: UiJ.font)),
-                            alignment: Alignment.topLeft,
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Container(
-                              alignment: Alignment.topLeft,
-                              padding: EdgeInsets.only(right: 400),
-                              child: RichText(
-                                text: TextSpan(children: [
-                                  WidgetSpan(
-                                    child: Icon(
-                                      Icons.square,
-                                      color: Colors.amber,
-                                      size: 20,
-                                    ),
-                                  ),
-                                  TextSpan(
-                                    style: TextStyle(
-                                      fontFamily: UiJ.fontbold,
-                                      fontSize: 20,
-                                    ),
-                                    text: "  Дата проекта:  ",
-                                  ),
-                                  TextSpan(
-                                      text: formattedDate.format(DateTime.parse(
-                                          _listKompleks[index].dateproject!)),
-                                      style: TextStyle(
-                                          fontFamily: UiJ.font, fontSize: 20))
-                                ]),
-                              )),
-                          Container(
-                              alignment: Alignment.topLeft,
-                              padding: EdgeInsets.only(right: 400),
-                              child: RichText(
-                                text: TextSpan(children: [
-                                  WidgetSpan(
-                                    child: Icon(
-                                      Icons.square,
-                                      color: Colors.amber,
-                                      size: 20,
-                                    ),
-                                  ),
-                                  TextSpan(
-                                    style: TextStyle(
-                                      fontFamily: UiJ.fontbold,
-                                      fontSize: 20,
-                                    ),
-                                    text: "  Заказчик:  ",
-                                  ),
-                                  TextSpan(
-                                      text: _listKompleks[index].customer!,
-                                      style: TextStyle(
-                                          fontFamily: UiJ.font, fontSize: 20))
-                                ]),
-                              )),
-                          Container(
-                              alignment: Alignment.topLeft,
-                              padding: EdgeInsets.only(right: 400),
-                              child: RichText(
-                                text: TextSpan(children: [
-                                  WidgetSpan(
-                                    child: Icon(
-                                      Icons.square,
-                                      color: Colors.amber,
-                                      size: 20,
-                                    ),
-                                  ),
-                                  TextSpan(
-                                    style: TextStyle(
-                                      fontFamily: UiJ.fontbold,
-                                      fontSize: 20,
-                                    ),
-                                    text: "  Подрядчик:  ",
-                                  ),
-                                  TextSpan(
-                                      text: UiJ.companyName,
-                                      style: TextStyle(
-                                          fontFamily: UiJ.font, fontSize: 20))
-                                ]),
-                              )),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Row(
-                            children: [
-                              SizedBox(
-                                  width: 300,
-                                  height: 50,
-                                  child: ElevatedButton(
-                                      onPressed: () {},
-                                      child: Text(
-                                        "Приобрести квартиру",
-                                        style: TextStyle(
-                                            fontFamily: UiJ.font, fontSize: 20),
-                                      ))),
-                              SizedBox(
-                                width: 20,
-                              ),
-                              SizedBox(
-                                  width: 300,
-                                  height: 50,
-                                  child: ElevatedButton(
-                                      onPressed: () {
-                                        for (Dom dom
-                                            in _listKompleks[index].domSet!) {
-                                          if (dom.imageDataList!.length == 0) {
-                                            continue;
-                                          }
-
-                                          _listImage.addAll(dom.imageDataList!);
-                                        }
-                                        showDialogphoto(context,
-                                            _listKompleks[index].title!);
-                                      },
-                                      child: Text(
-                                        "Процесс строительство",
-                                        style: TextStyle(
-                                            fontFamily: UiJ.font, fontSize: 20),
-                                      )))
-                            ],
-                          )
-                        ],
-                      )),
+                  index % 2 == 0 ? getText(context, index) : getCar(index),
                 ],
               ),
               SizedBox(

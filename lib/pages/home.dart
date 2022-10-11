@@ -64,7 +64,12 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   height: 150,
                 ),
               ),
-              Spacer(),
+
+              SizedBox(
+                width: MediaQuery.of(context).size.width /
+                    (UiJ.sizeweight(context) ? 5 : 7),
+              ),
+              // Spacer(),
               TabBar(
                 controller: tabController,
 
@@ -86,12 +91,14 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   tabController.index = idx;
                   if (idx == 1) {
                     catalogBloc.add(DskLoadEvent());
+                    context.read<SimpleProvider>().changeindexpage(1);
+                    context.read<SimpleProvider>().changeindextab(1);
                   } else if (idx == 0) {
                     context.read<SimpleProvider>().changeindexpage(1);
                     context.read<SimpleProvider>().changeindextab(0);
                   } else {
-                    context.read<SimpleProvider>().changeindextab(idx);
                     context.read<SimpleProvider>().changeindexpage(1);
+                    context.read<SimpleProvider>().changeindextab(idx);
                   }
                 },
 
@@ -184,7 +191,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                         children: [
                           Text('Адрес компании:',
                               style: TextStyle(
-                                  fontSize: UiJ.sizeweight(context)?25:30,
+                                  fontSize: UiJ.sizeweight(context) ? 25 : 30,
                                   fontFamily: UiJ.fontbold,
                                   color: Colors.white)),
                           SizedBox(
@@ -198,7 +205,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                               TextSpan(
                                   text: '${UiJ.adress}',
                                   style: TextStyle(
-                                      fontSize: UiJ.sizeweight(context)?20:25,
+                                      fontSize:
+                                          UiJ.sizeweight(context) ? 20 : 25,
                                       fontWeight: FontWeight.w200,
                                       fontFamily: UiJ.font,
                                       color: Colors.white))
