@@ -1,14 +1,9 @@
-import 'dart:convert';
-import 'package:binokor_web/provider/simple_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../api/repository.dart';
-import '../bloc/catalog_bloc.dart';
 import '../bloc/dsk_state.dart';
 import '../bloc/make_bloc.dart';
-import '../models/Catalog.dart';
 import '../models/Make.dart';
 import '../models/uij.dart';
 
@@ -45,7 +40,7 @@ class _CatalogPageState extends State<CatalogPage> {
             _listMake.sort((a, b) => a.id!.compareTo(b.id!));
 
             if (_listMake.length > 0) {
-              _make = _listMake[2];
+              _make = _listMake.first;
             }
 
             return Container(
@@ -109,8 +104,10 @@ class _CatalogPageState extends State<CatalogPage> {
                   child: Container(
                     child: Card(
                         elevation: 1,
-                        child: Padding(
+
+                        child: Container(
                             padding: EdgeInsets.all(20),
+                            color: _make == e?Colors.amberAccent.shade100 : Colors.white,
                             child: Row(
                               children: [
                                 Container(
@@ -132,13 +129,13 @@ class _CatalogPageState extends State<CatalogPage> {
                                 ),
                                 Expanded(
                                     child: Text(
-                                  e.name!,
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(
-                                      // color: color,
-                                      fontFamily: UiJ.fontbold,
-                                      fontSize: 20),
-                                ))
+                                          e.name!,
+                                          textAlign: TextAlign.start,
+                                          style: TextStyle(
+                                              // color: color,
+                                              fontFamily: UiJ.fontbold,
+                                              fontSize: 20),
+                                        ))
                               ],
                             ))),
                   ));
@@ -270,39 +267,46 @@ class _CatalogPageState extends State<CatalogPage> {
         ],
         rows: _make!.catalogs!.map((e) {
           return DataRow(cells: [
-            DataCell(Center(child: Text(
+            DataCell(Center(
+                child: Text(
               e.name!,
               style: TextStyle(
                   fontSize: UiJ.sizeweight(context) ? 15 : 20,
                   fontFamily: UiJ.font),
             ))),
-            DataCell(Center(child: Text(
+            DataCell(Center(
+                child: Text(
               e.length!,
               style: TextStyle(
                   fontSize: UiJ.sizeweight(context) ? 15 : 20,
                   fontFamily: UiJ.font),
               textAlign: TextAlign.center,
             ))),
-            DataCell(Center(child: Text(e.weigth!,
-                style: TextStyle(
-                    fontSize: UiJ.sizeweight(context) ? 15 : 20,
-                    fontFamily: UiJ.font)))),
-            DataCell(Center(child: Text(e.heigth!,
-                style: TextStyle(
-                    fontSize: UiJ.sizeweight(context) ? 15 : 20,
-                    fontFamily: UiJ.font)))),
-            DataCell(Center(child: Text(e.volume!,
-                style: TextStyle(
-                    fontSize: UiJ.sizeweight(context) ? 15 : 20,
-                    fontFamily: UiJ.font)))),
-            DataCell(Center(child: Text(e.mass!,
-                style: TextStyle(
-                    fontSize: UiJ.sizeweight(context) ? 15 : 20,
-                    fontFamily: UiJ.font)))),
-            DataCell(Center(child: Text(e.concrete!,
-                style: TextStyle(
-                    fontSize: UiJ.sizeweight(context) ? 15 : 20,
-                    fontFamily: UiJ.font)))),
+            DataCell(Center(
+                child: Text(e.weigth!,
+                    style: TextStyle(
+                        fontSize: UiJ.sizeweight(context) ? 15 : 20,
+                        fontFamily: UiJ.font)))),
+            DataCell(Center(
+                child: Text(e.heigth!,
+                    style: TextStyle(
+                        fontSize: UiJ.sizeweight(context) ? 15 : 20,
+                        fontFamily: UiJ.font)))),
+            DataCell(Center(
+                child: Text(e.volume!,
+                    style: TextStyle(
+                        fontSize: UiJ.sizeweight(context) ? 15 : 20,
+                        fontFamily: UiJ.font)))),
+            DataCell(Center(
+                child: Text(e.mass!,
+                    style: TextStyle(
+                        fontSize: UiJ.sizeweight(context) ? 15 : 20,
+                        fontFamily: UiJ.font)))),
+            DataCell(Center(
+                child: Text(e.concrete!,
+                    style: TextStyle(
+                        fontSize: UiJ.sizeweight(context) ? 15 : 20,
+                        fontFamily: UiJ.font)))),
           ]);
         }).toList(),
       ),
@@ -310,7 +314,7 @@ class _CatalogPageState extends State<CatalogPage> {
   }
 
   Widget description() {
-    return Center(
+    return Container(
       // padding: EdgeInsets.all(20),
       child: Text(
         _make!.description!,
