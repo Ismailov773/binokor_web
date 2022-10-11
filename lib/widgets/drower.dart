@@ -106,6 +106,21 @@ class DrowerPage extends StatelessWidget {
           },
         ),
         Divider(),
+
+        ListTile(
+          leading: Text(
+            'Обучение',
+            style: TextStyle(
+                fontSize: 25, fontFamily: UiJ.font, color: Colors.black),
+          ),
+          onTap: () {
+            context.read<SimpleProvider>().changeindexpage(1);
+            context.read<SimpleProvider>().changeindextab(4);
+
+            Navigator.pop(context);
+          },
+        ),
+        Divider(),
         ListTile(
           leading: Text(
             'Контакты',
@@ -114,7 +129,7 @@ class DrowerPage extends StatelessWidget {
           ),
           onTap: () {
             context.read<SimpleProvider>().changeindexpage(1);
-            context.read<SimpleProvider>().changeindextab(4);
+            context.read<SimpleProvider>().changeindextab(5);
             Navigator.pop(context);
           },
         ),

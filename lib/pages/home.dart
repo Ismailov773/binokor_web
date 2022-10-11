@@ -1,5 +1,5 @@
-import 'package:binokor_web/pages/imagenews_page.dart';
 import 'package:binokor_web/pages/production_page.dart';
+import 'package:binokor_web/pages/study_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
@@ -31,7 +31,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    tabController = TabController(length: 5, vsync: this);
+    tabController = TabController(length: 6, vsync: this);
     catalogBloc = BlocProvider.of<CatalogBloc>(context);
   }
 
@@ -133,6 +133,13 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                         child: Text(
                       'Производство',
                     )),
+                  ),
+                  Container(
+                    // width: 200,
+                    child: Tab(
+                        child: Text(
+                          'Обучение',
+                        )),
                   ),
                   Container(
                     // width: 200,
@@ -323,6 +330,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             CatalogPage(),
             KompleksPage(),
             ProductionPage(),
+            StudyPage(),
             ContactPage(),
           ],
         );
