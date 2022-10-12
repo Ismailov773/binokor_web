@@ -204,7 +204,7 @@ packages:
       name: provider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "6.0.3"
+    version: "6.0.4"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -322,6 +322,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.2"
+  vertical_tabs_flutter:
+    dependency: "direct main"
+    description:
+      name: vertical_tabs_flutter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0"
   video_player:
     dependency: "direct main"
     description:
