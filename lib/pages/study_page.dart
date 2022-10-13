@@ -275,8 +275,11 @@ class _StudyPageState extends State<StudyPage> with TickerProviderStateMixin {
             child: Column(
           children: [
             Expanded(
+                child: Padding(padding: EdgeInsets.all(20),
                 child: VerticalTabs(
                     indicatorColor: Colors.white,
+                    backgroundColor: Colors.white,
+                    tabBackgroundColor: Colors.white,
                     tabsWidth: MediaQuery.of(context).size.width / 4,
                     tabs: _listStudy
                         .map((e) => Tab(
@@ -396,7 +399,7 @@ class _StudyPageState extends State<StudyPage> with TickerProviderStateMixin {
                               )),
                             ],
                           ));
-                    }).toList())),
+                    }).toList()))),
           ],
         )),
       ],
@@ -404,7 +407,8 @@ class _StudyPageState extends State<StudyPage> with TickerProviderStateMixin {
   }
 
   Widget teachers() {
-    return GridView.builder(
+    return Padding(padding: EdgeInsets.all(20),
+    child: GridView.builder(
         gridDelegate:
             SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
         itemCount: _listTeachers.length,
@@ -452,7 +456,7 @@ class _StudyPageState extends State<StudyPage> with TickerProviderStateMixin {
               ),
             ),
           ));
-        });
+        }));
   }
 
   Widget sertificate() {

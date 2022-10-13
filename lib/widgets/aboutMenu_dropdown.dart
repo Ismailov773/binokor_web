@@ -56,7 +56,7 @@ class _AboutMenu_DropDownState extends State<AboutMenu_DropDown> {
                   child: Text("Руководство",
                       style: TextStyle(
                           fontSize: UiJ.sizeweight(context) ? 20 : 25,
-                           fontFamily: UiJ.font,
+                          fontFamily: UiJ.font,
                           color: Colors.black))),
               PopupMenuItem(
                   textStyle: TextStyle(fontSize: 20),
@@ -69,16 +69,18 @@ class _AboutMenu_DropDownState extends State<AboutMenu_DropDown> {
                       style: TextStyle(
                           fontSize: UiJ.sizeweight(context) ? 20 : 25,
                           fontFamily: UiJ.font,
-
                           color: Colors.black))),
               PopupMenuItem(
                   textStyle: TextStyle(fontSize: 20),
+                  onTap: () {
+                    context.read<SimpleProvider>().changeindexpage(4);
+                    context.read<SimpleProvider>().changeindextab(0);
+                  },
                   value: Menu.Vacansy,
                   child: Text("Вакансия",
                       style: TextStyle(
                           fontSize: UiJ.sizeweight(context) ? 20 : 25,
                           fontFamily: UiJ.font,
-
                           color: Colors.black))),
             ]);
   }

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:binokor_web/bloc/job_bloc.dart';
 import 'package:binokor_web/bloc/make_bloc.dart';
 import 'package:binokor_web/bloc/news_bloc.dart';
 import 'package:binokor_web/pages/zero_page.dart';
@@ -64,7 +65,11 @@ class MyApp extends StatelessWidget {
               BlocProvider(
                   create: (context) =>
                       NewsBloc(repository: context.read<Repository>())
-                        ..add(DskLoadEvent()))
+                        ..add(DskLoadEvent())),
+              BlocProvider(
+                  create: (context) =>
+                  JobBloc(repository: context.read<Repository>())
+                    ..add(DskLoadEvent()))
             ],
             child: MaterialApp(
               debugShowCheckedModeBanner: false,

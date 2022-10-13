@@ -1,3 +1,4 @@
+import 'package:binokor_web/pages/job_page.dart';
 import 'package:binokor_web/pages/production_page.dart';
 import 'package:binokor_web/pages/study_page.dart';
 import 'package:flutter/material.dart';
@@ -138,8 +139,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                     // width: 200,
                     child: Tab(
                         child: Text(
-                          'Обучение',
-                        )),
+                      'Обучение',
+                    )),
                   ),
                   Container(
                     // width: 200,
@@ -288,28 +289,39 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                       onTap: () {
                         // UiJ.callTelegram;
                       },
-                      child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Icon(
-                              Icons.email,
-                              color: Colors.blue,
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            RichText(
-                              text: TextSpan(children: [
-                                TextSpan(
-                                    text: "info@dsk.uz",
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w200,
-                                        fontFamily: UiJ.font,
-                                        color: Colors.white))
+                      child: Column(
+                        children: [
+                          Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Icon(
+                                  Icons.email,
+                                  color: Colors.blue,
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                RichText(
+                                  text: TextSpan(children: [
+                                    TextSpan(
+                                        text: "info@dsk.uz",
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w200,
+                                            fontFamily: UiJ.font,
+                                            color: Colors.white))
+                                  ]),
+                                ),
                               ]),
-                            )
-                          ])),
+                          Container(
+                            alignment: Alignment.center,
+                            child: Text(
+                              "Copyright © 2020 Template by DSK BINOKOR",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          )
+                        ],
+                      )),
                 )
               ],
             ),
@@ -338,6 +350,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         return MenegersPage();
       case 3:
         return NewsPage();
+      case 4:
+        return JobPage();
       // case 4:
       //   return ImageNewsPage(news: news);
     }

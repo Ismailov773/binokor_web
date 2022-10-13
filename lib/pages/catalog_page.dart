@@ -107,7 +107,7 @@ class _CatalogPageState extends State<CatalogPage> {
 
                         child: Container(
                             padding: EdgeInsets.all(20),
-                            color: _make == e?Colors.amberAccent.shade100 : Colors.white,
+                            color: _make == e?Colors.greenAccent.shade100 : Colors.white,
                             child: Row(
                               children: [
                                 Container(
