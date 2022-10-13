@@ -56,7 +56,7 @@ class _AboutMenu_DropDownState extends State<AboutMenu_DropDown> {
                   child: Text("Руководство",
                       style: TextStyle(
                           fontSize: UiJ.sizeweight(context) ? 20 : 25,
-                          // fontFamily: UiJ.fontbold,
+                           fontFamily: UiJ.font,
                           color: Colors.black))),
               PopupMenuItem(
                   textStyle: TextStyle(fontSize: 20),
@@ -68,7 +68,8 @@ class _AboutMenu_DropDownState extends State<AboutMenu_DropDown> {
                   child: Text("Новости",
                       style: TextStyle(
                           fontSize: UiJ.sizeweight(context) ? 20 : 25,
-                          // fontFamily: UiJ.fontbold,
+                          fontFamily: UiJ.font,
+
                           color: Colors.black))),
               PopupMenuItem(
                   textStyle: TextStyle(fontSize: 20),
@@ -76,7 +77,8 @@ class _AboutMenu_DropDownState extends State<AboutMenu_DropDown> {
                   child: Text("Вакансия",
                       style: TextStyle(
                           fontSize: UiJ.sizeweight(context) ? 20 : 25,
-                          // fontFamily: UiJ.fontbold,
+                          fontFamily: UiJ.font,
+
                           color: Colors.black))),
             ]);
   }

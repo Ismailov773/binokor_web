@@ -77,6 +77,19 @@ flutter:
     - assets/images/production.png
     - assets/images/technology.png
     - assets/images/kompleks.png
+    - assets/images/teachers/specialist-1.webp
+    - assets/images/teachers/specialist-3.webp
+    - assets/images/teachers/specialist-3.webp
+    - assets/images/teachers/specialist-4.webp
+    - assets/images/teachers/specialist-5.webp
+    - assets/images/teachers/specialist-6.webp
+    - assets/images/sertificate/1.png
+    - assets/images/sertificate/2.png
+    - assets/images/sertificate/3.png
+    - assets/images/sertificate/4.png
+    - assets/images/sertificate/5.png
+    - assets/images/sertificate/6.png
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

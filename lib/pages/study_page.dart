@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:vertical_tabs_flutter/vertical_tabs.dart';
 
+import '../models/Teachers.dart';
 import '../models/uij.dart';
 
 class StudyPage extends StatefulWidget {
@@ -152,29 +153,63 @@ class _StudyPageState extends State<StudyPage> with TickerProviderStateMixin {
           "Консультации и квалификационный экзамен."
         ]),
     Study(
-      title: "Специальность «Бухгалтер». Основы бухгалтерского учета",
-      titledesc: "Описание:",
-      desc: [
-        "Программа курсов предназначена для специалистов хозяйствующих субъектов всех форм собственности и индивидуальных предпринимателей, которые обязаны вести бухгалтерский учет в соответствии с законом Республики Узбекистан «О бухгалтерском учёте». Продолжительность обучения 144 академических часов."
-      ],
-      work: "Рабочая программа:",
-      workdesc: [
-        "Содержание и функции бухгалтерского учета;",
-        "Учет денежных средств и денежных документов;",
-        "Учет расчетов;",
-        "Учет основных средств и нематериальных активов;",
-        "Учет материально-производственных запасов;",
-        "Учет затрат на производство продукции;",
-        "Учет выпуска и продажи готовой продукции;",
-        "Учет труда, заработной платы и расчетов с персоналом по оплате труда;",
-        "Учет фондов, резервов и финансовых результатов;",
-        "Бухгалтерская отчетность;",
-        "Итоговая аттестация;",
-        "Экзамен и/или защита итоговой работы.",
-      ],
-      practice: "",
-      practicedesc: []
-    ),
+        title: "Специальность «Бухгалтер». Основы бухгалтерского учета",
+        titledesc: "Описание:",
+        desc: [
+          "Программа курсов предназначена для специалистов хозяйствующих субъектов всех форм собственности и индивидуальных предпринимателей, которые обязаны вести бухгалтерский учет в соответствии с законом Республики Узбекистан «О бухгалтерском учёте». Продолжительность обучения 144 академических часов."
+        ],
+        work: "Рабочая программа:",
+        workdesc: [
+          "Содержание и функции бухгалтерского учета;",
+          "Учет денежных средств и денежных документов;",
+          "Учет расчетов;",
+          "Учет основных средств и нематериальных активов;",
+          "Учет материально-производственных запасов;",
+          "Учет затрат на производство продукции;",
+          "Учет выпуска и продажи готовой продукции;",
+          "Учет труда, заработной платы и расчетов с персоналом по оплате труда;",
+          "Учет фондов, резервов и финансовых результатов;",
+          "Бухгалтерская отчетность;",
+          "Итоговая аттестация;",
+          "Экзамен и/или защита итоговой работы.",
+        ],
+        practice: "",
+        practicedesc: []),
+  ];
+  List<Teachers> _listTeachers = [
+    Teachers(
+        name: "Абдусаламов Абдувасик Боисович",
+        post: "Член комиссии по повышению квалификации Министерства Труда",
+        imagepath: "assets/images/teachers/specialist-1.webp"),
+    Teachers(
+        name: "Эрматов Зиядулла Досматович",
+        post: "Доцент кафедры «Технологические машины и оборудование» ТАСИ",
+        imagepath: "assets/images/teachers/specialist-3.webp"),
+    Teachers(
+        name: "Юсупов Усмонжон Тургуналиевич",
+        post: "Доцент кафедры «Здания и сооружения» ТАСИ",
+        imagepath: "assets/images/teachers/specialist-3.webp"),
+    Teachers(
+        name: "Хабибуллаев Шавкат Азаматович",
+        post: "Доцент кафедры «Технология и организация строительства» ТАСИ",
+        imagepath: "assets/images/teachers/specialist-4.webp"),
+    Teachers(
+        name: "Базарбаев Алишер Инамджанович",
+        post: "Главный инспектор территориального управления города Ташкента",
+        imagepath: "assets/images/teachers/specialist-5.webp"),
+    Teachers(
+        name: "Мирсаидов Муракам Мирзахматович",
+        post:
+            "Старший преподаватель кафедры «Электротехники, электромеханики и электротехнологии» ТГТУ",
+        imagepath: "assets/images/teachers/specialist-6.webp"),
+  ];
+  List<String> _listSertificate = [
+    "assets/images/sertificate/1.png",
+    "assets/images/sertificate/2.png",
+    "assets/images/sertificate/3.png",
+    "assets/images/sertificate/4.png",
+    "assets/images/sertificate/5.png",
+    "assets/images/sertificate/6.png"
   ];
 
   @override
@@ -226,16 +261,8 @@ class _StudyPageState extends State<StudyPage> with TickerProviderStateMixin {
             Expanded(
                 child: TabBarView(
               controller: _tabController,
-              children: [
-                courses(),
-                Container(
-                  color: Colors.white,
-                ),
-                Container(
-                  color: Colors.lime,
-                ),
-              ],
-            ))
+              children: [courses(), teachers(), sertificate()],
+            )),
           ],
         ));
   }
@@ -250,14 +277,6 @@ class _StudyPageState extends State<StudyPage> with TickerProviderStateMixin {
             Expanded(
                 child: VerticalTabs(
                     indicatorColor: Colors.white,
-
-                    // controller: _tabStudyController,
-                    // labelStyle: TextStyle(color: Colors.black),
-                    // labelColor: Colors.black,
-                    // tabTextStyle: TextStyle(
-                    //     color: Colors.white,
-                    //     fontSize: 30,
-                    //     fontFamily: UiJ.font),
                     tabsWidth: MediaQuery.of(context).size.width / 4,
                     tabs: _listStudy
                         .map((e) => Tab(
@@ -355,42 +374,97 @@ class _StudyPageState extends State<StudyPage> with TickerProviderStateMixin {
                               Container(
                                   child: Column(
                                 children: e.practicedesc!.map((e) {
-                                        return RichText(
-                                            text: TextSpan(children: [
-                                          WidgetSpan(
-                                              child: Icon(
-                                            Icons.circle,
-                                            size: 15,
-                                          )),
-                                          WidgetSpan(
-                                              child: SizedBox(
-                                            width: 20,
-                                          )),
-                                          TextSpan(
-                                            text: e,
-                                            style: TextStyle(
-                                                fontSize: 20,
-                                                fontFamily: UiJ.font),
-                                          )
-                                        ]));
-                                      }).toList(),
+                                  return RichText(
+                                      text: TextSpan(children: [
+                                    WidgetSpan(
+                                        child: Icon(
+                                      Icons.circle,
+                                      size: 15,
+                                    )),
+                                    WidgetSpan(
+                                        child: SizedBox(
+                                      width: 20,
+                                    )),
+                                    TextSpan(
+                                      text: e,
+                                      style: TextStyle(
+                                          fontSize: 20, fontFamily: UiJ.font),
+                                    )
+                                  ]));
+                                }).toList(),
                                 crossAxisAlignment: CrossAxisAlignment.start,
                               )),
                             ],
                           ));
                     }).toList())),
-
-            // Expanded(
-            //     child: TabBarView(
-            //         controller: _tabStudyController,
-            //         children: _listStudy
-            //             .map((e) => Container(
-            //                   child: Text(e.titledesc),
-            //                 ))
-            //             .toList()))
           ],
         )),
       ],
     ));
+  }
+
+  Widget teachers() {
+    return GridView.builder(
+        gridDelegate:
+            SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+        itemCount: _listTeachers.length,
+        itemBuilder: (BuildContext context, int index) {
+          return Container(
+              child: Card(
+            elevation: 5,
+            child: Padding(
+              padding: EdgeInsets.all(20),
+              child: Column(
+                children: [
+                  Container(
+                    child: Image.asset(
+                      _listTeachers[index].imagepath,
+                      width: MediaQuery.of(context).size.width / 4,
+                      height: MediaQuery.of(context).size.height / 4,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    child: Text(
+                      _listTeachers[index].name,
+                      style: TextStyle(
+                        fontSize: 25,
+                        fontFamily: UiJ.font,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    child: Text(
+                      _listTeachers[index].post,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontFamily: UiJ.fontbold,
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ));
+        });
+  }
+
+  Widget sertificate() {
+    return GridView.builder(
+        itemCount: _listSertificate.length,
+        gridDelegate:
+            SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+        itemBuilder: (BuildContext context, int index) {
+          return Container(
+            padding: EdgeInsets.all(10),
+            child: Image.asset(_listSertificate[index]),
+          );
+        });
   }
 }
