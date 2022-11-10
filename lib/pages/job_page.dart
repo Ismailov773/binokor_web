@@ -62,66 +62,74 @@ class JobPage extends StatelessWidget {
           Expanded(
               child: Container(
                   // color: Colors.white,
-                  child: VerticalTabs(
-                      contentScrollAxis: Axis.vertical,
-                      backgroundColor: Colors.white,
-                      tabBackgroundColor: Colors.white,
-                      indicatorColor: Colors.white,
-                      // tabsShadowColor: Colors.white,
-                      tabsWidth: MediaQuery.of(context).size.width / 3,
-                      tabsElevation: 5,
-                      tabs: _listjob
-                          .map(
-                            (e) => Tab(
-                                child: SizedBox(
-                                    height: MediaQuery.of(context).size.height/9,
-                                    child: Card(child: Container(
-                                      alignment: Alignment.centerLeft,
-                                        child: Padding(
-                                            padding: EdgeInsets.all(20),
-                                            child: Text(e.department!,
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 20,
-                                                fontFamily: UiJ.fontbold))))))),
-                          )
-                          .toList(),
-                      contents: _listjob.map((e) {
-                        return Padding(
-                            padding: EdgeInsets.all(20),
-                            child: ListView.builder(
-                              itemBuilder: (context, idx) {
-                                return Container(
-                                    child: e.joblist![idx].title! == true
-                                        ? Text(
-                                            e.joblist![idx].description!,
-                                            style: TextStyle(
-                                                fontFamily: UiJ.fontbold,
-                                                fontSize: 20),
-                                          )
-                                        : RichText(
-                                            text: TextSpan(children: [
-                                            WidgetSpan(
-                                                child: Icon(
-                                              Icons.circle,
-                                              size: 15,
-                                            )),
-                                            WidgetSpan(
-                                                child: SizedBox(
-                                              width: 20,
-                                            )),
-                                            TextSpan(
-                                                text: e
-                                                    .joblist![idx].description!,
+                  child: _listjob == null
+                      ? Center(
+                          child: CircularProgressIndicator(),
+                        )
+                      : VerticalTabs(
+                          contentScrollAxis: Axis.vertical,
+                          backgroundColor: Colors.white,
+                          tabBackgroundColor: Colors.white,
+                          indicatorColor: Colors.white,
+                          // tabsShadowColor: Colors.white,
+                          tabsWidth: MediaQuery.of(context).size.width / 3,
+                          tabsElevation: 5,
+                          tabs: _listjob
+                              .map(
+                                (e) => Tab(
+                                    child: SizedBox(
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                9,
+                                        child: Card(
+                                            child: Container(
+                                                alignment: Alignment.centerLeft,
+                                                child: Padding(
+                                                    padding: EdgeInsets.all(20),
+                                                    child: Text(e.department!,
+                                                        style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontSize: 20,
+                                                            fontFamily: UiJ
+                                                                .fontbold))))))),
+                              )
+                              .toList(),
+                          contents: _listjob.map((e) {
+                            return Padding(
+                                padding: EdgeInsets.all(20),
+                                child: ListView.builder(
+                                  itemBuilder: (context, idx) {
+                                    return Container(
+                                        child: e.joblist![idx].title! == true
+                                            ? Text(
+                                                e.joblist![idx].description!,
                                                 style: TextStyle(
-                                                    fontFamily: UiJ.font,
-                                                    fontSize: 20))
-                                          ])));
-                              },
-                              itemExtent: 40,
-                              itemCount: e.joblist!.length,
-                            ));
-                      }).toList()))),
+                                                    fontFamily: UiJ.fontbold,
+                                                    fontSize: 20),
+                                              )
+                                            : RichText(
+                                                text: TextSpan(children: [
+                                                WidgetSpan(
+                                                    child: Icon(
+                                                  Icons.circle,
+                                                  size: 15,
+                                                )),
+                                                WidgetSpan(
+                                                    child: SizedBox(
+                                                  width: 20,
+                                                )),
+                                                TextSpan(
+                                                    text: e.joblist![idx]
+                                                        .description!,
+                                                    style: TextStyle(
+                                                        fontFamily: UiJ.font,
+                                                        fontSize: 20))
+                                              ])));
+                                  },
+                                  itemExtent: 40,
+                                  itemCount: e.joblist!.length,
+                                ));
+                          }).toList()))),
         ]);
   }
 }

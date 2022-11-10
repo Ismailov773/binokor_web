@@ -1,18 +1,21 @@
 import 'package:binokor_web/bloc/make_bloc.dart';
+import 'package:binokor_web/getconrollers/Controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:provider/provider.dart';
 
 import '../bloc/catalog_bloc.dart';
 import '../bloc/dsk_event.dart';
 import '../models/uij.dart';
-import '../provider/simple_provider.dart';
 
 String? dropname1;
 CatalogBloc? catalogBloc;
 List<String> listdrop = ['Руководство', 'Новости', 'Вакансии'];
 MakeBloc? makeBloc;
+final Controller controller = Get.put(Controller());
 
 class DrowerPage extends StatelessWidget {
   const DrowerPage({Key? key}) : super(key: key);
@@ -53,10 +56,9 @@ class DrowerPage extends StatelessWidget {
                 fontSize: 25, fontFamily: UiJ.font, color: Colors.black),
           ),
           onTap: () {
-            context.read<SimpleProvider>().changeindexpage(1);
-            context.read<SimpleProvider>().changeindextab(0);
+            controller.changeindexpage(1);
+            controller.changeindextab(0);
             Navigator.pop(context);
-
           },
         ),
 
@@ -68,8 +70,8 @@ class DrowerPage extends StatelessWidget {
                 fontSize: 25, fontFamily: UiJ.font, color: Colors.black),
           ),
           onTap: () {
-            context.read<SimpleProvider>().changeindexpage(1);
-            context.read<SimpleProvider>().changeindextab(1);
+            controller.changeindexpage(1);
+            controller.changeindextab(1);
             catalogBloc = BlocProvider.of<CatalogBloc>(context);
             catalogBloc?.add(DskLoadEvent());
             Navigator.pop(context);
@@ -83,8 +85,8 @@ class DrowerPage extends StatelessWidget {
                 fontSize: 25, fontFamily: UiJ.font, color: Colors.black),
           ),
           onTap: () {
-            context.read<SimpleProvider>().changeindexpage(1);
-            context.read<SimpleProvider>().changeindextab(2);
+            controller.changeindexpage(1);
+            controller.changeindextab(2);
             makeBloc = BlocProvider.of<MakeBloc>(context);
             makeBloc?.add(DskLoadEvent());
             Navigator.pop(context);
@@ -99,8 +101,8 @@ class DrowerPage extends StatelessWidget {
                 fontSize: 25, fontFamily: UiJ.font, color: Colors.black),
           ),
           onTap: () {
-            context.read<SimpleProvider>().changeindexpage(1);
-            context.read<SimpleProvider>().changeindextab(3);
+            controller.changeindexpage(1);
+            controller.changeindextab(3);
 
             Navigator.pop(context);
           },
@@ -114,8 +116,8 @@ class DrowerPage extends StatelessWidget {
                 fontSize: 25, fontFamily: UiJ.font, color: Colors.black),
           ),
           onTap: () {
-            context.read<SimpleProvider>().changeindexpage(1);
-            context.read<SimpleProvider>().changeindextab(4);
+            controller.changeindexpage(1);
+            controller.changeindextab(4);
 
             Navigator.pop(context);
           },
@@ -128,8 +130,8 @@ class DrowerPage extends StatelessWidget {
                 fontSize: 25, fontFamily: UiJ.font, color: Colors.black),
           ),
           onTap: () {
-            context.read<SimpleProvider>().changeindexpage(1);
-            context.read<SimpleProvider>().changeindextab(5);
+            controller.changeindexpage(1);
+            controller.changeindextab(5);
             Navigator.pop(context);
           },
         ),

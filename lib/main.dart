@@ -3,10 +3,11 @@ import 'dart:io';
 import 'package:binokor_web/bloc/job_bloc.dart';
 import 'package:binokor_web/bloc/make_bloc.dart';
 import 'package:binokor_web/bloc/news_bloc.dart';
+import 'package:binokor_web/pages/kompleks_details_page.dart';
 import 'package:binokor_web/pages/zero_page.dart';
-import 'package:binokor_web/provider/simple_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 import 'api/repository.dart';
@@ -14,6 +15,7 @@ import 'bloc/Kompleks_bloc.dart';
 import 'bloc/catalog_bloc.dart';
 import 'bloc/dsk_event.dart';
 import 'bloc/meneger_bloc.dart';
+import 'getconrollers/Controller.dart';
 import 'models/uij.dart';
 
 class MyHttpOverrides extends HttpOverrides {
@@ -32,9 +34,7 @@ void main() {
   HttpOverrides.global = MyHttpOverrides();
   WidgetsFlutterBinding.ensureInitialized();
 
-  runApp(MultiProvider(providers: [
-    ChangeNotifierProvider(create: (_) => SimpleProvider()),
-  ], child: MyApp()));
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -68,10 +68,10 @@ class MyApp extends StatelessWidget {
                         ..add(DskLoadEvent())),
               BlocProvider(
                   create: (context) =>
-                  JobBloc(repository: context.read<Repository>())
-                    ..add(DskLoadEvent()))
+                      JobBloc(repository: context.read<Repository>())
+                        ..add(DskLoadEvent()))
             ],
-            child: MaterialApp(
+            child: GetMaterialApp(
               debugShowCheckedModeBanner: false,
               title: UiJ.companyName,
               theme: ThemeData(
@@ -79,13 +79,12 @@ class MyApp extends StatelessWidget {
                 visualDensity: VisualDensity.adaptivePlatformDensity,
                 //primarySwatch: Colors.black87,
               ),
-              // home: Home(),
               initialRoute: '/',
-              routes: {
-                // '/': (context) => LoginPage(),
-                '/': (context) => ZeroPage(),
-                // '/catalogimage': (context) => ImageCatalogPage(catalog: null,),
-              },
+              initialBinding: HomeBindings(),
+              getPages: [
+                GetPage(name: '/', page: () => ZeroPage()),
+                // GetPage(name: '/kompleksdetails', page: () => KompleksDetailesPage()),
+              ],
             )));
   }
 }

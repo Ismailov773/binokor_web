@@ -20,18 +20,6 @@ class _FirstPageState extends State<FirstPage> {
 
   int _current = 0;
 
-  // final List<Color> kMixedColors = [
-  //   Color(0xff71A5D7),
-  //   Color(0xff72CCD4),
-  //   Color(0xffFBAB57),
-  //   Color(0xffF8B993),
-  //   Color(0xff962D17),
-  //   Color(0xffc657fb),
-  //   Color(0xfffb8457),
-  // ];
-
-  // GlobalKey<CarouselSliderState> _sliderKey = GlobalKey();
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -39,20 +27,7 @@ class _FirstPageState extends State<FirstPage> {
         //   height: 800,
         child: Column(
       children: [
-        // Container(
-        //     alignment: Alignment.centerLeft,
-        //     child: IconButton(
-        //       icon: Icon(
-        //         Icons.navigate_before,
-        //         size: 50,
-        //       ),
-        //       color: Colors.black,
-        //       onPressed: () {
-        //         setState(() {
-        //           _current++;
-        //         });
-        //       },
-        //     )),
+
         CarouselSlider(
             items: _items.map((e) {
               return Builder(builder: (BuildContext context) {
@@ -80,16 +55,6 @@ class _FirstPageState extends State<FirstPage> {
               },
               scrollDirection: Axis.horizontal,
             )),
-        // Container(
-        //     alignment: Alignment.centerRight,
-        //     child: IconButton(
-        //       icon: Icon(
-        //         Icons.navigate_next,
-        //         size: 50,
-        //       ),
-        //       color: Colors.black26,
-        //       onPressed: () {},
-        //     )),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: _items.map(

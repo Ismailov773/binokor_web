@@ -1,14 +1,18 @@
+import 'package:binokor_web/getconrollers/Controller.dart';
 import 'package:binokor_web/pages/job_page.dart';
+import 'package:binokor_web/pages/kompleks_details_page.dart';
 import 'package:binokor_web/pages/production_page.dart';
 import 'package:binokor_web/pages/study_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:provider/provider.dart';
 
 import '../bloc/catalog_bloc.dart';
 import '../bloc/dsk_event.dart';
+import '../models/Kompleks.dart';
 import '../models/uij.dart';
-import '../provider/simple_provider.dart';
 import '../widgets/aboutMenu_dropdown.dart';
 import '../widgets/drower.dart';
 import 'catalog_page.dart';
@@ -28,17 +32,22 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   late TabController tabController;
   late CatalogBloc catalogBloc;
+  List<Kompleks> _listKomleks = [];
+  final Controller controller = Get.put(Controller());
+  //final Controller controller = Get.
+
 
   @override
   void initState() {
     super.initState();
     tabController = TabController(length: 6, vsync: this);
     catalogBloc = BlocProvider.of<CatalogBloc>(context);
+    _listKomleks = controller.listKompleks;
   }
 
   @override
   Widget build(BuildContext context) {
-    tabController.index = context.watch<SimpleProvider>().getindextab;
+    tabController.index = controller.indextab;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: PreferredSize(
@@ -54,8 +63,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               InkWell(
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    context.read<SimpleProvider>().changeindexpage(1);
-                    context.read<SimpleProvider>().changeindextab(0);
+                    controller.changeindexpage(1);
+                    controller.changeindextab(0);
                     return Home();
                   }));
                 },
@@ -92,14 +101,14 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   tabController.index = idx;
                   if (idx == 1) {
                     catalogBloc.add(DskLoadEvent());
-                    context.read<SimpleProvider>().changeindexpage(1);
-                    context.read<SimpleProvider>().changeindextab(1);
+                    controller.changeindexpage(1);
+                    controller.changeindextab(1);;
                   } else if (idx == 0) {
-                    context.read<SimpleProvider>().changeindexpage(1);
-                    context.read<SimpleProvider>().changeindextab(0);
+                    controller.changeindexpage(1);
+                    controller.changeindextab(0);
                   } else {
-                    context.read<SimpleProvider>().changeindexpage(1);
-                    context.read<SimpleProvider>().changeindextab(idx);
+                    controller.changeindexpage(1);
+                    controller.changeindextab(idx);
                   }
                 },
 
@@ -180,7 +189,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           Container(
               height: MediaQuery.of(context).size.height,
               child:
-                  selectionPage(context.watch<SimpleProvider>().getindexpage)),
+                  selectionPage(controller.indexpage)),
           SizedBox(
             height: 50,
           ),
@@ -352,8 +361,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         return NewsPage();
       case 4:
         return JobPage();
-      // case 4:
-      //   return ImageNewsPage(news: news);
+      case 5:
+        return KompleksDetailesPage();
     }
   }
 }

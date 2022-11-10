@@ -1,10 +1,12 @@
+import 'package:binokor_web/getconrollers/Controller.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:intl/intl.dart';
 
-import '../bloc/dsk_state.dart';
-import '../bloc/Kompleks_bloc.dart';
 import '../models/Dom.dart';
 import '../models/ImageDom.dart';
 import '../models/Kompleks.dart';
@@ -13,39 +15,23 @@ import '../models/uij.dart';
 List<Kompleks> _listKompleks = [];
 DateFormat formattedDate = DateFormat('dd-MM-yyyy');
 List<ImageDom> _listImage = [];
+ final Controller controller = Get.find();
 
-class KompleksPage extends StatelessWidget {
+class KompleksPage extends GetView<Controller>{
   const KompleksPage({Key? key}) : super(key: key);
+
+
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<KompleksBloc, DskState>(
-        builder: (context, state) {
-          if (state is DskEmtyState) {
-            return Center(child: Text("No data!"));
-          }
-          if (state is DskLoadingState) {
-            return Center(child: CircularProgressIndicator());
-          }
-          if (state is HouseLoadedSatate) {
-            _listKompleks = state.loadedHouse;
-            if (_listKompleks.length != 0) {
-              _listKompleks.sort((a, b) => a.id!.compareTo(b.id!));
-              return Container(
-                alignment: Alignment.center,
-                padding: EdgeInsets.only(left: 100, right: 100),
-                child: main(context),
-              );
-            }
-          }
-          if (state is DskErrorState) {
-            return Center(
-              child: Text("Сервер не работает!"),
-            );
-          }
-          return SizedBox.shrink();
-        },
-        listener: (context, state) {});
+    // _listKompleks = controller.listKompleks;
+    return Obx(()  {
+      _listKompleks = controller.listKompleks;
+      return Padding(
+        padding: EdgeInsets.only(left: 100, right: 100),
+        child: main(context),
+      );
+    });
   }
 
   Widget main(BuildContext context) {
@@ -227,24 +213,30 @@ class KompleksPage extends StatelessWidget {
     return ListView.builder(
         itemCount: _listKompleks.length,
         itemBuilder: (context, index) {
-          return Container(
-              child: Column(
-            children: [
-              Row(
+          return InkWell(
+              onTap: () {
+                controller.changeKompleks(_listKompleks[index]);
+                controller.changeindextab(1);
+                controller.changeindexpage(5);
+              },
+              child: Container(
+                  child: Column(
                 children: [
-                  index % 2 == 0 ? getCar(index) : getText(context, index),
-                  SizedBox(
-                    width: 30,
+                  Row(
+                    children: [
+                      index % 2 == 0 ? getCar(index) : getText(context, index),
+                      SizedBox(
+                        width: 30,
+                      ),
+                      index % 2 == 0 ? getText(context, index) : getCar(index),
+                    ],
                   ),
-                  index % 2 == 0 ? getText(context, index) : getCar(index),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Divider()
                 ],
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Divider()
-            ],
-          ));
+              )));
         });
   }
 
@@ -330,4 +322,35 @@ class KompleksPage extends StatelessWidget {
       },
     );
   }
+
 }
+
+//
+//   BlocConsumer<KompleksBloc, DskState>(
+//   builder: (context, state) {
+//   if (state is DskEmtyState) {
+//   return Center(child: Text("No data!"));
+//   }
+//   if (state is DskLoadingState) {
+//   return Center(child: CircularProgressIndicator());
+//   }
+//   if (state is HouseLoadedSatate) {
+//   _listKompleks = state.loadedHouse;
+//   if (_listKompleks.length != 0) {
+//   _listKompleks.sort((a, b) => a.id!.compareTo(b.id!));
+//   return Container(
+//   alignment: Alignment.center,
+//   padding: EdgeInsets.only(left: 100, right: 100),
+//   child: main(context),
+//   );
+//   }
+//   }
+//   if (state is DskErrorState) {
+//   return Center(
+//   child: Text("Сервер не работает!"),
+//   );
+//   }
+//   return SizedBox.shrink();
+//   },
+//   listener: (context, state) {});
+// }

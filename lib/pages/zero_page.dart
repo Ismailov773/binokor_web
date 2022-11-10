@@ -1,6 +1,9 @@
+import 'package:binokor_web/getconrollers/Controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 import '../models/uij.dart';
 import 'home.dart';
@@ -15,6 +18,9 @@ class ZeroPage extends StatefulWidget {
 }
 
 class _ZeroPageState extends State<ZeroPage> {
+
+  // final Controller controller = Get.put(Controller());
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -51,7 +57,10 @@ class _ZeroPageState extends State<ZeroPage> {
 
   Future<Widget> getHomePage() async {
     _changeOpacity();
-    return await Future.delayed(Duration(seconds: 1), () {})
+
+    return await Future.delayed(Duration(seconds: 1), () {
+
+    })
         .then((value) => Home());
   }
 }

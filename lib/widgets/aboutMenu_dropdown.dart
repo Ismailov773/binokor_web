@@ -1,9 +1,11 @@
+import 'package:binokor_web/getconrollers/Controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 import '../models/uij.dart';
-import '../provider/simple_provider.dart';
 
 enum Menu { About, Menegers, News, Vacansy }
 
@@ -21,6 +23,7 @@ class _AboutMenu_DropDownState extends State<AboutMenu_DropDown> {
 
   bool isHovered = false;
   late bool vertical;
+  final Controller controller = Get.put(Controller());
 
   @override
   void initState() {
@@ -34,12 +37,7 @@ class _AboutMenu_DropDownState extends State<AboutMenu_DropDown> {
         position: PopupMenuPosition.under,
         elevation: 0,
         offset: const Offset(0, 20),
-        // onSelected: (Menu menu) {
-        //   if(Menu.About == menu){
-        //     context.read<SimpleProvider>().changeindexpage(1);
-        //     context.read<SimpleProvider>().changeindextab(0);
-        //   }
-        // },
+
         child: Text(
           "О Компании",
           style: TextStyle(fontSize: UiJ.sizeweight(context) ? 20 : 25),
@@ -47,8 +45,8 @@ class _AboutMenu_DropDownState extends State<AboutMenu_DropDown> {
         itemBuilder: (BuildContext context) => <PopupMenuEntry<Menu>>[
               PopupMenuItem(
                   onTap: () {
-                    context.read<SimpleProvider>().changeindexpage(2);
-                    context.read<SimpleProvider>().changeindextab(0);
+                    controller.changeindexpage(2);
+                    controller.changeindextab(0);;
                   },
                   textStyle:
                       TextStyle(fontSize: UiJ.sizeweight(context) ? 20 : 25),
@@ -61,8 +59,8 @@ class _AboutMenu_DropDownState extends State<AboutMenu_DropDown> {
               PopupMenuItem(
                   textStyle: TextStyle(fontSize: 20),
                   onTap: () {
-                    context.read<SimpleProvider>().changeindexpage(3);
-                    context.read<SimpleProvider>().changeindextab(0);
+                    controller.changeindexpage(3);
+                    controller.changeindextab(0);
                   },
                   value: Menu.News,
                   child: Text("Новости",
@@ -73,8 +71,8 @@ class _AboutMenu_DropDownState extends State<AboutMenu_DropDown> {
               PopupMenuItem(
                   textStyle: TextStyle(fontSize: 20),
                   onTap: () {
-                    context.read<SimpleProvider>().changeindexpage(4);
-                    context.read<SimpleProvider>().changeindextab(0);
+                    controller.changeindexpage(4);
+                    controller.changeindextab(0);
                   },
                   value: Menu.Vacansy,
                   child: Text("Вакансия",
