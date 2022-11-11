@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -57,7 +58,7 @@ class UiJ {
   }
 
   static bool sizeweight(BuildContext context) {
-    if (MediaQuery.of(context).size.width < 1300) {
+    if (kIsWeb) {
       return true;
     } else {
       return false;

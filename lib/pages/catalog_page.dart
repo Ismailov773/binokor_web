@@ -38,15 +38,12 @@ class _CatalogPageState extends State<CatalogPage> {
           if (state is MakeLoadedState) {
             _listMake = state.loadedMake;
             _listMake.sort((a, b) => a.id!.compareTo(b.id!));
-
             if (_listMake.length > 0) {
               _make = _listMake.first;
             }
-
             return Container(
                 padding: EdgeInsets.only(left: 100, right: 100), child: main());
           }
-
           if (state is DskErrorState) {
             return Center(
               child: Text("Сервер не работает!"),

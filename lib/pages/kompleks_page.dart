@@ -1,37 +1,26 @@
 import 'package:binokor_web/getconrollers/Controller.dart';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:intl/intl.dart';
 
 import '../models/Dom.dart';
 import '../models/ImageDom.dart';
-import '../models/Kompleks.dart';
 import '../models/uij.dart';
 
-List<Kompleks> _listKompleks = [];
 DateFormat formattedDate = DateFormat('dd-MM-yyyy');
 List<ImageDom> _listImage = [];
- final Controller controller = Get.find();
+final Controller controller = Get.put(Controller());
 
-class KompleksPage extends GetView<Controller>{
+class KompleksPage extends StatelessWidget {
   const KompleksPage({Key? key}) : super(key: key);
-
-
 
   @override
   Widget build(BuildContext context) {
-    // _listKompleks = controller.listKompleks;
-    return Obx(()  {
-      _listKompleks = controller.listKompleks;
-      return Padding(
-        padding: EdgeInsets.only(left: 100, right: 100),
-        child: main(context),
-      );
-    });
+    return Padding(
+      padding: EdgeInsets.only(left: 100, right: 100),
+      child: main(context),
+    );
   }
 
   Widget main(BuildContext context) {
@@ -62,7 +51,7 @@ class KompleksPage extends GetView<Controller>{
         child: Card(
             elevation: 5,
             child: Image.network(
-              '${UiJ.url}kompleks/download/house/${_listKompleks[index].mainimagepath}',
+              '${UiJ.url}kompleks/download/house/${controller.listKompleks[index].mainimagepath}',
               errorBuilder: (context, exception, stackTrace) {
                 return Center(
                   child: CircularProgressIndicator(),
@@ -79,7 +68,7 @@ class KompleksPage extends GetView<Controller>{
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              child: Text(_listKompleks[index].typehouse!,
+              child: Text(controller.listKompleks[index].typehouse!,
                   style: TextStyle(
                       color: Colors.redAccent,
                       fontWeight: FontWeight.w900,
@@ -90,7 +79,7 @@ class KompleksPage extends GetView<Controller>{
               height: 10,
             ),
             Container(
-              child: Text(_listKompleks[index].title!,
+              child: Text(controller.listKompleks[index].title!,
                   style: TextStyle(
                       fontSize: UiJ.sizeweight(context) ? 30 : 40,
                       fontWeight: FontWeight.w900,
@@ -102,7 +91,7 @@ class KompleksPage extends GetView<Controller>{
             ),
             Container(
               // padding: EdgeInsets.only(right: 400),
-              child: Text(_listKompleks[index].description!,
+              child: Text(controller.listKompleks[index].description!,
                   style: TextStyle(
                       fontSize: UiJ.sizeweight(context) ? 20 : 25,
                       fontFamily: UiJ.font)),
@@ -132,7 +121,7 @@ class KompleksPage extends GetView<Controller>{
                     ),
                     TextSpan(
                         text: formattedDate.format(
-                            DateTime.parse(_listKompleks[index].dateproject!)),
+                            DateTime.parse(controller.listKompleks[index].dateproject!)),
                         style: TextStyle(fontFamily: UiJ.font, fontSize: 20))
                   ]),
                 )),
@@ -156,7 +145,7 @@ class KompleksPage extends GetView<Controller>{
                       text: "  Заказчик:  ",
                     ),
                     TextSpan(
-                        text: _listKompleks[index].customer!,
+                        text: controller.listKompleks[index].customer!,
                         style: TextStyle(fontFamily: UiJ.font, fontSize: 20))
                   ]),
                 )),
@@ -192,14 +181,14 @@ class KompleksPage extends GetView<Controller>{
                 height: 50,
                 child: ElevatedButton(
                     onPressed: () {
-                      for (Dom dom in _listKompleks[index].domSet!) {
+                      for (Dom dom in controller.listKompleks[index].domSet!) {
                         if (dom.imageDataList!.length == 0) {
                           continue;
                         }
 
                         _listImage.addAll(dom.imageDataList!);
                       }
-                      showDialogphoto(context, _listKompleks[index].title!);
+                      showDialogphoto(context, controller.listKompleks[index].title!);
                     },
                     child: Text(
                       "Процесс строительство",
@@ -211,32 +200,37 @@ class KompleksPage extends GetView<Controller>{
 
   Widget mainPage() {
     return ListView.builder(
-        itemCount: _listKompleks.length,
+        itemCount: controller.listKompleks.length,
         itemBuilder: (context, index) {
-          return InkWell(
-              onTap: () {
-                controller.changeKompleks(_listKompleks[index]);
-                controller.changeindextab(1);
-                controller.changeindexpage(5);
-              },
-              child: Container(
-                  child: Column(
-                children: [
-                  Row(
-                    children: [
-                      index % 2 == 0 ? getCar(index) : getText(context, index),
-                      SizedBox(
-                        width: 30,
-                      ),
-                      index % 2 == 0 ? getText(context, index) : getCar(index),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Divider()
-                ],
-              )));
+          return Container(
+              child: InkWell(
+                  onTap: () {
+                    controller.changeKompleks(controller.listKompleks[index]);
+                    controller.changeindexpage(5);
+                  },
+                  child: Card(
+                      child: Container(
+                          padding: EdgeInsets.all(10),
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  index % 2 == 0
+                                      ? getCar(index)
+                                      : getText(context, index),
+                                  SizedBox(
+                                    width: 30,
+                                  ),
+                                  index % 2 == 0
+                                      ? getText(context, index)
+                                      : getCar(index),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                            ],
+                          )))));
         });
   }
 
@@ -322,7 +316,6 @@ class KompleksPage extends GetView<Controller>{
       },
     );
   }
-
 }
 
 //

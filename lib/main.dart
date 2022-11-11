@@ -58,10 +58,10 @@ class MyApp extends StatelessWidget {
                   create: (context) =>
                       MenegerBloc(repository: context.read<Repository>())
                         ..add(DskLoadEvent())),
-              BlocProvider(
-                  create: (context) =>
-                      KompleksBloc(repository: context.read<Repository>())
-                        ..add(DskLoadEvent())),
+              // BlocProvider(
+              //     create: (context) =>
+              //         KompleksBloc(repository: context.read<Repository>())
+              //           ..add(DskLoadEvent())),
               BlocProvider(
                   create: (context) =>
                       NewsBloc(repository: context.read<Repository>())

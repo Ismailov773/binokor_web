@@ -5,39 +5,37 @@ import 'package:get/get.dart';
 class Controller extends GetxController {
   final api = ApiConnector();
   Kompleks? kompleks;
-  int indexpage = 1;
-  int indextab = 4;
+  var indexpage = 0.obs;
+  var indextab = 0.obs;
 
   var listKompleks = <Kompleks>[].obs;
 
-  void fetchListKompleks() async {
+  fetchListKompleks() async {
     var komplek = await api.getKomleks();
     if (komplek != null) {
       listKompleks.value = komplek;
+      listKompleks.value.sort((a,b) => a.id!.compareTo(b.id!));
     }
   }
 
   @override
-  void onInit() {
+  onInit() {
     fetchListKompleks();
     super.onInit();
   }
 
-  void changeKompleks(Kompleks newkompleks) {
+  changeKompleks(Kompleks newkompleks) {
     this.kompleks = newkompleks;
+    update();
+  }
+
+  changeindexpage(int newindex) => indexpage.value = newindex;
+
+  changeindextab(int newindex) {
+    this.indextab.value = newindex;
     // update();
   }
-
-  void changeindexpage(int newindex) {
-    this.indexpage = newindex;
-  }
-
-  void changeindextab(int newindex) {
-    this.indextab = newindex;
-  }
 }
-
-
 
 class HomeBindings extends Bindings {
   @override

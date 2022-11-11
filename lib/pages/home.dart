@@ -32,22 +32,18 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   late TabController tabController;
   late CatalogBloc catalogBloc;
-  List<Kompleks> _listKomleks = [];
   final Controller controller = Get.put(Controller());
-  //final Controller controller = Get.
-
 
   @override
   void initState() {
     super.initState();
     tabController = TabController(length: 6, vsync: this);
     catalogBloc = BlocProvider.of<CatalogBloc>(context);
-    _listKomleks = controller.listKompleks;
   }
 
   @override
   Widget build(BuildContext context) {
-    tabController.index = controller.indextab;
+    tabController.index = controller.indextab.toInt();
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: PreferredSize(
@@ -77,7 +73,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
               SizedBox(
                 width: MediaQuery.of(context).size.width /
-                    (UiJ.sizeweight(context) ? 5 : 7),
+                    (UiJ.sizeweight(context) ? 17 : 10),
               ),
               // Spacer(),
               TabBar(
@@ -102,7 +98,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   if (idx == 1) {
                     catalogBloc.add(DskLoadEvent());
                     controller.changeindexpage(1);
-                    controller.changeindextab(1);;
+                    controller.changeindextab(1);
                   } else if (idx == 0) {
                     controller.changeindexpage(1);
                     controller.changeindextab(0);
@@ -188,8 +184,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         children: [
           Container(
               height: MediaQuery.of(context).size.height,
-              child:
-                  selectionPage(controller.indexpage)),
+              child: Obx(() => selectionPage(controller.indexpage.value))),
           SizedBox(
             height: 50,
           ),
