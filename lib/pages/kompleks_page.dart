@@ -120,8 +120,8 @@ class KompleksPage extends StatelessWidget {
                       text: "  Дата проекта:  ",
                     ),
                     TextSpan(
-                        text: formattedDate.format(
-                            DateTime.parse(controller.listKompleks[index].dateproject!)),
+                        text: formattedDate.format(DateTime.parse(
+                            controller.listKompleks[index].dateproject!)),
                         style: TextStyle(fontFamily: UiJ.font, fontSize: 20))
                   ]),
                 )),
@@ -188,7 +188,8 @@ class KompleksPage extends StatelessWidget {
 
                         _listImage.addAll(dom.imageDataList!);
                       }
-                      showDialogphoto(context, controller.listKompleks[index].title!);
+                      showDialogphoto(
+                          context, controller.listKompleks[index].title!);
                     },
                     child: Text(
                       "Процесс строительство",
@@ -203,12 +204,13 @@ class KompleksPage extends StatelessWidget {
         itemCount: controller.listKompleks.length,
         itemBuilder: (context, index) {
           return Container(
-              child: InkWell(
-                  onTap: () {
-                    controller.changeKompleks(controller.listKompleks[index]);
-                    controller.changeindexpage(5);
-                  },
-                  child: Card(
+              child: Card(
+                  child: InkWell(
+                      onTap: () {
+                        controller
+                            .changeKompleks(controller.listKompleks[index]);
+                        controller.changeindexpage(5);
+                      },
                       child: Container(
                           padding: EdgeInsets.all(10),
                           child: Column(

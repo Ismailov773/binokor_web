@@ -10,17 +10,21 @@ class Controller extends GetxController {
 
   var listKompleks = <Kompleks>[].obs;
 
+
   fetchListKompleks() async {
     var komplek = await api.getKomleks();
     if (komplek != null) {
       listKompleks.value = komplek;
       listKompleks.value.sort((a,b) => a.id!.compareTo(b.id!));
     }
+
   }
 
   @override
   onInit() {
     fetchListKompleks();
+    indexpage.value =1;
+    indextab.value = 1;
     super.onInit();
   }
 

@@ -8,8 +8,8 @@ class UiJ {
   static final color = HexColor("#686868");
   static final font = 'Play'; //sans-serif
   static final fontbold = 'PlayBold';
-  static final String url = 'https://dsk-webapp.azurewebsites.net/';
- // static final String url = 'http://localhost:8087/';
+  // static final String url = 'https://dsk-webapp.azurewebsites.net/';
+  static final String url = 'http://localhost:8087/';
   static final String adress =
       '100083, Узбекистан, г.Ташкент, Бектемирский р-н, ул. Зироат 91';
   static final String phone = '+998 71 205 0853';
