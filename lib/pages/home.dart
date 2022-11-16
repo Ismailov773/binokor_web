@@ -4,14 +4,9 @@ import 'package:binokor_web/pages/kompleks_details_page.dart';
 import 'package:binokor_web/pages/production_page.dart';
 import 'package:binokor_web/pages/study_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:provider/provider.dart';
 
-import '../bloc/catalog_bloc.dart';
-import '../bloc/dsk_event.dart';
-import '../models/Kompleks.dart';
 import '../models/uij.dart';
 import '../widgets/aboutMenu_dropdown.dart';
 import '../widgets/drower.dart';
@@ -31,14 +26,12 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   late TabController tabController;
-  late CatalogBloc catalogBloc;
   final controller = Get.put(Controller());
 
   @override
   void initState() {
     super.initState();
     tabController = TabController(length: 6, vsync: this);
-    catalogBloc = BlocProvider.of<CatalogBloc>(context);
   }
 
   @override
@@ -96,7 +89,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   // });
                   tabController.index = idx;
                   if (idx == 1) {
-                    catalogBloc.add(DskLoadEvent());
                     controller.changeindexpage(1);
                     controller.changeindextab(1);
                   } else if (idx == 0) {

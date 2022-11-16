@@ -1,5 +1,7 @@
 import 'package:binokor_web/getconrollers/ApiConnector.dart';
+import 'package:binokor_web/models/Job.dart';
 import 'package:binokor_web/models/Kompleks.dart';
+import 'package:binokor_web/models/News.dart';
 import 'package:get/get.dart';
 
 import '../models/Make.dart';
@@ -14,6 +16,8 @@ class Controller extends GetxController {
   var listMeneger = <Meneger>[].obs;
   var listKompleks = <Kompleks>[].obs;
   var listMake = <Make>[].obs;
+  var listJob = <Job>[].obs;
+  var listnews = <News>[].obs;
 
   fetchListKompleks() async {
     var komplek = await api.getKomleks();
@@ -24,9 +28,8 @@ class Controller extends GetxController {
   }
 
   fetchListMeneger() async {
-
     final json = await api.getAll("meneger/get");
-    final loadedmeneger =  json.map((e) => Meneger.fromJson(e)).toList();
+    final loadedmeneger = json.map((e) => Meneger.fromJson(e)).toList();
 
     if (loadedmeneger != null) {
       listMeneger.value = loadedmeneger;
@@ -35,13 +38,32 @@ class Controller extends GetxController {
   }
 
   fetchListMake() async {
-
     final json = await api.getAll("make/get");
-    final loadedmake =  json.map((e) => Make.fromJson(e)).toList();
+    final loadedmake = json.map((e) => Make.fromJson(e)).toList();
 
     if (loadedmake != null) {
       listMake.value = loadedmake;
       listMake.value.sort((a, b) => a.id!.compareTo(b.id!));
+    }
+  }
+
+  fetchListjob() async {
+    final json = await api.getAll("job/get");
+    final loadedjob = json.map((e) => Job.fromJson(e)).toList();
+
+    if (loadedjob != null) {
+      listJob.value = loadedjob;
+      listJob.value.sort((a, b) => a.id!.compareTo(b.id!));
+    }
+  }
+
+  fetchListnews() async {
+    final json = await api.getAll("news/get");
+    final loadednews = json.map((e) => News.fromJson(e)).toList();
+
+    if (loadednews != null) {
+      listnews.value = loadednews;
+      listnews.value.sort((a, b) => a.id!.compareTo(b.id!));
     }
   }
 
@@ -50,7 +72,8 @@ class Controller extends GetxController {
     fetchListKompleks();
     fetchListMeneger();
     fetchListMake();
-
+    fetchListjob();
+    fetchListnews();
     indexpage.value = 1;
     indextab.value = 1;
     super.onInit();

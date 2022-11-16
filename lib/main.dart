@@ -1,20 +1,12 @@
 import 'dart:io';
 
-import 'package:binokor_web/bloc/job_bloc.dart';
-import 'package:binokor_web/bloc/news_bloc.dart';
-import 'package:binokor_web/pages/kompleks_details_page.dart';
 import 'package:binokor_web/pages/zero_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 
 import 'api/repository.dart';
-import 'bloc/Kompleks_bloc.dart';
-import 'bloc/catalog_bloc.dart';
-import 'bloc/dsk_event.dart';
 import 'getconrollers/Controller.dart';
-import 'getconrollers/initservices.dart';
 import 'models/uij.dart';
 
 class MyHttpOverrides extends HttpOverrides {
@@ -44,34 +36,20 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return RepositoryProvider(
         create: (context) => Repository(),
-        child: MultiBlocProvider(
-            providers: [
-              BlocProvider(
-                  create: (context) =>
-                      CatalogBloc(repository: context.read<Repository>())),
-              BlocProvider(
-                  create: (context) =>
-                      NewsBloc(repository: context.read<Repository>())
-                        ..add(DskLoadEvent())),
-              BlocProvider(
-                  create: (context) =>
-                      JobBloc(repository: context.read<Repository>())
-                        ..add(DskLoadEvent()))
-            ],
-            child: GetMaterialApp(
-              debugShowCheckedModeBanner: false,
-              title: UiJ.companyName,
-              theme: ThemeData(
-                backgroundColor: Colors.black, bottomAppBarColor: Colors.black,
-                visualDensity: VisualDensity.adaptivePlatformDensity,
-                //primarySwatch: Colors.black87,
-              ),
-              initialRoute: '/',
-              initialBinding: HomeBindings(),
-              getPages: [
-                GetPage(name: '/', page: () => ZeroPage()),
-                // GetPage(name: '/kompleksdetails', page: () => KompleksDetailesPage()),
-              ],
-            )));
+        child: GetMaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: UiJ.companyName,
+          theme: ThemeData(
+            backgroundColor: Colors.black, bottomAppBarColor: Colors.black,
+            visualDensity: VisualDensity.adaptivePlatformDensity,
+            //primarySwatch: Colors.black87,
+          ),
+          initialRoute: '/',
+          initialBinding: HomeBindings(),
+          getPages: [
+            GetPage(name: '/', page: () => ZeroPage()),
+            // GetPage(name: '/kompleksdetails', page: () => KompleksDetailesPage()),
+          ],
+        ));
   }
 }

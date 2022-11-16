@@ -1,10 +1,11 @@
-import 'package:binokor_web/bloc/dsk_state.dart';
-import 'package:binokor_web/bloc/job_bloc.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:vertical_tabs_flutter/vertical_tabs.dart';
 
+import '../getconrollers/Controller.dart';
 import '../models/Job.dart';
 import '../models/uij.dart';
 
@@ -15,30 +16,11 @@ class JobPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<JobBloc, DskState>(
-        builder: (context, state) {
-          if (state is DskEmtyState) {
-            return Center(child: Text("No data!"));
-          }
-          if (state is DskLoadingState) {
-            return Center(child: CircularProgressIndicator());
-          }
-          if (state is JobLoadedState) {
-            _listjob = state.loadedjods;
-            _listjob.sort((a, b) => a.id!.compareTo(b.id!));
-            return Container(
-                padding: EdgeInsets.only(left: 100, right: 100),
-                color: Colors.white,
-                child: main(context));
-          }
-          if (state is DskErrorState) {
-            return Center(
-              child: Text("Сервер не работает!"),
-            );
-          }
-          return SizedBox.shrink();
-        },
-        listener: (context, state) {});
+    final Controller controller = Get.find();
+    return Obx(() {
+      _listjob = controller.listJob;
+      return main(context);
+    });
   }
 
   Widget main(BuildContext context) {

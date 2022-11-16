@@ -2,17 +2,12 @@
 import 'package:binokor_web/getconrollers/Controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:provider/provider.dart';
 
-import '../bloc/catalog_bloc.dart';
-import '../bloc/dsk_event.dart';
 import '../models/uij.dart';
 
 String? dropname1;
-CatalogBloc? catalogBloc;
 List<String> listdrop = ['Руководство', 'Новости', 'Вакансии'];
 
 final Controller controller = Get.put(Controller());
@@ -72,8 +67,6 @@ class DrowerPage extends StatelessWidget {
           onTap: () {
             controller.changeindexpage(1);
             controller.changeindextab(1);
-            catalogBloc = BlocProvider.of<CatalogBloc>(context);
-            catalogBloc?.add(DskLoadEvent());
             Navigator.pop(context);
           },
         ),

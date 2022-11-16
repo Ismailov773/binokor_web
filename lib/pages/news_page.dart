@@ -1,10 +1,11 @@
-import 'package:binokor_web/bloc/dsk_state.dart';
-import 'package:binokor_web/bloc/news_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:intl/intl.dart';
 
+import '../getconrollers/Controller.dart';
 import '../models/News.dart';
 import '../models/uij.dart';
 
@@ -17,30 +18,14 @@ class NewsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<NewsBloc, DskState>(
-        builder: (context, state) {
-          if (state is DskEmtyState) {
-            return Center(child: Text("No data!"));
-          }
-          if (state is DskLoadingState) {
-            return Center(child: CircularProgressIndicator());
-          }
-
-          if (state is NewsLoadedSatate) {
-            _listnews = state.loadedNews;
-
-            return Container(
-                padding: EdgeInsets.only(left: 100, right: 100), child: main());
-          }
-
-          if (state is DskErrorState) {
-            return Center(
-              child: Text("Сервер не работает!"),
-            );
-          }
-          return SizedBox.shrink();
-        },
-        listener: (context, state) {});
+    final Controller controller = Get.find();
+    return Obx(() {
+      _listnews = controller.listnews;
+      return Padding(
+        padding: EdgeInsets.only(left: 100, right: 100),
+        child: main(),
+      );
+    });
   }
 
   Widget main() {
@@ -179,7 +164,7 @@ class NewsPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
-                         mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Image.network(
