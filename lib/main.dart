@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:binokor_web/bloc/job_bloc.dart';
-import 'package:binokor_web/bloc/make_bloc.dart';
 import 'package:binokor_web/bloc/news_bloc.dart';
 import 'package:binokor_web/pages/kompleks_details_page.dart';
 import 'package:binokor_web/pages/zero_page.dart';
@@ -14,8 +13,8 @@ import 'api/repository.dart';
 import 'bloc/Kompleks_bloc.dart';
 import 'bloc/catalog_bloc.dart';
 import 'bloc/dsk_event.dart';
-import 'bloc/meneger_bloc.dart';
 import 'getconrollers/Controller.dart';
+import 'getconrollers/initservices.dart';
 import 'models/uij.dart';
 
 class MyHttpOverrides extends HttpOverrides {
@@ -49,19 +48,7 @@ class MyApp extends StatelessWidget {
             providers: [
               BlocProvider(
                   create: (context) =>
-                      MakeBloc(repository: context.read<Repository>())
-                        ..add(DskLoadEvent())),
-              BlocProvider(
-                  create: (context) =>
                       CatalogBloc(repository: context.read<Repository>())),
-              BlocProvider(
-                  create: (context) =>
-                      MenegerBloc(repository: context.read<Repository>())
-                        ..add(DskLoadEvent())),
-              // BlocProvider(
-              //     create: (context) =>
-              //         KompleksBloc(repository: context.read<Repository>())
-              //           ..add(DskLoadEvent())),
               BlocProvider(
                   create: (context) =>
                       NewsBloc(repository: context.read<Repository>())

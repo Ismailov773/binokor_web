@@ -19,22 +19,10 @@ class CatalogLoadedState extends DskState {
   CatalogLoadedState({required this.loadedCatalog});
 }
 
-class MenegerLoadedState extends DskState {
-  List<Meneger> loadedMeneger;
-
-  MenegerLoadedState({required this.loadedMeneger});
-}
-
 class HouseLoadedSatate extends DskState {
   List<Kompleks> loadedHouse;
 
   HouseLoadedSatate({required this.loadedHouse});
-}
-
-class MakeLoadedState extends DskState {
-  List<Make> loadedMake;
-
-  MakeLoadedState({required this.loadedMake});
 }
 
 class NewsLoadedSatate extends DskState {

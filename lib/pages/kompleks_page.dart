@@ -6,20 +6,21 @@ import 'package:intl/intl.dart';
 
 import '../models/Dom.dart';
 import '../models/ImageDom.dart';
+import '../models/Kompleks.dart';
 import '../models/uij.dart';
 
 DateFormat formattedDate = DateFormat('dd-MM-yyyy');
 List<ImageDom> _listImage = [];
-final Controller controller = Get.put(Controller());
+final Controller controller = Get.find();
 
 class KompleksPage extends StatelessWidget {
-  const KompleksPage({Key? key}) : super(key: key);
+  KompleksPage() : super();
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(left: 100, right: 100),
-      child: main(context),
+      child: Obx(() => main(context)),
     );
   }
 
@@ -41,7 +42,41 @@ class KompleksPage extends StatelessWidget {
         SizedBox(
           height: 20,
         ),
-        Expanded(child: mainPage()),
+        Expanded(
+            child:  ListView.builder(
+                itemCount: controller.listKompleks.length,
+                itemBuilder: (context, index) {
+                  return Container(
+                      child: Card(
+                          child: InkWell(
+                              onTap: () {
+                                controller.changeKompleks(
+                                    controller.listKompleks[index]);
+                                controller.changeindexpage(5);
+                              },
+                              child: Container(
+                                  padding: EdgeInsets.all(10),
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        children: [
+                                          index % 2 == 0
+                                              ? getCar(index)
+                                              : getText(context, index),
+                                          SizedBox(
+                                            width: 30,
+                                          ),
+                                          index % 2 == 0
+                                              ? getText(context, index)
+                                              : getCar(index),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                    ],
+                                  )))));
+                })),
       ],
     );
   }
@@ -188,8 +223,7 @@ class KompleksPage extends StatelessWidget {
 
                         _listImage.addAll(dom.imageDataList!);
                       }
-                      showDialogphoto(
-                          context, controller.listKompleks[index].title!);
+                      showDialogphoto(context, controller.listKompleks[index].title!);
                     },
                     child: Text(
                       "Процесс строительство",
@@ -197,43 +231,6 @@ class KompleksPage extends StatelessWidget {
                     )))
           ],
         ));
-  }
-
-  Widget mainPage() {
-    return ListView.builder(
-        itemCount: controller.listKompleks.length,
-        itemBuilder: (context, index) {
-          return Container(
-              child: Card(
-                  child: InkWell(
-                      onTap: () {
-                        controller
-                            .changeKompleks(controller.listKompleks[index]);
-                        controller.changeindexpage(5);
-                      },
-                      child: Container(
-                          padding: EdgeInsets.all(10),
-                          child: Column(
-                            children: [
-                              Row(
-                                children: [
-                                  index % 2 == 0
-                                      ? getCar(index)
-                                      : getText(context, index),
-                                  SizedBox(
-                                    width: 30,
-                                  ),
-                                  index % 2 == 0
-                                      ? getText(context, index)
-                                      : getCar(index),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                            ],
-                          )))));
-        });
   }
 
   Future<void> showDialogphoto(BuildContext context, String title) async {

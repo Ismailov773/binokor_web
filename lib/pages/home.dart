@@ -32,7 +32,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   late TabController tabController;
   late CatalogBloc catalogBloc;
-  final Controller controller = Get.put(Controller());
+  final controller = Get.put(Controller());
 
   @override
   void initState() {
@@ -180,126 +180,95 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           titleTextStyle: TextStyle(fontWeight: FontWeight.w200, fontSize: 45),
         ),
       ),
-      body: ListView(
-        children: [
-          Container(
-              height: MediaQuery.of(context).size.height,
-              child: Obx(() => selectionPage(controller.indexpage.value))),
-          SizedBox(
-            height: 50,
-          ),
-          // CatalogPage(),
-          //  Container(child: KompleksPage()),
-          // ProductionPage(),
-          Container(
-            color: Colors.black,
-            padding: EdgeInsets.only(left: 100, right: 100, top: 50),
-            child: Column(
-              children: [
-                Container(
-                    alignment: Alignment.topLeft,
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Адрес компании:',
-                              style: TextStyle(
-                                  fontSize: UiJ.sizeweight(context) ? 25 : 30,
-                                  fontFamily: UiJ.fontbold,
-                                  color: Colors.white)),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          RichText(
-                            text: TextSpan(children: [
-                              WidgetSpan(
-                                  child: Icon(Icons.location_on_rounded,
-                                      color: Colors.blue)),
-                              TextSpan(
-                                  text: '${UiJ.adress}',
+      body: Obx(() => ListView(
+            children: [
+              Container(
+                  height: MediaQuery.of(context).size.height,
+                  child: selectionPage(controller.indexpage.value)),
+              //,
+              // KompleksPage(),
+              SizedBox(
+                height: 50,
+              ),
+              // CatalogPage(),
+              //  Container(child: KompleksPage()),
+              // ProductionPage(),
+              Container(
+                color: Colors.black,
+                padding: EdgeInsets.only(left: 100, right: 100, top: 50),
+                child: Column(
+                  children: [
+                    Container(
+                        alignment: Alignment.topLeft,
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('Адрес компании:',
                                   style: TextStyle(
                                       fontSize:
-                                          UiJ.sizeweight(context) ? 20 : 25,
-                                      fontWeight: FontWeight.w200,
-                                      fontFamily: UiJ.font,
-                                      color: Colors.white))
-                            ]),
-                          )
-                        ])),
-                SizedBox(
-                  height: 20,
-                ),
-                Container(
-                    alignment: Alignment.topLeft,
-                    child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Icon(
-                            Icons.phone,
-                            color: Colors.blue,
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          RichText(
-                            text: TextSpan(children: [
-                              TextSpan(
-                                  text: '${UiJ.phone}  ',
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w200,
-                                      fontFamily: UiJ.font,
+                                          UiJ.sizeweight(context) ? 25 : 30,
+                                      fontFamily: UiJ.fontbold,
                                       color: Colors.white)),
-                            ]),
-                          )
-                        ])),
-                SizedBox(
-                  height: 20,
-                ),
-                Container(
-                  alignment: Alignment.topLeft,
-                  child: InkWell(
-                      onTap: () {
-                        UiJ.callTelegram;
-                      },
-                      child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Icon(
-                              Icons.telegram,
-                              color: Colors.blue,
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            RichText(
-                              text: TextSpan(children: [
-                                TextSpan(
-                                    text: UiJ.telegram,
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w200,
-                                        fontFamily: UiJ.font,
-                                        color: Colors.white))
-                              ]),
-                            )
-                          ])),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Container(
-                  alignment: Alignment.topLeft,
-                  child: InkWell(
-                      onTap: () {
-                        // UiJ.callTelegram;
-                      },
-                      child: Column(
-                        children: [
-                          Row(
+                              SizedBox(
+                                height: 10,
+                              ),
+                              RichText(
+                                text: TextSpan(children: [
+                                  WidgetSpan(
+                                      child: Icon(Icons.location_on_rounded,
+                                          color: Colors.blue)),
+                                  TextSpan(
+                                      text: '${UiJ.adress}',
+                                      style: TextStyle(
+                                          fontSize:
+                                              UiJ.sizeweight(context) ? 20 : 25,
+                                          fontWeight: FontWeight.w200,
+                                          fontFamily: UiJ.font,
+                                          color: Colors.white))
+                                ]),
+                              )
+                            ])),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                        alignment: Alignment.topLeft,
+                        child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Icon(
+                                Icons.phone,
+                                color: Colors.blue,
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              RichText(
+                                text: TextSpan(children: [
+                                  TextSpan(
+                                      text: '${UiJ.phone}  ',
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w200,
+                                          fontFamily: UiJ.font,
+                                          color: Colors.white)),
+                                ]),
+                              )
+                            ])),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      alignment: Alignment.topLeft,
+                      child: InkWell(
+                          onTap: () {
+                            UiJ.callTelegram;
+                          },
+                          child: Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Icon(
-                                  Icons.email,
+                                  Icons.telegram,
                                   color: Colors.blue,
                                 ),
                                 SizedBox(
@@ -308,30 +277,64 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                 RichText(
                                   text: TextSpan(children: [
                                     TextSpan(
-                                        text: "info@dsk.uz",
+                                        text: UiJ.telegram,
                                         style: TextStyle(
                                             fontSize: 20,
                                             fontWeight: FontWeight.w200,
                                             fontFamily: UiJ.font,
                                             color: Colors.white))
                                   ]),
+                                )
+                              ])),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      alignment: Alignment.topLeft,
+                      child: InkWell(
+                          onTap: () {
+                            // UiJ.callTelegram;
+                          },
+                          child: Column(
+                            children: [
+                              Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Icon(
+                                      Icons.email,
+                                      color: Colors.blue,
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    RichText(
+                                      text: TextSpan(children: [
+                                        TextSpan(
+                                            text: "info@dsk.uz",
+                                            style: TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w200,
+                                                fontFamily: UiJ.font,
+                                                color: Colors.white))
+                                      ]),
+                                    ),
+                                  ]),
+                              Container(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  "Copyright © 2020 Template by DSK BINOKOR",
+                                  style: TextStyle(color: Colors.white),
                                 ),
-                              ]),
-                          Container(
-                            alignment: Alignment.center,
-                            child: Text(
-                              "Copyright © 2020 Template by DSK BINOKOR",
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          )
-                        ],
-                      )),
-                )
-              ],
-            ),
-          ),
-        ],
-      ),
+                              )
+                            ],
+                          )),
+                    )
+                  ],
+                ),
+              ),
+            ],
+          )),
       drawer: DrowerPage(),
     );
   }

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
+import '../getconrollers/initservices.dart';
 import '../models/uij.dart';
 import 'home.dart';
 
@@ -18,8 +19,8 @@ class ZeroPage extends StatefulWidget {
 }
 
 class _ZeroPageState extends State<ZeroPage> {
-
-  // final Controller controller = Get.put(Controller());
+  @override
+  void initState() {}
 
   @override
   Widget build(BuildContext context) {
@@ -35,13 +36,17 @@ class _ZeroPageState extends State<ZeroPage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                    Image.asset(
-                    'assets/images/logo1.png',
-                    width: 400,
-                    height: 400,
-                  ),
-
-                  Text(UiJ.lozung, style: TextStyle(fontSize: UiJ.sizeweight(context)?20:30, fontFamily: UiJ.font),)
+                      Image.asset(
+                        'assets/images/logo1.png',
+                        width: 400,
+                        height: 400,
+                      ),
+                      Text(
+                        UiJ.lozung,
+                        style: TextStyle(
+                            fontSize: UiJ.sizeweight(context) ? 20 : 30,
+                            fontFamily: UiJ.font),
+                      )
                     ],
                   ),
                 ));
@@ -58,9 +63,9 @@ class _ZeroPageState extends State<ZeroPage> {
   Future<Widget> getHomePage() async {
     _changeOpacity();
 
-    return await Future.delayed(Duration(seconds: 1), () {
+    await initServices();
 
-    })
+    return await Future.delayed(Duration(seconds: 2), () {})
         .then((value) => Home());
   }
 }

@@ -8,5 +8,4 @@ class Repository {
 
   Future<List<dynamic>> getall(String url) => api.getall(url);
 
-  // Future<List<ImageCatalog>> getimagecatalog(String id) => api.getImageCatalog(id);
 }

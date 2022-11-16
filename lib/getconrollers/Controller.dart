@@ -2,28 +2,56 @@ import 'package:binokor_web/getconrollers/ApiConnector.dart';
 import 'package:binokor_web/models/Kompleks.dart';
 import 'package:get/get.dart';
 
+import '../models/Make.dart';
+import '../models/Meneger.dart';
+
 class Controller extends GetxController {
   final api = ApiConnector();
   Kompleks? kompleks;
   var indexpage = 0.obs;
   var indextab = 0.obs;
 
+  var listMeneger = <Meneger>[].obs;
   var listKompleks = <Kompleks>[].obs;
-
+  var listMake = <Make>[].obs;
 
   fetchListKompleks() async {
     var komplek = await api.getKomleks();
     if (komplek != null) {
       listKompleks.value = komplek;
-      listKompleks.value.sort((a,b) => a.id!.compareTo(b.id!));
+      listKompleks.value.sort((a, b) => a.id!.compareTo(b.id!));
     }
+  }
 
+  fetchListMeneger() async {
+
+    final json = await api.getAll("meneger/get");
+    final loadedmeneger =  json.map((e) => Meneger.fromJson(e)).toList();
+
+    if (loadedmeneger != null) {
+      listMeneger.value = loadedmeneger;
+      listMeneger.value.sort((a, b) => a.id!.compareTo(b.id!));
+    }
+  }
+
+  fetchListMake() async {
+
+    final json = await api.getAll("make/get");
+    final loadedmake =  json.map((e) => Make.fromJson(e)).toList();
+
+    if (loadedmake != null) {
+      listMake.value = loadedmake;
+      listMake.value.sort((a, b) => a.id!.compareTo(b.id!));
+    }
   }
 
   @override
   onInit() {
     fetchListKompleks();
-    indexpage.value =1;
+    fetchListMeneger();
+    fetchListMake();
+
+    indexpage.value = 1;
     indextab.value = 1;
     super.onInit();
   }

@@ -1,9 +1,9 @@
+import 'package:binokor_web/getconrollers/Controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
-import '../bloc/dsk_state.dart';
-import '../bloc/make_bloc.dart';
 import '../models/Catalog.dart';
 import '../models/Make.dart';
 import '../models/uij.dart';
@@ -25,33 +25,18 @@ class _CatalogPageState extends State<CatalogPage> {
   @override
   Widget build(BuildContext context) {
     // _tabcontroller = TabController(length: 2, vsync: this);
-
-    return BlocConsumer<MakeBloc, DskState>(
-        builder: (context, state) {
-          if (state is DskEmtyState) {
-            return Center(child: Text("No data!"));
-          }
-          if (state is DskLoadingState) {
-            return Center(child: CircularProgressIndicator());
-          }
-
-          if (state is MakeLoadedState) {
-            _listMake = state.loadedMake;
-            _listMake.sort((a, b) => a.id!.compareTo(b.id!));
-            if (_listMake.length > 0) {
-              _make = _listMake.first;
-            }
-            return Container(
-                padding: EdgeInsets.only(left: 100, right: 100), child: main());
-          }
-          if (state is DskErrorState) {
-            return Center(
-              child: Text("Сервер не работает!"),
-            );
-          }
-          return SizedBox.shrink();
-        },
-        listener: (context, state) {});
+    final Controller controller = Get.find();
+    return Obx(() {
+      _listMake = controller.listMake;
+      _listMake.sort((a, b) => a.id!.compareTo(b.id!));
+      if (_listMake.length > 0) {
+        _make = _listMake.first;
+      }
+      return Padding(
+        padding: EdgeInsets.only(left: 100, right: 100),
+        child: main(),
+      );
+    });
   }
 
   Widget main() {

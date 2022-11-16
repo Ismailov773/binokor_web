@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
-import '../bloc/dsk_state.dart';
-import '../bloc/meneger_bloc.dart';
+import '../getconrollers/Controller.dart';
 import '../models/Meneger.dart';
 import '../models/uij.dart';
 
@@ -14,30 +15,11 @@ class MenegersPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<MenegerBloc, DskState>(
-        builder: (context, state) {
-          if (state is DskEmtyState) {
-            return Center(child: Text("No data!"));
-          }
-          if (state is DskLoadingState) {
-            return Center(child: CircularProgressIndicator());
-          }
-
-          if (state is MenegerLoadedState) {
-            _list = state.loadedMeneger;
-
-            return Container(
-                padding: EdgeInsets.only(left: 100, right: 100), child: main());
-          }
-
-          if (state is DskErrorState) {
-            return Center(
-              child: Text("Сервер не работает!"),
-            );
-          }
-          return SizedBox.shrink();
-        },
-        listener: (context, state) {});
+    final Controller controller = Get.find();
+    return Obx(() {
+      _list = controller.listMeneger;
+      return main();
+    });
   }
 
   Widget main() {
@@ -103,7 +85,9 @@ class MenegersPage extends StatelessWidget {
                                     child: Text(
                                   _list[index].name!,
                                   style: TextStyle(
-                                      fontFamily: UiJ.fontbold, fontSize: UiJ.sizeweight(context)?25:30),
+                                      fontFamily: UiJ.fontbold,
+                                      fontSize:
+                                          UiJ.sizeweight(context) ? 25 : 30),
                                 )),
                                 SizedBox(
                                   height: 20,
