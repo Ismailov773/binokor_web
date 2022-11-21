@@ -2,6 +2,7 @@ import 'package:binokor_web/getconrollers/ApiConnector.dart';
 import 'package:binokor_web/models/Job.dart';
 import 'package:binokor_web/models/Kompleks.dart';
 import 'package:binokor_web/models/News.dart';
+import 'package:binokor_web/models/Order.dart';
 import 'package:get/get.dart';
 
 import '../models/Make.dart';
@@ -18,6 +19,8 @@ class Controller extends GetxController {
   var listMake = <Make>[].obs;
   var listJob = <Job>[].obs;
   var listnews = <News>[].obs;
+  Make? make;
+  List<Order> orderlist = <Order>[].obs;
 
   fetchListKompleks() async {
     var komplek = await api.getKomleks();
@@ -89,6 +92,17 @@ class Controller extends GetxController {
   changeindextab(int newindex) {
     this.indextab.value = newindex;
     // update();
+  }
+
+  changeMake(Make newMake){
+    this.make = newMake;
+  }
+
+  addOrder(Order order){
+    this.orderlist.add(order);
+  }
+  removeOrder(Order order){
+      this.orderlist.remove(order);
   }
 }
 

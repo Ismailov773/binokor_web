@@ -1,8 +1,12 @@
 import 'package:binokor_web/getconrollers/Controller.dart';
+import 'package:binokor_web/models/Order.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:syncfusion_flutter_core/theme.dart';
+import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 import '../models/Catalog.dart';
 import '../models/Make.dart';
@@ -17,26 +21,29 @@ class CatalogPage extends StatefulWidget {
 
 class _CatalogPageState extends State<CatalogPage> {
   List<Catalog> _listCatalog = [];
-  List<Make> _listMake = [];
-  Make? _make;
+  final Controller controller = Get.find();
+  GlobalKey _globalKey = GlobalKey<FormState>();
+  TextEditingController _lengthController = TextEditingController();
+  TextEditingController _heigthController = TextEditingController();
+  TextEditingController _widthController = TextEditingController();
+  TextEditingController _quantityController = TextEditingController();
+  int count = 0;
+  late SourceMeneger sourceMeneger;
 
-  // Repository repository = Repository();
+  @override
+  void initState() {
+    super.initState();
+    _listCatalog = controller.make!.catalogs!;
+    sourceMeneger = SourceMeneger(listCatalog: _listCatalog);
+  } // Repository repository = Repository();
 
   @override
   Widget build(BuildContext context) {
     // _tabcontroller = TabController(length: 2, vsync: this);
-    final Controller controller = Get.find();
-    return Obx(() {
-      _listMake = controller.listMake;
-      _listMake.sort((a, b) => a.id!.compareTo(b.id!));
-      if (_listMake.length > 0) {
-        _make = _listMake.first;
-      }
-      return Padding(
-        padding: EdgeInsets.only(left: 100, right: 100),
-        child: main(),
-      );
-    });
+    return Padding(
+      padding: EdgeInsets.only(left: 50, right: 50),
+      child: main(),
+    );
   }
 
   Widget main() {
@@ -46,13 +53,22 @@ class _CatalogPageState extends State<CatalogPage> {
           height: 20,
         ),
         Container(
-          alignment: Alignment.topLeft,
-          child: Text("Каталоги",
-              style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: UiJ.fontbold)),
-        ),
+            alignment: Alignment.topLeft,
+            child: Row(
+              children: [
+                IconButton(
+                    onPressed: () {
+                      controller.changeindextab(1);
+                      controller.changeindexpage(1);
+                    },
+                    icon: Icon(Icons.keyboard_arrow_left)),
+                Text("Каталоги",
+                    style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: UiJ.fontbold)),
+              ],
+            )),
         Divider(),
         SizedBox(
           height: 20,
@@ -67,85 +83,234 @@ class _CatalogPageState extends State<CatalogPage> {
       return Row(
         children: [
           Expanded(
-              child: _listMake == null
-                  ? Center(
-                      child: CircularProgressIndicator(),
-                    )
-                  : ListView(
-                      children: _listMake.map((e) {
-                        return InkWell(
-                            // onHover: (bool value){
-                            //
-                            //   // if(value){
-                            //   //   color = Colors.red;
-                            //   // }else{
-                            //   //   color = Colors.yellow;
-                            //   // }
-                            // },
-                            onTap: () {
-                              setState(() {
-                                _make = e;
-                                _listCatalog = e.catalogs!;
-                              });
-                            },
-                            child: Container(
-                              child: Card(
-                                  elevation: 1,
-                                  child: Container(
-                                      padding: EdgeInsets.all(20),
-                                      color: _make == e
-                                          ? Colors.greenAccent.shade100
-                                          : Colors.white,
-                                      child: Row(
-                                        children: [
-                                          Container(
-                                            height: 50,
-                                            child: Image.network(
-                                              _make == null
-                                                  ? ''
-                                                  : '${UiJ.url}make/download/makes/${_make!.imagepath}',
-                                              width: 50,
-                                              height: 50,
-                                              errorBuilder: (context, exception,
-                                                  stackTrace) {
-                                                return Center(
-                                                  child:
-                                                      CircularProgressIndicator(),
-                                                );
-                                              },
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            width: 10,
-                                          ),
-                                          Expanded(
-                                              child: Text(
-                                            e.name!,
-                                            textAlign: TextAlign.start,
-                                            style: TextStyle(
-                                                // color: color,
-                                                fontFamily: UiJ.fontbold,
-                                                fontSize: 20),
-                                          ))
-                                        ],
-                                      ))),
-                            ));
-                      }).toList(),
-                    )),
-          VerticalDivider(),
-          Expanded(
             flex: 3,
             child: rightside(),
           ),
+          VerticalDivider(),
+          applyOrder(),
         ],
       );
     });
   }
 
+  @override
+  DataGridRowAdapter buildRow(DataGridRow row) {
+    return DataGridRowAdapter(cells: [
+      Container(
+        alignment: Alignment.center,
+        padding: EdgeInsets.symmetric(horizontal: 16),
+        child: Text(row.getCells()[0].value.toString()),
+      ),
+      Container(
+        alignment: Alignment.center,
+        padding: EdgeInsets.symmetric(horizontal: 16),
+        child: Text(row.getCells()[1].value.toString()),
+      ),
+      Container(
+        alignment: Alignment.center,
+        padding: EdgeInsets.symmetric(horizontal: 16),
+        child: Text(row.getCells()[2].value.toString()),
+      ),
+      Container(
+        alignment: Alignment.center,
+        padding: EdgeInsets.symmetric(horizontal: 16),
+        child: Text(row.getCells()[3].value.toString()),
+      ),
+      Container(
+        alignment: Alignment.center,
+        padding: EdgeInsets.symmetric(horizontal: 16),
+        child: Text(row.getCells()[4].value.toString()),
+      ),
+      Container(
+          alignment: Alignment.center,
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: Icon(Icons.edit)),
+      Container(
+        alignment: Alignment.center,
+        padding: EdgeInsets.symmetric(horizontal: 16),
+        child: Icon(Icons.delete),
+      ),
+    ]);
+  }
+
+  Widget applyOrder() {
+    return Expanded(
+        child: Form(
+            key: _globalKey,
+            child: Column(
+              children: [
+                Text(
+                  "Форма заказа",
+                  style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.blue,
+                      fontFamily: UiJ.fontbold),
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                TextFormField(
+                  controller: _lengthController,
+                  keyboardType: TextInputType.number,
+                  inputFormatters: <TextInputFormatter>[
+                    FilteringTextInputFormatter.digitsOnly
+                  ],
+                  decoration: InputDecoration(
+                      fillColor: Colors.white,
+                      //Theme.of(context).backgroundColor,
+                      labelText: "Длина",
+                      labelStyle: TextStyle(color: Colors.blue),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide:
+                              BorderSide(width: 0.5, color: Colors.blue)),
+                      focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide:
+                              BorderSide(width: 0.5, color: Colors.blue))),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                TextFormField(
+                  controller: _widthController,
+                  keyboardType: TextInputType.number,
+                  inputFormatters: <TextInputFormatter>[
+                    FilteringTextInputFormatter.digitsOnly
+                  ],
+                  decoration: InputDecoration(
+                      fillColor: Colors.white,
+                      //Theme.of(context).backgroundColor,
+                      labelText: "Ширина",
+                      labelStyle: TextStyle(color: Colors.blue),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide:
+                              BorderSide(width: 0.5, color: Colors.blue)),
+                      focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide:
+                              BorderSide(width: 0.5, color: Colors.blue))),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                TextFormField(
+                  controller: _heigthController,
+                  keyboardType: TextInputType.number,
+                  inputFormatters: <TextInputFormatter>[
+                    FilteringTextInputFormatter.digitsOnly
+                  ],
+                  decoration: InputDecoration(
+                      fillColor: Colors.white,
+                      //Theme.of(context).backgroundColor,
+                      labelText: "Высота",
+                      labelStyle: TextStyle(color: Colors.blue),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide:
+                              BorderSide(width: 0.5, color: Colors.blue)),
+                      focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide:
+                              BorderSide(width: 0.5, color: Colors.blue))),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Container(
+                    // height: 80,
+                    alignment: Alignment.bottomRight,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Кол-во",
+                          style: TextStyle(
+                            fontFamily: UiJ.fontbold,
+                            fontSize: 20,
+                          ),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        FloatingActionButton(
+                          onPressed: () {
+                            setState(() {
+                              if (count > 0) {
+                                count--;
+                              }
+                            });
+                          },
+                          child: Icon(
+                            Icons.remove,
+                            size: 20,
+                            color: Colors.white,
+                          ),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          count.toString(),
+                          style: TextStyle(
+                            fontFamily: UiJ.fontbold,
+                            fontSize: 20,
+                          ),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        FloatingActionButton(
+                          onPressed: () {
+                            setState(() {
+                              count++;
+                            });
+                          },
+                          child: Icon(
+                            Icons.add,
+                            size: 20,
+                            color: Colors.white,
+                          ),
+                        ),
+                        // SizedBox(
+                        //   width: 20,
+                        // ),
+                        // Container(
+                        //   height: 50,
+                        //     alignment:
+                        //         Alignment.center,
+                        //     child:
+                        //         ElevatedButton(
+                        //       onPressed: () {},
+                        //       child:
+                        //           Text("Заказать"),
+                        //     )),
+                      ],
+                    )),
+                SizedBox(
+                  height: 50,
+                ),
+                ElevatedButton(
+                    onPressed: () {
+
+                      Order order = Order();
+                      // order.length
+                      // controller.addOrder()
+                    },
+                    child: Text(
+                      "Заказать изделию",
+                      style: TextStyle(fontFamily: UiJ.fontbold, fontSize: 20),
+                    ))
+              ],
+            )));
+  }
+
   Widget rightside() {
     return DefaultTabController(
         length: 2,
-        child: _make == null
+        child: controller.make == null
             ? Center(
                 child: CircularProgressIndicator(),
               )
@@ -156,28 +321,13 @@ class _CatalogPageState extends State<CatalogPage> {
                       alignment: Alignment.center,
                       height: 50,
                       child: Text(
-                        _make!.name!,
+                        controller.make!.name!,
                         // textAlign: TextAlign.start,
                         style: TextStyle(
                             // color: color,
-                            fontFamily: UiJ.font,
+                            fontFamily: UiJ.fontbold,
                             fontSize: 20),
                       )),
-                  Container(
-                    height: 350,
-                    child: Image.network(
-                      _make == null
-                          ? ''
-                          : '${UiJ.url}make/download/makes/${_make!.imagepath}',
-                      width: 350,
-                      height: 350,
-                      errorBuilder: (context, exception, stackTrace) {
-                        return Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      },
-                    ),
-                  ),
                   SizedBox(
                     height: 50,
                     child: TabBar(
@@ -185,27 +335,11 @@ class _CatalogPageState extends State<CatalogPage> {
                         labelColor: Colors.red,
                         unselectedLabelColor: Colors.black,
                         labelStyle: TextStyle(
-                            fontSize: UiJ.sizeweight(context) ? 15 : 20,
+                            fontSize: UiJ.sizeweight(context) ? 20 : 25,
                             fontFamily: UiJ.font),
                         indicatorColor: Colors.white,
                         isScrollable: false,
                         tabs: [
-                          Tab(
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.view_module,
-                                  size: UiJ.sizeweight(context) ? 30 : 50,
-                                ),
-                                SizedBox(
-                                  width: 20,
-                                ),
-                                Text("Характеристики")
-                              ],
-                            ),
-                          ),
                           Tab(
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
@@ -222,17 +356,34 @@ class _CatalogPageState extends State<CatalogPage> {
                               ],
                             ),
                           ),
+                          Tab(
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.view_module,
+                                  size: UiJ.sizeweight(context) ? 30 : 50,
+                                ),
+                                SizedBox(
+                                  width: 20,
+                                ),
+                                Text("Характеристики")
+                              ],
+                            ),
+                          ),
                         ]),
                   ),
                   Expanded(
                     child: TabBarView(
                       // controller: _tabcontroller,
                       children: [
-                        datatable(),
                         description(),
+                        datatable(),
                       ],
                     ),
                   ),
+
                   // SizedBox(height: 200,)
                 ],
               ));
@@ -241,90 +392,211 @@ class _CatalogPageState extends State<CatalogPage> {
   Widget datatable() {
     return Container(
         child: SingleChildScrollView(
-      child: _listCatalog == null
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
-          : DataTable(
-              headingTextStyle: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: UiJ.sizeweight(context) ? 13 : 20,
-                  fontFamily: UiJ.font),
-
-              horizontalMargin: 3,
-              // headingRowHeight: 100,
-              columns: [
-                DataColumn(
-                    label: Center(
-                        child: Text(
-                  "Марка изделия",
-                ))),
-                DataColumn(label: Center(child: Text("Длина"))),
-                DataColumn(label: Center(child: Text("Ширина"))),
-                DataColumn(label: Center(child: Text("Высота"))),
-                DataColumn(label: Center(child: Text("Объём, м3"))),
-                DataColumn(label: Center(child: Text("Масса, т"))),
-                DataColumn(label: Center(child: Text("Класс бетона")))
-              ],
-              rows: _listCatalog.map((e) {
-                return DataRow(cells: [
-                  DataCell(Center(
-                      child: Text(
-                    e.name!,
-                    style: TextStyle(
-                        fontSize: UiJ.sizeweight(context) ? 15 : 20,
-                        fontFamily: UiJ.font),
-                  ))),
-                  DataCell(Center(
-                      child: Text(
-                    e.length!,
-                    style: TextStyle(
-                        fontSize: UiJ.sizeweight(context) ? 15 : 20,
-                        fontFamily: UiJ.font),
-                    textAlign: TextAlign.center,
-                  ))),
-                  DataCell(Center(
-                      child: Text(e.weigth!,
-                          style: TextStyle(
-                              fontSize: UiJ.sizeweight(context) ? 15 : 20,
-                              fontFamily: UiJ.font)))),
-                  DataCell(Center(
-                      child: Text(e.heigth!,
-                          style: TextStyle(
-                              fontSize: UiJ.sizeweight(context) ? 15 : 20,
-                              fontFamily: UiJ.font)))),
-                  DataCell(Center(
-                      child: Text(e.volume!,
-                          style: TextStyle(
-                              fontSize: UiJ.sizeweight(context) ? 15 : 20,
-                              fontFamily: UiJ.font)))),
-                  DataCell(Center(
-                      child: Text(e.mass!,
-                          style: TextStyle(
-                              fontSize: UiJ.sizeweight(context) ? 15 : 20,
-                              fontFamily: UiJ.font)))),
-                  DataCell(Center(
-                      child: Text(e.concrete!,
-                          style: TextStyle(
-                              fontSize: UiJ.sizeweight(context) ? 15 : 20,
-                              fontFamily: UiJ.font)))),
-                ]);
-              }).toList(),
-            ),
-    ));
+            child: _listCatalog == null
+                ? Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : SfDataGridTheme(
+                    data: SfDataGridThemeData(
+                        headerColor: Colors.blue,
+                        rowHoverTextStyle: TextStyle(color: Colors.white)),
+                    child: SfDataGrid(
+                      columnWidthMode: ColumnWidthMode.fill,
+                      selectionMode: SelectionMode.single,
+                      navigationMode: GridNavigationMode.cell,
+                      allowSorting: true,
+                      source: sourceMeneger,
+                      onCellTap: (DataGridCellTapDetails newValue) {
+                        // setState(() {
+                        _lengthController.text =
+                            _listCatalog[newValue.rowColumnIndex.rowIndex - 1]
+                                .length!;
+                        _widthController.text =
+                            _listCatalog[newValue.rowColumnIndex.rowIndex - 1]
+                                .weigth!;
+                        _heigthController.text =
+                            _listCatalog[newValue.rowColumnIndex.rowIndex - 1]
+                                .heigth!;
+                        // });
+                      },
+                      columns: [
+                        GridColumn(
+                            columnName: "length",
+                            label: Container(
+                                padding: EdgeInsets.all(16.0),
+                                alignment: Alignment.center,
+                                child: Text(
+                                  'Марка изделия',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ))),
+                        GridColumn(
+                            columnName: "length",
+                            label: Container(
+                                padding: EdgeInsets.all(16.0),
+                                alignment: Alignment.center,
+                                child: Text(
+                                  'Длина',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ))),
+                        GridColumn(
+                            columnName: "weigth",
+                            label: Container(
+                                padding: EdgeInsets.all(16.0),
+                                alignment: Alignment.center,
+                                child: Text(
+                                  'Щирина',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ))),
+                        GridColumn(
+                            columnName: "heigth",
+                            label: Container(
+                                padding: EdgeInsets.all(16.0),
+                                alignment: Alignment.center,
+                                child: Text(
+                                  'Высота',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ))),
+                        GridColumn(
+                            columnName: "volume",
+                            label: Container(
+                                padding: EdgeInsets.all(16.0),
+                                alignment: Alignment.center,
+                                child: Text(
+                                  'Объем',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ))),
+                        GridColumn(
+                            columnName: "mass",
+                            label: Container(
+                                padding: EdgeInsets.all(16.0),
+                                alignment: Alignment.center,
+                                child: Text(
+                                  'Масса',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ))),
+                        GridColumn(
+                            columnName: "concrete",
+                            label: Container(
+                                padding: EdgeInsets.all(16.0),
+                                alignment: Alignment.center,
+                                child: Text(
+                                  'Класс бетона',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ))),
+                      ],
+                    ))));
   }
 
   Widget description() {
     return Container(
-      // padding: EdgeInsets.all(20),
-      child: Text(
-        _make!.description!,
-        style: TextStyle(
-            fontFamily: UiJ.font,
-            fontSize: UiJ.sizeweight(context) ? 20 : 25,
-            fontStyle: FontStyle.italic),
-        textAlign: TextAlign.justify,
+        // padding: EdgeInsets.all(20),
+        child: Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+            child: Padding(
+                padding: EdgeInsets.all(20),
+                child: Text(
+                  controller.make!.description!,
+                  textAlign: TextAlign.start,
+                  style: TextStyle(
+                      fontFamily: UiJ.font,
+                      fontSize: UiJ.sizeweight(context) ? 20 : 25,
+                      fontStyle: FontStyle.italic),
+                ))),
+        VerticalDivider(),
+        Expanded(
+          child: Padding(
+              padding: EdgeInsets.all(20),
+              child: Image.network(
+                controller.make == null
+                    ? ''
+                    : '${UiJ.url}make/download/makes/${controller.make!.imagepath}',
+                errorBuilder: (context, exception, stackTrace) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                },
+              )),
+        ),
+      ],
+    ));
+  }
+}
+
+class SourceMeneger extends DataGridSource {
+  dynamic newCellValue;
+  TextEditingController editingController = TextEditingController();
+
+  SourceMeneger({required List<Catalog> listCatalog}) {
+    _listDataRow = listCatalog
+        .map<DataGridRow>((e) => DataGridRow(cells: [
+              DataGridCell<String>(columnName: "name", value: e.name),
+              DataGridCell<String>(columnName: "length", value: e.length),
+              DataGridCell<String>(columnName: "weigth", value: e.weigth),
+              DataGridCell<String>(columnName: "heigth", value: e.heigth),
+              DataGridCell<String>(columnName: "volume", value: e.volume),
+              DataGridCell<String>(columnName: "mass", value: e.mass),
+              DataGridCell<String>(columnName: "concrete", value: e.concrete),
+            ]))
+        .toList();
+  }
+
+  List<DataGridRow> _listDataRow = [];
+
+  List<DataGridRow> get rows => _listDataRow;
+
+  @override
+  DataGridRowAdapter buildRow(DataGridRow row) {
+    return DataGridRowAdapter(cells: [
+      Container(
+        alignment: Alignment.center,
+        padding: EdgeInsets.symmetric(horizontal: 16),
+        child: Text(row.getCells()[0].value.toString()),
       ),
-    );
+      Container(
+        alignment: Alignment.center,
+        padding: EdgeInsets.symmetric(horizontal: 16),
+        child: Text(row.getCells()[1].value.toString()),
+      ),
+      Container(
+        alignment: Alignment.center,
+        padding: EdgeInsets.symmetric(horizontal: 16),
+        child: Text(row.getCells()[2].value.toString()),
+      ),
+      Container(
+        alignment: Alignment.center,
+        padding: EdgeInsets.symmetric(horizontal: 16),
+        child: Text(row.getCells()[3].value.toString()),
+      ),
+      Container(
+        alignment: Alignment.center,
+        padding: EdgeInsets.symmetric(horizontal: 16),
+        child: Text(row.getCells()[4].value.toString()),
+      ),
+      Container(
+          alignment: Alignment.center,
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: Text(row.getCells()[5].value.toString())),
+      Container(
+        alignment: Alignment.center,
+        padding: EdgeInsets.symmetric(horizontal: 16),
+        child: Text(row.getCells()[6].value.toString()),
+      ),
+    ]);
   }
 }

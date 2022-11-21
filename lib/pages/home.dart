@@ -1,4 +1,5 @@
 import 'package:binokor_web/getconrollers/Controller.dart';
+import 'package:binokor_web/pages/catalog_main_page.dart';
 import 'package:binokor_web/pages/job_page.dart';
 import 'package:binokor_web/pages/kompleks_details_page.dart';
 import 'package:binokor_web/pages/production_page.dart';
@@ -171,7 +172,27 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               ),
             ]),
           ),
-          actions: [],
+          actions: [
+            IconButton(
+                onPressed: () {},
+                icon: Icon(
+                  Icons.add_shopping_cart,
+                  color: Colors.blue,
+                  size: 50,
+                )),
+            Text(
+              controller.orderlist.length.toString(),
+              style: TextStyle(
+                  fontFamily: UiJ.fontbold, fontSize: 20, color: Colors.orange),
+            ),
+            TextButton(
+                onPressed: () {},
+                child: Text("Оформить \nзаказать",
+                    style: TextStyle(
+                        color: Colors.blue,
+                        fontSize: 15,
+                        fontFamily: UiJ.fontbold))),
+          ],
           titleTextStyle: TextStyle(fontWeight: FontWeight.w200, fontSize: 45),
         ),
       ),
@@ -341,7 +362,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           controller: tabController,
           children: [
             FirstPage(),
-            CatalogPage(),
+            CatalogMainPage(),
             KompleksPage(),
             ProductionPage(),
             StudyPage(),
@@ -356,6 +377,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         return JobPage();
       case 5:
         return KompleksDetailesPage();
+      case 6:
+        return CatalogPage();
     }
   }
 }
