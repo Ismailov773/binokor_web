@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -79,37 +78,60 @@ class JobPage extends StatelessWidget {
                           contents: _listjob.map((e) {
                             return Padding(
                                 padding: EdgeInsets.all(20),
-                                child: ListView.builder(
-                                  itemBuilder: (context, idx) {
-                                    return Container(
-                                        child: e.joblist![idx].title! == true
-                                            ? Text(
-                                                e.joblist![idx].description!,
-                                                style: TextStyle(
-                                                    fontFamily: UiJ.fontbold,
-                                                    fontSize: 20),
-                                              )
-                                            : RichText(
-                                                text: TextSpan(children: [
-                                                WidgetSpan(
-                                                    child: Icon(
-                                                  Icons.circle,
-                                                  size: 15,
-                                                )),
-                                                WidgetSpan(
-                                                    child: SizedBox(
-                                                  width: 20,
-                                                )),
-                                                TextSpan(
-                                                    text: e.joblist![idx]
+                                child: Column(
+                                  children: [
+                                    Align(
+                                      child: Text(
+                                        e.vacancy!,
+                                        style: TextStyle(
+                                            fontFamily: UiJ.fontbold,
+                                            color: Colors.indigoAccent,
+                                            fontSize: 25),
+                                      ),
+                                      alignment: Alignment.topLeft,
+                                    ),
+                                    Divider(),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    Expanded(
+                                        child: ListView.builder(
+                                      itemBuilder: (context, idx) {
+                                        return Container(
+                                            child: e.joblist![idx].title! ==
+                                                    true
+                                                ? Text(
+                                                    e.joblist![idx]
                                                         .description!,
                                                     style: TextStyle(
-                                                        fontFamily: UiJ.font,
-                                                        fontSize: 20))
-                                              ])));
-                                  },
-                                  itemExtent: 40,
-                                  itemCount: e.joblist!.length,
+                                                        fontFamily:
+                                                            UiJ.fontbold,
+                                                        fontSize: 20, color: Colors.indigoAccent),
+                                                  )
+                                                : RichText(
+                                                    text: TextSpan(children: [
+                                                    WidgetSpan(
+                                                        child: Icon(
+                                                      Icons.circle,
+                                                      size: 15,
+                                                    )),
+                                                    WidgetSpan(
+                                                        child: SizedBox(
+                                                      width: 20,
+                                                    )),
+                                                    TextSpan(
+                                                        text: e.joblist![idx]
+                                                            .description!,
+                                                        style: TextStyle(
+                                                          fontFamily: UiJ.font,
+                                                          fontSize: 20,
+                                                        ))
+                                                  ])));
+                                      },
+                                      itemExtent: 40,
+                                      itemCount: e.joblist!.length,
+                                    ))
+                                  ],
                                 ));
                           }).toList()))),
         ]);

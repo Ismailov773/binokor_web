@@ -75,7 +75,7 @@ class Controller extends GetxController {
     fetchListjob();
     fetchListnews();
     indexpage.value = 1;
-    indextab.value = 1;
+    indextab.value = 0;
     super.onInit();
   }
 

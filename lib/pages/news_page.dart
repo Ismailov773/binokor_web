@@ -108,7 +108,7 @@ class NewsPage extends StatelessWidget {
                                         _listnews[index].title!,
                                         style: TextStyle(
                                             fontFamily: UiJ.fontbold,
-                                            fontSize: 30),
+                                            fontSize: 30, color: Colors.indigoAccent),
                                       )),
                                       SizedBox(
                                         height: 20,
@@ -127,8 +127,10 @@ class NewsPage extends StatelessWidget {
                       ],
                     ),
                     onTap: () {
-                      showDialogphoto(
-                          context, "Фото новости", _listnews[index]);
+                      if (_listnews[index].imagenews!.length != 0) {
+                        showDialogphoto(
+                            context, "Фото новости", _listnews[index]);
+                      }
                     },
                   );
                 }))
@@ -155,9 +157,7 @@ class NewsPage extends StatelessWidget {
           ),
           content: SizedBox(
               width: MediaQuery.of(context).size.width / 1.1,
-              child: GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: news.imagenews!.length > 2 ? 4 : 1),
+              child: ListView.builder(
                 itemCount: news.imagenews!.length,
                 itemBuilder: (context, idx) {
                   return Column(
@@ -169,8 +169,8 @@ class NewsPage extends StatelessWidget {
                         children: [
                           Image.network(
                             '${UiJ.url}news/download/imagenews/${news.imagenews![idx].imagepath}',
-                            height: MediaQuery.of(context).size.height /
-                                (news.imagenews!.length > 2 ? 4 : 2),
+                            // height: MediaQuery.of(context).size.height /
+                            //     (news.imagenews!.length > 2 ? 4 : 2),
                             errorBuilder: (context, exception, stackTrace) {
                               return Center(
                                 child: CircularProgressIndicator(),
