@@ -34,12 +34,13 @@ class _ZeroPageState extends State<ZeroPage> {
                 backgroundColor: Colors.white,
                 body: Center(
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image.asset(
                         'assets/images/logo1.png',
-                        width: 400,
-                        height: 400,
+                        width: MediaQuery.of(context).size.width/3,
+                        height: MediaQuery.of(context).size.height/3,
                       ),
                       Text(
                         UiJ.lozung,

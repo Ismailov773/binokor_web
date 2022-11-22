@@ -22,13 +22,16 @@ class CatalogPage extends StatefulWidget {
 class _CatalogPageState extends State<CatalogPage> {
   List<Catalog> _listCatalog = [];
   final Controller controller = Get.find();
-  GlobalKey _globalKey = GlobalKey<FormState>();
+  final _globalKey = GlobalKey<FormState>();
   TextEditingController _lengthController = TextEditingController();
   TextEditingController _heigthController = TextEditingController();
   TextEditingController _widthController = TextEditingController();
-  TextEditingController _quantityController = TextEditingController();
+
+  // TextEditingController _quantityController = TextEditingController();
   int count = 0;
   late SourceMeneger sourceMeneger;
+  Catalog? _catalog;
+  String _catalogname = "";
 
   @override
   void initState() {
@@ -93,44 +96,54 @@ class _CatalogPageState extends State<CatalogPage> {
     });
   }
 
-  @override
-  DataGridRowAdapter buildRow(DataGridRow row) {
-    return DataGridRowAdapter(cells: [
-      Container(
-        alignment: Alignment.center,
-        padding: EdgeInsets.symmetric(horizontal: 16),
-        child: Text(row.getCells()[0].value.toString()),
-      ),
-      Container(
-        alignment: Alignment.center,
-        padding: EdgeInsets.symmetric(horizontal: 16),
-        child: Text(row.getCells()[1].value.toString()),
-      ),
-      Container(
-        alignment: Alignment.center,
-        padding: EdgeInsets.symmetric(horizontal: 16),
-        child: Text(row.getCells()[2].value.toString()),
-      ),
-      Container(
-        alignment: Alignment.center,
-        padding: EdgeInsets.symmetric(horizontal: 16),
-        child: Text(row.getCells()[3].value.toString()),
-      ),
-      Container(
-        alignment: Alignment.center,
-        padding: EdgeInsets.symmetric(horizontal: 16),
-        child: Text(row.getCells()[4].value.toString()),
-      ),
-      Container(
-          alignment: Alignment.center,
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          child: Icon(Icons.edit)),
-      Container(
-        alignment: Alignment.center,
-        padding: EdgeInsets.symmetric(horizontal: 16),
-        child: Icon(Icons.delete),
-      ),
-    ]);
+  // @override
+  // DataGridRowAdapter buildRow(DataGridRow row) {
+  //   return DataGridRowAdapter(cells: [
+  //     Container(
+  //       alignment: Alignment.center,
+  //       padding: EdgeInsets.symmetric(horizontal: 16),
+  //       child: Text(row.getCells()[0].value.toString()),
+  //     ),
+  //     Container(
+  //       alignment: Alignment.center,
+  //       padding: EdgeInsets.symmetric(horizontal: 16),
+  //       child: Text(row.getCells()[1].value.toString()),
+  //     ),
+  //     Container(
+  //       alignment: Alignment.center,
+  //       padding: EdgeInsets.symmetric(horizontal: 16),
+  //       child: Text(row.getCells()[2].value.toString()),
+  //     ),
+  //     Container(
+  //       alignment: Alignment.center,
+  //       padding: EdgeInsets.symmetric(horizontal: 16),
+  //       child: Text(row.getCells()[3].value.toString()),
+  //     ),
+  //     Container(
+  //       alignment: Alignment.center,
+  //       padding: EdgeInsets.symmetric(horizontal: 16),
+  //       child: Text(row.getCells()[4].value.toString()),
+  //     ),
+  //     Container(
+  //         alignment: Alignment.center,
+  //         padding: EdgeInsets.symmetric(horizontal: 16),
+  //         child: Icon(Icons.edit)),
+  //     Container(
+  //       alignment: Alignment.center,
+  //       padding: EdgeInsets.symmetric(horizontal: 16),
+  //       child: Icon(Icons.delete),
+  //     ),
+  //   ]);
+  // }
+
+  void dataGridonCellTap(int index) {
+    setState(() {
+      _catalog = _listCatalog[index];
+      _catalogname = _catalog!.name!;
+    });
+    _lengthController.text = _listCatalog[index].length!;
+    _widthController.text = _listCatalog[index].weigth!;
+    _heigthController.text = _listCatalog[index].heigth!;
   }
 
   Widget applyOrder() {
@@ -138,6 +151,7 @@ class _CatalogPageState extends State<CatalogPage> {
         child: Form(
             key: _globalKey,
             child: Column(
+              // crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   "Форма заказа",
@@ -148,6 +162,35 @@ class _CatalogPageState extends State<CatalogPage> {
                 ),
                 SizedBox(
                   height: 30,
+                ),
+                Text(
+                  '${controller.make == null ? "" : controller.make!.name}',
+                  style: TextStyle(fontSize: 20, fontFamily: UiJ.fontbold),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                _catalog == null
+                    ? Container()
+                    : Align(
+                        alignment: Alignment.topLeft,
+                        child: RichText(
+                            text: TextSpan(children: [
+                          TextSpan(
+                              text: 'Марка изделия:',
+                              style: TextStyle(fontSize: 15)),
+                          WidgetSpan(
+                              child: SizedBox(
+                            width: 10,
+                          )),
+                          TextSpan(
+                            text: '${_catalogname}',
+                            style: TextStyle(
+                                fontSize: 20, fontFamily: UiJ.fontbold),
+                          ),
+                        ]))),
+                SizedBox(
+                  height: 20,
                 ),
                 TextFormField(
                   controller: _lengthController,
@@ -168,6 +211,11 @@ class _CatalogPageState extends State<CatalogPage> {
                           borderRadius: BorderRadius.circular(10),
                           borderSide:
                               BorderSide(width: 0.5, color: Colors.blue))),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Не заполнено поле Длина!";
+                    }
+                  },
                 ),
                 SizedBox(
                   height: 20,
@@ -191,6 +239,11 @@ class _CatalogPageState extends State<CatalogPage> {
                           borderRadius: BorderRadius.circular(10),
                           borderSide:
                               BorderSide(width: 0.5, color: Colors.blue))),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Не заполнено поле Ширина!";
+                    }
+                  },
                 ),
                 SizedBox(
                   height: 20,
@@ -214,6 +267,11 @@ class _CatalogPageState extends State<CatalogPage> {
                           borderRadius: BorderRadius.circular(10),
                           borderSide:
                               BorderSide(width: 0.5, color: Colors.blue))),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Не заполнено поле Высота!";
+                    }
+                  },
                 ),
                 SizedBox(
                   height: 20,
@@ -292,17 +350,39 @@ class _CatalogPageState extends State<CatalogPage> {
                 SizedBox(
                   height: 50,
                 ),
-                ElevatedButton(
-                    onPressed: () {
+                SizedBox(
+                    child: ElevatedButton(
+                        onPressed: () {
+                          if (!_globalKey.currentState!.validate()) {
+                            return;
+                          }
 
-                      Order order = Order();
-                      // order.length
-                      // controller.addOrder()
-                    },
-                    child: Text(
-                      "Заказать изделию",
-                      style: TextStyle(fontFamily: UiJ.fontbold, fontSize: 20),
-                    ))
+                          Order order = Order();
+                          order.make = controller.make;
+                          order.name = _catalog!.name;
+                          order.length = _lengthController.text;
+                          order.heigth = _heigthController.text;
+                          order.weigth = _widthController.text;
+                          order.volume = _catalog!.volume;
+                          order.mass = _catalog!.mass;
+                          order.concrete = _catalog!.concrete;
+                          order.count = count;
+
+                          controller.addOrder(order);
+
+                          _lengthController.clear();
+                          _heigthController.clear();
+                          _widthController.clear();
+                          setState((){
+                            _catalogname = "";
+                            count = 0;
+                          });
+                        },
+                        child: Text(
+                          "В Корзину",
+                          style:
+                              TextStyle(fontFamily: UiJ.fontbold, fontSize: 20),
+                        )))
               ],
             )));
   }
@@ -399,7 +479,7 @@ class _CatalogPageState extends State<CatalogPage> {
                 : SfDataGridTheme(
                     data: SfDataGridThemeData(
                         headerColor: Colors.blue,
-                        rowHoverTextStyle: TextStyle(color: Colors.white)),
+                        rowHoverTextStyle: TextStyle(color: Colors.blue)),
                     child: SfDataGrid(
                       columnWidthMode: ColumnWidthMode.fill,
                       selectionMode: SelectionMode.single,
@@ -407,17 +487,7 @@ class _CatalogPageState extends State<CatalogPage> {
                       allowSorting: true,
                       source: sourceMeneger,
                       onCellTap: (DataGridCellTapDetails newValue) {
-                        // setState(() {
-                        _lengthController.text =
-                            _listCatalog[newValue.rowColumnIndex.rowIndex - 1]
-                                .length!;
-                        _widthController.text =
-                            _listCatalog[newValue.rowColumnIndex.rowIndex - 1]
-                                .weigth!;
-                        _heigthController.text =
-                            _listCatalog[newValue.rowColumnIndex.rowIndex - 1]
-                                .heigth!;
-                        // });
+                        dataGridonCellTap(newValue.rowColumnIndex.rowIndex - 1);
                       },
                       columns: [
                         GridColumn(

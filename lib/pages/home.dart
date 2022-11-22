@@ -3,6 +3,7 @@ import 'package:binokor_web/pages/catalog_main_page.dart';
 import 'package:binokor_web/pages/job_page.dart';
 import 'package:binokor_web/pages/kompleks_details_page.dart';
 import 'package:binokor_web/pages/production_page.dart';
+import 'package:binokor_web/pages/shoping_box.dart';
 import 'package:binokor_web/pages/study_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -180,13 +181,18 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   color: Colors.blue,
                   size: 50,
                 )),
-            Text(
-              controller.orderlist.length.toString(),
-              style: TextStyle(
-                  fontFamily: UiJ.fontbold, fontSize: 20, color: Colors.orange),
-            ),
+            Obx(() => Text(
+                  controller.orderlist.length.toString(),
+                  style: TextStyle(
+                      fontFamily: UiJ.fontbold,
+                      fontSize: 20,
+                      color: Colors.orange),
+                )),
             TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  controller.changeindextab(1);
+                  controller.changeindexpage(7);
+                },
                 child: Text("Оформить \nзаказать",
                     style: TextStyle(
                         color: Colors.blue,
@@ -379,6 +385,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         return KompleksDetailesPage();
       case 6:
         return CatalogPage();
+      case 7:
+        return ShopingBox();
     }
   }
 }
