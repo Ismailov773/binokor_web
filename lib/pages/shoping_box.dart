@@ -28,8 +28,7 @@ class ShopingBox extends StatelessWidget {
   Widget build(BuildContext context) {
     sourceMeneger = SourceMeneger(listOrder: controller.orderlist);
     //controller.changeSource(sourceMeneger);
-    return ListView(
-
+    return Column(
       children: [
         Container(
             alignment: Alignment.topLeft,
@@ -60,17 +59,17 @@ class ShopingBox extends StatelessWidget {
                         color: Colors.blue,
                         fontWeight: FontWeight.bold,
                         fontFamily: UiJ.fontbold))),
+        SizedBox(
+          height: 20,
+        ),
         controller.orderlist.length == 0
             ? Container()
-            : Padding(
-                padding: EdgeInsets.only(left: 50, right: 50, top: 20),
+            : Expanded(
+                child: Container(
+                padding: EdgeInsets.only(left: 50, right: 50),
                 child: dataGrid(),
-              ),
-        // SizedBox(
-        //   height: 20,
-        // ),
-       Expanded(
-           child:  otherParams(context)),
+              )),
+        Expanded(flex: 3, child: otherParams(context)),
       ],
     );
   }
@@ -78,19 +77,17 @@ class ShopingBox extends StatelessWidget {
   Widget dataGrid() {
     return SfDataGridTheme(
         data: SfDataGridThemeData(
-            headerColor: Colors.blue,
-            rowHoverTextStyle: TextStyle(color: Colors.blue)),
+          headerColor: Colors.blue,
+          rowHoverTextStyle: TextStyle(color: Colors.blue),
+        ),
         child: SfDataGrid(
           columnWidthMode: ColumnWidthMode.fill,
           selectionMode: SelectionMode.single,
           navigationMode: GridNavigationMode.cell,
-          allowSorting: true,
+          // allowSorting: true,
           allowEditing: true,
           allowPullToRefresh: true,
           source: sourceMeneger,
-          // onCellTap: (DataGridCellTapDetails newValue) {
-          //   // dataGridonCellTap(newValue.rowColumnIndex.rowIndex - 1);
-          // },
           columns: [
             GridColumn(
                 columnName: "make",
@@ -187,15 +184,15 @@ class ShopingBox extends StatelessWidget {
 
   Widget otherParams(BuildContext context) {
     return Container(
-         alignment: Alignment.topLeft,
+        alignment: Alignment.topLeft,
         padding: EdgeInsets.only(
             left: MediaQuery.of(context).size.width / 3,
             right: MediaQuery.of(context).size.width / 3),
         child: Form(
             key: _globalKeyOffer,
             child: Column(
-              // crossAxisAlignment: CrossAxisAlignment.start,
-              // mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 TextFormField(
                   controller: _fioController,
@@ -205,15 +202,18 @@ class ShopingBox extends StatelessWidget {
                       //Theme.of(context).backgroundColor,
                       prefix: Icon(Icons.man),
                       labelText: "Ф.И.О.",
-                      labelStyle: TextStyle(color: Colors.black),
+                      labelStyle: TextStyle(
+                          color: Colors.blue,
+                          fontWeight: FontWeight.w200,
+                          fontFamily: UiJ.font),
                       enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                           borderSide:
-                              BorderSide(width: 0.5, color: Colors.black)),
+                              BorderSide(width: 0.5, color: Colors.blue)),
                       focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                           borderSide:
-                              BorderSide(width: 0.5, color: Colors.black))),
+                              BorderSide(width: 0.5, color: Colors.blue))),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return "Не заполнено поле Ф.И.О.!";
@@ -233,15 +233,18 @@ class ShopingBox extends StatelessWidget {
                       //Theme.of(context).backgroundColor,
                       labelText: 'Телефон',
                       prefix: Icon(Icons.phone_android),
-                      labelStyle: TextStyle(color: Colors.black),
+                      labelStyle: TextStyle(
+                          color: Colors.blue,
+                          fontWeight: FontWeight.w200,
+                          fontFamily: UiJ.font),
                       enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                           borderSide:
-                              BorderSide(width: 0.5, color: Colors.black)),
+                              BorderSide(width: 0.5, color: Colors.blue)),
                       focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                           borderSide:
-                              BorderSide(width: 0.5, color: Colors.black))),
+                              BorderSide(width: 0.5, color: Colors.blue))),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return "Не заполнено поле Телефон!";
@@ -259,15 +262,18 @@ class ShopingBox extends StatelessWidget {
                       prefix: Icon(Icons.home),
 //Theme.of(context).backgroundColor,
                       labelText: "Адрес доставки",
-                      labelStyle: TextStyle(color: Colors.black),
+                      labelStyle: TextStyle(
+                          color: Colors.blue,
+                          fontWeight: FontWeight.w200,
+                          fontFamily: UiJ.font),
                       enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                           borderSide:
-                              BorderSide(width: 0.5, color: Colors.black)),
+                              BorderSide(width: 0.5, color: Colors.blue)),
                       focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                           borderSide:
-                              BorderSide(width: 0.5, color: Colors.black))),
+                              BorderSide(width: 0.5, color: Colors.blue))),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return "Не заполнено поле Ф.И.О.!";
@@ -280,14 +286,11 @@ class ShopingBox extends StatelessWidget {
                 Container(
                     height: 50,
                     child: ElevatedButton(
-                    onPressed: () {
-
-
-                    },
-                    child: Text(
-                      "Отправить заказать",
-                      style: TextStyle(fontSize: 20, fontFamily: UiJ.font),
-                    ))),
+                        onPressed: () {},
+                        child: Text(
+                          "Отправить заказ",
+                          style: TextStyle(fontSize: 20, fontFamily: UiJ.font),
+                        ))),
                 SizedBox(
                   height: 20,
                 ),
@@ -353,42 +356,51 @@ class SourceMeneger extends DataGridSource {
         padding: EdgeInsets.symmetric(horizontal: 16),
         child: Text(
           row.getCells()[0].value.toString(),
-          style: TextStyle(fontWeight: FontWeight.bold),
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue),
         ),
       ),
       Container(
         alignment: Alignment.center,
         padding: EdgeInsets.symmetric(horizontal: 16),
-        child: Text(row.getCells()[1].value.toString()),
+        child: Text(
+          row.getCells()[1].value.toString(),
+          style: TextStyle(color: Colors.blue),
+        ),
       ),
       Container(
         alignment: Alignment.center,
         padding: EdgeInsets.symmetric(horizontal: 16),
-        child: Text(row.getCells()[2].value.toString()),
+        child: Text(row.getCells()[2].value.toString(),
+            style: TextStyle(color: Colors.blue)),
       ),
       Container(
         alignment: Alignment.center,
         padding: EdgeInsets.symmetric(horizontal: 16),
-        child: Text(row.getCells()[3].value.toString()),
+        child: Text(row.getCells()[3].value.toString(),
+            style: TextStyle(color: Colors.blue)),
       ),
       Container(
         alignment: Alignment.center,
         padding: EdgeInsets.symmetric(horizontal: 16),
-        child: Text(row.getCells()[4].value.toString()),
+        child: Text(row.getCells()[4].value.toString(),
+            style: TextStyle(color: Colors.blue)),
       ),
       Container(
           alignment: Alignment.center,
           padding: EdgeInsets.symmetric(horizontal: 16),
-          child: Text(row.getCells()[5].value.toString())),
+          child: Text(row.getCells()[5].value.toString(),
+              style: TextStyle(color: Colors.blue))),
       Container(
         alignment: Alignment.center,
         padding: EdgeInsets.symmetric(horizontal: 16),
-        child: Text(row.getCells()[6].value.toString()),
+        child: Text(row.getCells()[6].value.toString(),
+            style: TextStyle(color: Colors.blue)),
       ),
       Container(
         alignment: Alignment.center,
         padding: EdgeInsets.symmetric(horizontal: 16),
-        child: Text(row.getCells()[7].value.toString()),
+        child: Text(row.getCells()[7].value.toString(),
+            style: TextStyle(color: Colors.blue)),
       ),
       Container(
         alignment: Alignment.center,
@@ -459,19 +471,6 @@ class SourceMeneger extends DataGridSource {
                     color: Colors.white,
                   ),
                 )),
-            // SizedBox(
-            //   width: 20,
-            // ),
-            // Container(
-            //   height: 50,
-            //     alignment:
-            //         Alignment.center,
-            //     child:
-            //         ElevatedButton(
-            //       onPressed: () {},
-            //       child:
-            //           Text("Заказать"),
-            //     )),
           ],
         )),
       ),

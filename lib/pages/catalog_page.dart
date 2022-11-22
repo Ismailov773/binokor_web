@@ -96,46 +96,6 @@ class _CatalogPageState extends State<CatalogPage> {
     });
   }
 
-  // @override
-  // DataGridRowAdapter buildRow(DataGridRow row) {
-  //   return DataGridRowAdapter(cells: [
-  //     Container(
-  //       alignment: Alignment.center,
-  //       padding: EdgeInsets.symmetric(horizontal: 16),
-  //       child: Text(row.getCells()[0].value.toString()),
-  //     ),
-  //     Container(
-  //       alignment: Alignment.center,
-  //       padding: EdgeInsets.symmetric(horizontal: 16),
-  //       child: Text(row.getCells()[1].value.toString()),
-  //     ),
-  //     Container(
-  //       alignment: Alignment.center,
-  //       padding: EdgeInsets.symmetric(horizontal: 16),
-  //       child: Text(row.getCells()[2].value.toString()),
-  //     ),
-  //     Container(
-  //       alignment: Alignment.center,
-  //       padding: EdgeInsets.symmetric(horizontal: 16),
-  //       child: Text(row.getCells()[3].value.toString()),
-  //     ),
-  //     Container(
-  //       alignment: Alignment.center,
-  //       padding: EdgeInsets.symmetric(horizontal: 16),
-  //       child: Text(row.getCells()[4].value.toString()),
-  //     ),
-  //     Container(
-  //         alignment: Alignment.center,
-  //         padding: EdgeInsets.symmetric(horizontal: 16),
-  //         child: Icon(Icons.edit)),
-  //     Container(
-  //       alignment: Alignment.center,
-  //       padding: EdgeInsets.symmetric(horizontal: 16),
-  //       child: Icon(Icons.delete),
-  //     ),
-  //   ]);
-  // }
-
   void dataGridonCellTap(int index) {
     setState(() {
       _catalog = _listCatalog[index];
@@ -350,13 +310,19 @@ class _CatalogPageState extends State<CatalogPage> {
                 SizedBox(
                   height: 50,
                 ),
-                SizedBox(
+                Container(
+                    height: 50,
                     child: ElevatedButton(
                         onPressed: () {
                           if (!_globalKey.currentState!.validate()) {
                             return;
                           }
 
+                          if (count == 0) {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                content: Text("Просим заполнить количество!")));
+                            return;
+                          }
                           Order order = Order();
                           order.make = controller.make;
                           order.name = _catalog!.name;
@@ -373,7 +339,7 @@ class _CatalogPageState extends State<CatalogPage> {
                           _lengthController.clear();
                           _heigthController.clear();
                           _widthController.clear();
-                          setState((){
+                          setState(() {
                             _catalogname = "";
                             count = 0;
                           });
@@ -484,7 +450,7 @@ class _CatalogPageState extends State<CatalogPage> {
                       columnWidthMode: ColumnWidthMode.fill,
                       selectionMode: SelectionMode.single,
                       navigationMode: GridNavigationMode.cell,
-                      allowSorting: true,
+                      // allowSorting: true,
                       source: sourceMeneger,
                       onCellTap: (DataGridCellTapDetails newValue) {
                         dataGridonCellTap(newValue.rowColumnIndex.rowIndex - 1);
