@@ -26,23 +26,25 @@ class JobPage extends StatelessWidget {
     return Column(
         // mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Container(
-            alignment: Alignment.topLeft,
-            child: Text(
-              "Вакансии",
-              style: TextStyle(
-                  fontFamily: UiJ.fontbold,
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold),
-            ),
-          ),
+          Padding(
+              padding: EdgeInsets.only(left: 100, right: 100),
+              child: Container(
+                alignment: Alignment.topLeft,
+                child: Text(
+                  "Вакансии",
+                  style: TextStyle(
+                      fontFamily: UiJ.fontbold,
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold),
+                ),
+              )),
           Divider(),
           SizedBox(
             height: 30,
           ),
           Expanded(
               child: Container(
-                  // color: Colors.white,
+                  padding: EdgeInsets.only(left: 100, right: 100),
                   child: _listjob == null
                       ? Center(
                           child: CircularProgressIndicator(),
@@ -106,7 +108,9 @@ class JobPage extends StatelessWidget {
                                                     style: TextStyle(
                                                         fontFamily:
                                                             UiJ.fontbold,
-                                                        fontSize: 20, color: Colors.indigoAccent),
+                                                        fontSize: 20,
+                                                        color: Colors
+                                                            .indigoAccent),
                                                   )
                                                 : RichText(
                                                     text: TextSpan(children: [

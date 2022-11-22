@@ -25,7 +25,7 @@ class MenegersPage extends StatelessWidget {
   Widget main() {
     return Column(
       children: [
-        Container(
+       Padding(padding: EdgeInsets.only(left: 100, right: 100), child:  Container(
           alignment: Alignment.topLeft,
           child: Text(
             "Руководство:",
@@ -34,7 +34,7 @@ class MenegersPage extends StatelessWidget {
                 fontSize: 30,
                 fontWeight: FontWeight.bold),
           ),
-        ),
+        )),
         Divider(),
         SizedBox(
           height: 50,

@@ -21,119 +21,124 @@ class NewsPage extends StatelessWidget {
     final Controller controller = Get.find();
     return Obx(() {
       _listnews = controller.listnews;
-      return Padding(
-        padding: EdgeInsets.only(left: 100, right: 100),
-        child: main(),
-      );
+      return main();
     });
   }
 
   Widget main() {
     return Column(
       children: [
-        Container(
-          alignment: Alignment.topLeft,
-          child: Text(
-            "Новости",
-            style: TextStyle(
-                fontFamily: UiJ.fontbold,
-                fontSize: 30,
-                fontWeight: FontWeight.bold),
-          ),
-        ),
+        Padding(
+            padding: EdgeInsets.only(left: 100, right: 100),
+            child: Container(
+              alignment: Alignment.topLeft,
+              child: Text(
+                "Новости",
+                style: TextStyle(
+                    fontFamily: UiJ.fontbold,
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold),
+              ),
+            )),
         Divider(),
         SizedBox(
           height: 30,
         ),
         Expanded(
-            child: ListView.builder(
-                itemCount: _listnews.length,
-                itemBuilder: (context, index) {
-                  return InkWell(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                            child: Row(
+            child: Padding(
+                padding: EdgeInsets.only(left: 100, right: 100),
+                child: ListView.builder(
+                    itemCount: _listnews.length,
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          // mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Expanded(
-                                // padding: EdgeInsets.only(left: 100, right: 100),
-                                // margin: EdgeInsets.all(20),
-                                child: Container(
-                                    // decoration: BoxDecoration(
-                                    //     borderRadius: BorderRadius.circular(15)),
-                                    child: Card(
-                                        // shape: RoundedRectangleBorder(
+                            Container(
+                                child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              // mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Expanded(
+                                    // padding: EdgeInsets.only(left: 100, right: 100),
+                                    // margin: EdgeInsets.all(20),
+                                    child: Container(
+                                        // decoration: BoxDecoration(
                                         //     borderRadius: BorderRadius.circular(15)),
-                                        elevation: 5,
-                                        child: Container(
+                                        child: Card(
+                                            // shape: RoundedRectangleBorder(
+                                            //     borderRadius: BorderRadius.circular(15)),
+                                            elevation: 5,
+                                            child: Container(
 
-                                            // padding: EdgeInsets.all(20),
-                                            // decoration: BoxDecoration(
-                                            //     borderRadius:
-                                            //         BorderRadius.circular(15)),
-                                            child: Image.network(
-                                                '${UiJ.url}news/download/news/${_listnews[index].imagepath}',
-                                                width: 500,
-                                                height: 300, errorBuilder:
-                                                    (context, exception,
-                                                        stackTrace) {
-                                          return Center(
-                                            child: CircularProgressIndicator(),
-                                          );
-                                        }))))),
-                            SizedBox(
-                              width: 50,
-                            ),
-                            Expanded(
-                                flex: 3,
-                                child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    // mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        child: Text(
-                                          formattedDate.format(DateTime.parse(
-                                              _listnews[index].datacreate!)),
-                                          style: TextStyle(fontSize: 20),
-                                        ),
-                                        alignment: Alignment.topRight,
-                                      ),
+                                                // padding: EdgeInsets.all(20),
+                                                // decoration: BoxDecoration(
+                                                //     borderRadius:
+                                                //         BorderRadius.circular(15)),
+                                                child: Image.network(
+                                                    '${UiJ.url}news/download/news/${_listnews[index].imagepath}',
+                                                    width: 500,
+                                                    height: 300, errorBuilder:
+                                                        (context, exception,
+                                                            stackTrace) {
+                                              return Center(
+                                                child:
+                                                    CircularProgressIndicator(),
+                                              );
+                                            }))))),
+                                SizedBox(
+                                  width: 50,
+                                ),
+                                Expanded(
+                                    flex: 3,
+                                    child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        // mainAxisAlignment: MainAxisAlignment.start,
+                                        children: [
+                                          Container(
+                                            child: Text(
+                                              formattedDate.format(
+                                                  DateTime.parse(
+                                                      _listnews[index]
+                                                          .datacreate!)),
+                                              style: TextStyle(fontSize: 20),
+                                            ),
+                                            alignment: Alignment.topRight,
+                                          ),
 
-                                      Container(
-                                          child: Text(
-                                        _listnews[index].title!,
-                                        style: TextStyle(
-                                            fontFamily: UiJ.fontbold,
-                                            fontSize: 30, color: Colors.indigoAccent),
-                                      )),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                      Text(_listnews[index].description!,
-                                          textAlign: TextAlign.justify,
-                                          style: TextStyle(
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.w200,
-                                              fontFamily: UiJ.font))
-                                      // Spacer(),
-                                    ])),
+                                          Container(
+                                              child: Text(
+                                            _listnews[index].title!,
+                                            style: TextStyle(
+                                                fontFamily: UiJ.fontbold,
+                                                fontSize: 30,
+                                                color: Colors.indigoAccent),
+                                          )),
+                                          SizedBox(
+                                            height: 20,
+                                          ),
+                                          Text(_listnews[index].description!,
+                                              textAlign: TextAlign.justify,
+                                              style: TextStyle(
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.w200,
+                                                  fontFamily: UiJ.font))
+                                          // Spacer(),
+                                        ])),
+                              ],
+                            )),
+                            Divider()
                           ],
-                        )),
-                        Divider()
-                      ],
-                    ),
-                    onTap: () {
-                      if (_listnews[index].imagenews!.length != 0) {
-                        showDialogphoto(
-                            context, "Фото новости", _listnews[index]);
-                      }
-                    },
-                  );
-                }))
+                        ),
+                        onTap: () {
+                          if (_listnews[index].imagenews!.length != 0) {
+                            showDialogphoto(
+                                context, "Фото новости", _listnews[index]);
+                          }
+                        },
+                      );
+                    })))
       ],
     );
   }
