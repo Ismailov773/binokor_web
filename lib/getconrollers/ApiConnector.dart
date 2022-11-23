@@ -1,6 +1,9 @@
 import 'package:binokor_web/api/repository.dart';
 import 'package:binokor_web/models/Kompleks.dart';
+import 'package:binokor_web/models/LightUser.dart';
 import 'package:get/get.dart';
+
+import '../models/Orderb.dart';
 
 class ApiConnector extends GetConnect{
 
@@ -18,5 +21,12 @@ class ApiConnector extends GetConnect{
     final json = await repository.getall(url);
 
     return json;
+  }
+
+  Future<LightUser> postLightUser(String url, LightUser lightUser) async{
+
+    final json = await repository.post(url, lightUser);
+
+    return LightUser.fromJson(json);
   }
 }

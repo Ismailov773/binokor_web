@@ -1,8 +1,9 @@
-import 'dart:js';
 import 'dart:ui';
 
+import 'package:binokor_web/getconrollers/ApiConnector.dart';
 import 'package:binokor_web/getconrollers/Controller.dart';
-import 'package:binokor_web/models/Order.dart';
+import 'package:binokor_web/models/LightUser.dart';
+import 'package:binokor_web/pages/catalog_main_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,14 +13,18 @@ import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 import '../models/Catalog.dart';
+import '../models/Orderb.dart';
 import '../models/uij.dart';
 
 final Controller controller = Get.find();
 late SourceMeneger sourceMeneger;
-final GlobalKey _globalKeyOffer = GlobalKey<FormState>();
+final _globalKeyOffer = GlobalKey<FormState>();
 TextEditingController _fioController = TextEditingController();
 TextEditingController _adressController = TextEditingController();
 TextEditingController _phoneController = TextEditingController();
+final ApiConnector _apiConnector = ApiConnector();
+Orderb? _orderb;
+bool visible = false;
 
 class ShopingBox extends StatelessWidget {
   const ShopingBox({Key? key}) : super(key: key);
@@ -183,124 +188,179 @@ class ShopingBox extends StatelessWidget {
   }
 
   Widget otherParams(BuildContext context) {
-    return Container(
-        alignment: Alignment.topLeft,
-        padding: EdgeInsets.only(
-            left: MediaQuery.of(context).size.width / 3,
-            right: MediaQuery.of(context).size.width / 3),
-        child: Form(
-            key: _globalKeyOffer,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                TextFormField(
-                  controller: _fioController,
-                  style: TextStyle(fontSize: 20, fontFamily: UiJ.fontbold),
-                  decoration: InputDecoration(
-                      fillColor: Colors.white,
-                      //Theme.of(context).backgroundColor,
-                      prefix: Icon(Icons.man),
-                      labelText: "Ф.И.О.",
-                      labelStyle: TextStyle(
-                          color: Colors.blue,
-                          fontWeight: FontWeight.w200,
-                          fontFamily: UiJ.font),
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide:
-                              BorderSide(width: 0.5, color: Colors.blue)),
-                      focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide:
-                              BorderSide(width: 0.5, color: Colors.blue))),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return "Не заполнено поле Ф.И.О.!";
-                    }
-                  },
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                TextFormField(
-                  controller: _phoneController,
-                  keyboardType: TextInputType.phone,
-                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                  style: TextStyle(fontSize: 20, fontFamily: UiJ.fontbold),
-                  decoration: InputDecoration(
-                      fillColor: Colors.white,
-                      //Theme.of(context).backgroundColor,
-                      labelText: 'Телефон',
-                      prefix: Icon(Icons.phone_android),
-                      labelStyle: TextStyle(
-                          color: Colors.blue,
-                          fontWeight: FontWeight.w200,
-                          fontFamily: UiJ.font),
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide:
-                              BorderSide(width: 0.5, color: Colors.blue)),
-                      focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide:
-                              BorderSide(width: 0.5, color: Colors.blue))),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return "Не заполнено поле Телефон!";
-                    }
-                  },
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                TextFormField(
-                  controller: _adressController,
-                  style: TextStyle(fontSize: 20, fontFamily: UiJ.fontbold),
-                  decoration: InputDecoration(
-                      fillColor: Colors.white,
-                      prefix: Icon(Icons.home),
+    return StatefulBuilder(
+        builder: (context, setState) => Container(
+            alignment: Alignment.topLeft,
+            padding: EdgeInsets.only(
+                left: MediaQuery.of(context).size.width / 3,
+                right: MediaQuery.of(context).size.width / 3),
+            child: Form(
+                key: _globalKeyOffer,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    TextFormField(
+                      controller: _fioController,
+                      style: TextStyle(fontSize: 20, fontFamily: UiJ.fontbold),
+                      decoration: InputDecoration(
+                          fillColor: Colors.white,
+                          //Theme.of(context).backgroundColor,
+                          prefix: Icon(Icons.man),
+                          labelText: "Ф.И.О.",
+                          labelStyle: TextStyle(
+                              color: Colors.blue,
+                              fontWeight: FontWeight.w200,
+                              fontFamily: UiJ.font),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide:
+                                  BorderSide(width: 0.5, color: Colors.blue)),
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide:
+                                  BorderSide(width: 0.5, color: Colors.blue))),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Не заполнено поле Ф.И.О.!";
+                        }
+                      },
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                      controller: _phoneController,
+                      keyboardType: TextInputType.phone,
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                      style: TextStyle(fontSize: 20, fontFamily: UiJ.fontbold),
+                      decoration: InputDecoration(
+                          fillColor: Colors.white,
+                          //Theme.of(context).backgroundColor,
+                          labelText: 'Телефон',
+                          prefix: Icon(Icons.phone_android),
+                          labelStyle: TextStyle(
+                              color: Colors.blue,
+                              fontWeight: FontWeight.w200,
+                              fontFamily: UiJ.font),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide:
+                                  BorderSide(width: 0.5, color: Colors.blue)),
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide:
+                                  BorderSide(width: 0.5, color: Colors.blue))),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Не заполнено поле Телефон!";
+                        }
+                      },
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                      controller: _adressController,
+                      style: TextStyle(fontSize: 20, fontFamily: UiJ.fontbold),
+                      decoration: InputDecoration(
+                          fillColor: Colors.white,
+                          prefix: Icon(Icons.home),
 //Theme.of(context).backgroundColor,
-                      labelText: "Адрес доставки",
-                      labelStyle: TextStyle(
-                          color: Colors.blue,
-                          fontWeight: FontWeight.w200,
-                          fontFamily: UiJ.font),
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide:
-                              BorderSide(width: 0.5, color: Colors.blue)),
-                      focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide:
-                              BorderSide(width: 0.5, color: Colors.blue))),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return "Не заполнено поле Ф.И.О.!";
-                    }
-                  },
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Container(
-                    height: 50,
-                    child: ElevatedButton(
-                        onPressed: () {},
-                        child: Text(
-                          "Отправить заказ",
-                          style: TextStyle(fontSize: 20, fontFamily: UiJ.font),
-                        ))),
-                SizedBox(
-                  height: 20,
-                ),
-                Text("После отправки заказа Наши менеджеры свяжутся с Вами !",
-                    style: TextStyle(
-                        fontSize: 15,
-                        color: Colors.orange,
-                        fontFamily: UiJ.font)),
-              ],
-            )));
+                          labelText: "Адрес доставки",
+                          labelStyle: TextStyle(
+                              color: Colors.blue,
+                              fontWeight: FontWeight.w200,
+                              fontFamily: UiJ.font),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide:
+                                  BorderSide(width: 0.5, color: Colors.blue)),
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide:
+                                  BorderSide(width: 0.5, color: Colors.blue))),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Не заполнено поле Ф.И.О.!";
+                        }
+                      },
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                        height: 50,
+                        child: visible
+                            ? Expanded(
+                                child: Center(
+                                    child: CircularProgressIndicator(
+                                  color: Colors.white,
+                                )),
+                              )
+                            : ElevatedButton(
+                                onPressed: () async {
+                                  setState(() {
+                                    visible = true;
+                                  });
+                                  await Future.delayed(Duration(seconds: 3),
+                                      () {
+                                    if (!_globalKeyOffer.currentState!
+                                        .validate()) {
+                                      return;
+                                    }
+                                    if (controller.orderlist == null) return;
+
+                                    LightUser lightuser = LightUser();
+                                    lightuser.orderList = controller.orderlist;
+                                    lightuser.phone = _phoneController.text;
+                                    lightuser.adress = _adressController.text;
+                                    lightuser.name = _fioController.text;
+
+                                    controller
+                                        .postLightUser(
+                                            "ligthuser/save", lightuser)
+                                        .then((value) {
+                                      controller.orderlist.clear();
+
+                                      _phoneController.clear();
+                                      _adressController.clear();
+                                      _fioController.clear();
+
+                                      sourceMeneger._listDataRow = [];
+                                      // _listDataRow = [];
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(SnackBar(
+                                              content: Text(
+                                                  "Ваше заявка принята Наше менеджеры свяжутся в течение 24 часов!")));
+
+                                      setState(() {
+                                        visible = false;
+                                      });
+                                    });
+                                  });
+                                },
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                        child: Text(
+                                      "Отправить заказ",
+                                      style: TextStyle(
+                                          fontSize: 20, fontFamily: UiJ.font),
+                                    )),
+                                  ],
+                                ))),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text(
+                        "После отправки заказа Наши менеджеры свяжутся с Вами !",
+                        style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.orange,
+                            fontFamily: UiJ.font)),
+                  ],
+                ))));
   }
 }
 
@@ -311,7 +371,7 @@ class SourceMeneger extends DataGridSource {
 
   // TextEditingController editingController = TextEditingController();
 
-  SourceMeneger({required List<Order> listOrder}) {
+  SourceMeneger({required List<Orderb> listOrder}) {
     _listDataRow = listOrder
         .map<DataGridRow>((e) => DataGridRow(cells: [
               DataGridCell<String>(columnName: "make", value: e.make!.name),

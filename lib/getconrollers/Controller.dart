@@ -1,13 +1,15 @@
 import 'package:binokor_web/getconrollers/ApiConnector.dart';
 import 'package:binokor_web/models/Job.dart';
 import 'package:binokor_web/models/Kompleks.dart';
+import 'package:binokor_web/models/LightUser.dart';
 import 'package:binokor_web/models/News.dart';
-import 'package:binokor_web/models/Order.dart';
+
 import 'package:binokor_web/pages/catalog_page.dart';
 import 'package:get/get.dart';
 
 import '../models/Make.dart';
 import '../models/Meneger.dart';
+import '../models/Orderb.dart';
 
 class Controller extends GetxController {
   final api = ApiConnector();
@@ -21,8 +23,11 @@ class Controller extends GetxController {
   var listJob = <Job>[].obs;
   var listnews = <News>[].obs;
   Make? make;
-  List<Order> orderlist = <Order>[].obs;
+  List<Orderb> orderlist = <Orderb>[].obs;
 
+  Future<LightUser> postLightUser(String url, LightUser user) async{
+    return await api.postLightUser(url, user);
+  }
 
   fetchListKompleks() async {
     var komplek = await api.getKomleks();
@@ -100,10 +105,10 @@ class Controller extends GetxController {
     this.make = newMake;
   }
 
-  addOrder(Order order){
+  addOrder(Orderb order){
     this.orderlist.add(order);
   }
-  removeOrder(Order order){
+  removeOrder(Orderb order){
       this.orderlist.remove(order);
   }
 

@@ -1,5 +1,5 @@
 import 'package:binokor_web/getconrollers/Controller.dart';
-import 'package:binokor_web/models/Order.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,6 +10,7 @@ import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 import '../models/Catalog.dart';
 import '../models/Make.dart';
+import '../models/Orderb.dart';
 import '../models/uij.dart';
 
 class CatalogPage extends StatefulWidget {
@@ -323,7 +324,7 @@ class _CatalogPageState extends State<CatalogPage> {
                                 content: Text("Просим заполнить количество!")));
                             return;
                           }
-                          Order order = Order();
+                          Orderb order = Orderb();
                           order.make = controller.make;
                           order.name = _catalog!.name;
                           order.length = _lengthController.text;
