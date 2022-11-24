@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
+import '../models/Dom.dart';
+import '../models/ImageDom.dart';
 import '../models/uij.dart';
 
 PageController _pageController = PageController(initialPage: 0, keepPage: true);
@@ -77,8 +79,8 @@ class KompleksDetailesPage extends StatelessWidget {
                                     child: CircularProgressIndicator(),
                                   );
                                 }),
-                                Container(
-                                    padding: EdgeInsets.only(right: 20),
+                                Align(
+                                    // padding: EdgeInsets.only(right: 20),
                                     alignment: Alignment.centerLeft,
                                     child: IconButton(
                                         iconSize: 180,
@@ -97,8 +99,8 @@ class KompleksDetailesPage extends StatelessWidget {
                                           color: Colors.white,
                                           size: 80,
                                         ))),
-                                Container(
-                                    padding: EdgeInsets.only(right: 20),
+                                Align(
+                                    // padding: EdgeInsets.only(right: 20),
                                     alignment: Alignment.centerRight,
                                     child: IconButton(
                                         iconSize: 180,
@@ -117,13 +119,6 @@ class KompleksDetailesPage extends StatelessWidget {
                                           color: Colors.white,
                                           size: 80,
                                         ))),
-                                Align(
-                                    alignment: Alignment.centerRight,
-                                    child: Icon(
-                                      Icons.arrow_left_sharp,
-                                      size: MediaQuery.of(context).size.height,
-                                      color: Colors.white,
-                                    )),
                                 page != 0
                                     ? Container()
                                     : Container(
@@ -133,44 +128,51 @@ class KompleksDetailesPage extends StatelessWidget {
                                         child: Text(
                                           controller.kompleks!.description!,
                                           style: TextStyle(
-                                              fontFamily: UiJ.font,
-                                              color:
-                                                  Colors.indigoAccent.shade700,
-                                              fontSize: 30),
+                                              fontFamily: UiJ.fontbold,
+                                              color: Colors.white,
+                                              fontSize: 50),
                                         ),
                                       )
                               ],
                             ));
                           }).toList());
                     })),
+                Container(
+                    padding: EdgeInsets.only(left: 100),
+                    alignment: Alignment.topLeft,
+                    child: Text("Проекты строительство",
+                        style: TextStyle(
+                            fontSize: UiJ.sizeweight(context) ? 20 : 30,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: UiJ.fontbold))),
                 Divider(),
-                Container(
-                    child: Column(
-                  children: [
-                    Container(
-                        padding: EdgeInsets.only(left: 100),
-                        alignment: Alignment.topLeft,
-                        child: Text("Проекты строительство",
-                            style: TextStyle(
-                                fontSize: UiJ.sizeweight(context) ? 20 : 30,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: UiJ.fontbold))),
-                  ],
-                )),
-                Container(
-                    child: Image.network(
-                        '${UiJ.url}kompleks/download/house/${controller.kompleks!.mainimagepath}',
+                controller.listImageDom.length == 0
+                    ? Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : Container(
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height,
-                        errorBuilder: (context, exception, stackTrace) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                })),
+                        child: layoutPicture()),
               ],
             )),
           ],
         ))));
+  }
+
+  Widget layoutPicture() {
+    return GridView.builder(
+      itemCount: controller.listImageDom.length,
+      itemBuilder: (context, idx) {
+        return Padding(
+          padding: EdgeInsets.only(left: 100, right: 100),
+          child: Image.network(
+              '${UiJ.url}imagedata/download/images/${controller.listImageDom[idx].imagepath}'),
+        );
+      },
+      gridDelegate:
+          SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+    );
   }
 
   Widget description() {

@@ -1,4 +1,5 @@
 import 'package:binokor_web/getconrollers/ApiConnector.dart';
+import 'package:binokor_web/models/ImageDom.dart';
 import 'package:binokor_web/models/Job.dart';
 import 'package:binokor_web/models/Kompleks.dart';
 import 'package:binokor_web/models/LightUser.dart';
@@ -7,6 +8,7 @@ import 'package:binokor_web/models/News.dart';
 import 'package:binokor_web/pages/catalog_page.dart';
 import 'package:get/get.dart';
 
+import '../models/Dom.dart';
 import '../models/Make.dart';
 import '../models/Meneger.dart';
 import '../models/Orderb.dart';
@@ -22,6 +24,7 @@ class Controller extends GetxController {
   var listMake = <Make>[].obs;
   var listJob = <Job>[].obs;
   var listnews = <News>[].obs;
+  var listImageDom = <ImageDom>[].obs;
   Make? make;
   List<Orderb> orderlist = <Orderb>[].obs;
 
@@ -91,6 +94,17 @@ class Controller extends GetxController {
 
   changeKompleks(Kompleks newkompleks) {
     this.kompleks = newkompleks;
+   {
+      if (kompleks!.domSet!.length != 0) {
+        for (Dom dom in kompleks!.domSet!) {
+          for (ImageDom imageDom in dom.imageDataList!) {
+            if (imageDom.layout!) {
+              listImageDom.add(imageDom);
+            }
+          }
+        }
+      }
+    }
     update();
   }
 

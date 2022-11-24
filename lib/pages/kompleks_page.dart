@@ -211,24 +211,24 @@ class KompleksPage extends StatelessWidget {
             SizedBox(
               height: 20,
             ),
-            SizedBox(
-                width: 300,
-                height: 50,
-                child: ElevatedButton(
-                    onPressed: () {
-                      for (Dom dom in controller.listKompleks[index].domSet!) {
-                        if (dom.imageDataList!.length == 0) {
-                          continue;
-                        }
-
-                        _listImage.addAll(dom.imageDataList!);
-                      }
-                      showDialogphoto(context, controller.listKompleks[index].title!);
-                    },
-                    child: Text(
-                      "Процесс строительство",
-                      style: TextStyle(fontFamily: UiJ.font, fontSize: 20),
-                    )))
+            // SizedBox(
+            //     width: 300,
+            //     height: 50,
+            //     child: ElevatedButton(
+            //         onPressed: () {
+            //           for (Dom dom in controller.listKompleks[index].domSet!) {
+            //             if (dom.imageDataList!.length == 0) {
+            //               continue;
+            //             }
+            //
+            //             _listImage.addAll(dom.imageDataList!);
+            //           }
+            //           showDialogphoto(context, controller.listKompleks[index].title!);
+            //         },
+            //         child: Text(
+            //           "Процесс строительство",
+            //           style: TextStyle(fontFamily: UiJ.font, fontSize: 20),
+            //         )))
           ],
         ));
   }

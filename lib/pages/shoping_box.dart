@@ -25,7 +25,7 @@ TextEditingController _phoneController = TextEditingController();
 final ApiConnector _apiConnector = ApiConnector();
 Orderb? _orderb;
 bool visible = false;
-final GlobalKey<SfDataGridState> _globalKey = GlobalKey<SfDataGridState>();
+// final GlobalKey<SfDataGridState> _globalKey = GlobalKey<SfDataGridState>();
 
 class ShopingBox extends StatelessWidget {
   const ShopingBox({Key? key}) : super(key: key);
@@ -87,7 +87,6 @@ class ShopingBox extends StatelessWidget {
           rowHoverTextStyle: TextStyle(color: Colors.blue),
         ),
         child: SfDataGrid(
-          key: _globalKey,
           columnWidthMode: ColumnWidthMode.fill,
           selectionMode: SelectionMode.single,
           navigationMode: GridNavigationMode.cell,
