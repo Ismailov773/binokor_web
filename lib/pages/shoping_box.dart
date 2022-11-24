@@ -25,6 +25,7 @@ TextEditingController _phoneController = TextEditingController();
 final ApiConnector _apiConnector = ApiConnector();
 Orderb? _orderb;
 bool visible = false;
+final GlobalKey<SfDataGridState> _globalKey = GlobalKey<SfDataGridState>();
 
 class ShopingBox extends StatelessWidget {
   const ShopingBox({Key? key}) : super(key: key);
@@ -86,6 +87,7 @@ class ShopingBox extends StatelessWidget {
           rowHoverTextStyle: TextStyle(color: Colors.blue),
         ),
         child: SfDataGrid(
+          key: _globalKey,
           columnWidthMode: ColumnWidthMode.fill,
           selectionMode: SelectionMode.single,
           navigationMode: GridNavigationMode.cell,
@@ -291,65 +293,68 @@ class ShopingBox extends StatelessWidget {
                     ),
                     Container(
                         height: 50,
-                        child: visible
-                            ? Expanded(
-                                child: Center(
-                                    child: CircularProgressIndicator(
-                                  color: Colors.white,
-                                )),
-                              )
-                            : ElevatedButton(
-                                onPressed: () async {
+                        child: ElevatedButton(
+                            style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all(Colors.blue)),
+                            onPressed: () async {
+                              if (visible != false) return;
+
+                              if (!_globalKeyOffer.currentState!.validate()) {
+                                return;
+                              }
+                              setState(() {
+                                visible = true;
+                              });
+                              await Future.delayed(Duration(seconds: 2), () {
+                                if (controller.orderlist == null) return;
+                                LightUser lightuser = LightUser();
+                                lightuser.orderList = controller.orderlist;
+                                lightuser.phone = _phoneController.text;
+                                lightuser.adress = _adressController.text;
+                                lightuser.name = _fioController.text;
+                                controller
+                                    .postLightUser("ligthuser/save", lightuser)
+                                    .then((value) {
+                                  controller.orderlist.clear();
+                                  _phoneController.clear();
+                                  _adressController.clear();
+                                  _fioController.clear();
+
+                                  sourceMeneger._listDataRow = [];
+                                  sourceMeneger.updateDataGridSource();
+                                  //_globalKey.currentState!.refresh();
+
+                                  // sourceMeneger._listDataRow = [];
+                                  // _listDataRow = [];
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                          content: Text(
+                                              "Ваше заявка принята Наше менеджеры свяжутся в течение 24 часов!")));
+
                                   setState(() {
-                                    visible = true;
+                                    visible = false;
                                   });
-                                  await Future.delayed(Duration(seconds: 3),
-                                      () {
-                                    if (!_globalKeyOffer.currentState!
-                                        .validate()) {
-                                      return;
-                                    }
-                                    if (controller.orderlist == null) return;
-
-                                    LightUser lightuser = LightUser();
-                                    lightuser.orderList = controller.orderlist;
-                                    lightuser.phone = _phoneController.text;
-                                    lightuser.adress = _adressController.text;
-                                    lightuser.name = _fioController.text;
-
-                                    controller
-                                        .postLightUser(
-                                            "ligthuser/save", lightuser)
-                                        .then((value) {
-                                      controller.orderlist.clear();
-
-                                      _phoneController.clear();
-                                      _adressController.clear();
-                                      _fioController.clear();
-
-                                      sourceMeneger._listDataRow = [];
-                                      // _listDataRow = [];
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(SnackBar(
-                                              content: Text(
-                                                  "Ваше заявка принята Наше менеджеры свяжутся в течение 24 часов!")));
-
-                                      setState(() {
-                                        visible = false;
-                                      });
-                                    });
-                                  });
-                                },
-                                child: Row(
-                                  children: [
-                                    Expanded(
+                                });
+                              });
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                visible
+                                    ? Center(
+                                        child: CircularProgressIndicator(
+                                          color: Colors.white,
+                                        ),
+                                      )
+                                    : Container(
                                         child: Text(
-                                      "Отправить заказ",
-                                      style: TextStyle(
-                                          fontSize: 20, fontFamily: UiJ.font),
-                                    )),
-                                  ],
-                                ))),
+                                        "Отправить заказ",
+                                        style: TextStyle(
+                                            fontSize: 20, fontFamily: UiJ.font),
+                                      )),
+                              ],
+                            ))),
                     SizedBox(
                       height: 20,
                     ),
@@ -390,6 +395,10 @@ class SourceMeneger extends DataGridSource {
   List<DataGridRow> _listDataRow = [];
 
   List<DataGridRow> get rows => _listDataRow;
+
+  void updateDataGridSource() {
+    notifyListeners();
+  }
 
   @override
   void onCellSubmit(DataGridRow dataGridRow, RowColumnIndex rowColumnIndex,
