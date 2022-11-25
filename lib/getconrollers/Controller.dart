@@ -4,8 +4,6 @@ import 'package:binokor_web/models/Job.dart';
 import 'package:binokor_web/models/Kompleks.dart';
 import 'package:binokor_web/models/LightUser.dart';
 import 'package:binokor_web/models/News.dart';
-
-import 'package:binokor_web/pages/catalog_page.dart';
 import 'package:get/get.dart';
 
 import '../models/Dom.dart';
@@ -28,7 +26,7 @@ class Controller extends GetxController {
   Make? make;
   List<Orderb> orderlist = <Orderb>[].obs;
 
-  Future<LightUser> postLightUser(String url, LightUser user) async{
+  Future<LightUser> postLightUser(String url, LightUser user) async {
     return await api.postLightUser(url, user);
   }
 
@@ -92,9 +90,31 @@ class Controller extends GetxController {
     super.onInit();
   }
 
+  changeindexpage(int newindex) {
+    indexpage.value = newindex;
+    // update();
+  }
+
+  changeindextab(int newindex) {
+    this.indextab.value = newindex;
+    // update();
+  }
+
+  changeMake(Make newMake) {
+    this.make = newMake;
+  }
+
+  addOrder(Orderb order) {
+    this.orderlist.add(order);
+  }
+
+  removeOrder(Orderb order) {
+    this.orderlist.remove(order);
+  }
+
   changeKompleks(Kompleks newkompleks) {
     this.kompleks = newkompleks;
-   {
+    {
       if (kompleks!.domSet!.length != 0) {
         for (Dom dom in kompleks!.domSet!) {
           for (ImageDom imageDom in dom.imageDataList!) {
@@ -107,26 +127,6 @@ class Controller extends GetxController {
     }
     update();
   }
-
-  changeindexpage(int newindex) => indexpage.value = newindex;
-
-  changeindextab(int newindex) {
-    this.indextab.value = newindex;
-    // update();
-  }
-
-  changeMake(Make newMake){
-    this.make = newMake;
-  }
-
-  addOrder(Orderb order){
-    this.orderlist.add(order);
-  }
-  removeOrder(Orderb order){
-      this.orderlist.remove(order);
-  }
-
-
 }
 
 class HomeBindings extends Bindings {

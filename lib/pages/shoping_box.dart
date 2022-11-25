@@ -22,10 +22,7 @@ final _globalKeyOffer = GlobalKey<FormState>();
 TextEditingController _fioController = TextEditingController();
 TextEditingController _adressController = TextEditingController();
 TextEditingController _phoneController = TextEditingController();
-final ApiConnector _apiConnector = ApiConnector();
-Orderb? _orderb;
 bool visible = false;
-// final GlobalKey<SfDataGridState> _globalKey = GlobalKey<SfDataGridState>();
 
 class ShopingBox extends StatelessWidget {
   const ShopingBox({Key? key}) : super(key: key);

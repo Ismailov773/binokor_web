@@ -39,170 +39,148 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     tabController.index = controller.indextab.toInt();
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(150),
-        child: AppBar(
+    return Obx(() => Scaffold(
           backgroundColor: Colors.white,
-          centerTitle: false,
-          elevation: 0,
-          iconTheme: IconThemeData(color: Colors.black, size: 40),
-          flexibleSpace: Padding(
-            padding: EdgeInsets.only(left: 100),
-            child: Row(children: [
-              InkWell(
-                onTap: () {
-                  tabController.index = 0;
-                  controller.changeindexpage(1);
-                  controller.changeindextab(0);
-
-                  // Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  //
-                  //   return Home();
-                  // }));
-                },
-                child: Container(
-                  child: Image.asset('assets/images/logo1.png'),
-                  width: 200,
-                  height: 150,
-                ),
-              ),
-
-              SizedBox(
-                width: MediaQuery.of(context).size.width /
-                    (UiJ.sizeweight(context) ? 17 : 10),
-              ),
-              // Spacer(),
-              TabBar(
-                controller: tabController,
-
-                indicatorColor: Colors.white,
-                labelColor: Colors.red,
-                unselectedLabelColor: Colors.black,
-                indicatorWeight: 1,
-                labelStyle: TextStyle(
-                    fontSize: UiJ.sizeweight(context) ? 20 : 25,
-                    fontFamily: UiJ.font),
-                isScrollable: true,
-
-                // indicator: Decoration(BoxPainter(paintBorder())),
-                onTap: (int idx) {
-                  // setState(() {
-                  //
-
-                  // });
-                  tabController.index = idx;
-                  if (idx == 1) {
-                    controller.changeindexpage(1);
-                    controller.changeindextab(1);
-                  } else if (idx == 0) {
-                    controller.changeindexpage(1);
-                    controller.changeindextab(0);
-                  } else {
-                    controller.changeindexpage(1);
-                    controller.changeindextab(idx);
-                  }
-                },
-
-                tabs: [
-                  Container(
-                      // width: 200,
-                      child: Tab(
-                    child: AboutMenu_DropDown(
-                      vertical: false,
+          appBar: PreferredSize(
+            preferredSize: Size.fromHeight(150),
+            child: AppBar(
+              backgroundColor: Colors.white,
+              centerTitle: false,
+              elevation: 0,
+              iconTheme: IconThemeData(color: Colors.black, size: 40),
+              flexibleSpace: Padding(
+                padding: EdgeInsets.only(left: 100),
+                child: Row(children: [
+                  InkWell(
+                    onTap: () {
+                      tabController.index = 0;
+                      controller.changeindexpage(1);
+                      controller.changeindextab(0);
+                    },
+                    child: Container(
+                      child: Image.asset('assets/images/logo1.png'),
+                      width: 200,
+                      height: 150,
                     ),
-                  )),
-                  Container(
-                    // width: 200,
-                    child: Tab(
-                        child: Text(
-                      'Каталоги',
-                    )),
                   ),
-                  Container(
-                    // width: 200,
-                    child: Tab(
-                        child: Text(
-                      'Строительство',
-                      style: TextStyle(
-                        fontFamily: UiJ.font,
+
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width /
+                        (UiJ.sizeweight(context) ? 17 : 10),
+                  ),
+                  // Spacer(),
+                  TabBar(
+                    controller: tabController,
+
+                    indicatorColor: Colors.white,
+                    labelColor: Colors.red,
+                    unselectedLabelColor: Colors.black,
+                    indicatorWeight: 1,
+                    labelStyle: TextStyle(
+                        fontSize: UiJ.sizeweight(context) ? 20 : 25,
+                        fontFamily: UiJ.font),
+                    isScrollable: true,
+
+                    // indicator: Decoration(BoxPainter(paintBorder())),
+                    onTap: (int idx) {
+                      // setState(() {
+                      //
+
+                      // });
+                      tabController.index = idx;
+                      if (idx == 1) {
+                        controller.changeindexpage(1);
+                        controller.changeindextab(1);
+                      } else if (idx == 0) {
+                        controller.changeindexpage(1);
+                        controller.changeindextab(0);
+                      } else {
+                        controller.changeindexpage(1);
+                        controller.changeindextab(idx);
+                      }
+                    },
+
+                    tabs: [
+                      Container(
+                          // width: 200,
+                          child: Tab(
+                        child: AboutMenu_DropDown(
+                          vertical: false,
+                        ),
+                      )),
+                      Container(
+                        // width: 200,
+                        child: Tab(
+                            child: Text(
+                          'Каталоги',
+                        )),
                       ),
-                    )),
+                      Container(
+                        // width: 200,
+                        child: Tab(
+                            child: Text(
+                          'Строительство',
+                          style: TextStyle(
+                            fontFamily: UiJ.font,
+                          ),
+                        )),
+                      ),
+                      Container(
+                        // width: 200,
+                        child: Tab(
+                            child: Text(
+                          'Производство',
+                        )),
+                      ),
+                      Container(
+                        // width: 200,
+                        child: Tab(
+                            child: Text(
+                          'Обучение',
+                        )),
+                      ),
+                      Container(
+                        // width: 200,
+                        child: Tab(
+                            child: Text(
+                          'Контакты',
+                        )),
+                      ),
+                    ],
                   ),
-                  Container(
-                    // width: 200,
-                    child: Tab(
-                        child: Text(
-                      'Производство',
-                    )),
-                  ),
-                  Container(
-                    // width: 200,
-                    child: Tab(
-                        child: Text(
-                      'Обучение',
-                    )),
-                  ),
-                  Container(
-                    // width: 200,
-                    child: Tab(
-                        child: Text(
-                      'Контакты',
-                    )),
-                  ),
-                  // Wrap(
-                  //     direction: Axis.horizontal,
-                  //     children: [
-                  //       Text("Личный кабинет",
-                  //           style: TextStyle(
-                  //               fontSize: 25,
-                  //               fontFamily: UiJ.font,
-                  //               color: Colors.black)),
-                  //       // IconButton(
-                  //       //   onPressed: () {},
-                  //       //   icon: Icon(
-                  //       //     Icons.person,
-                  //       //     color: Colors.black,
-                  //       //     size: 50,
-                  //       //   ),
-                  //       // ),
-                  //     ],
-                  //   ),
-                ],
+                ]),
               ),
-            ]),
+              actions: [
+                IconButton(
+                    onPressed: () {},
+                    icon: Icon(
+                      Icons.add_shopping_cart,
+                      color: Colors.blue,
+                      size: 50,
+                    )),
+                Obx(() => Text(
+                      controller.orderlist.length.toString(),
+                      style: TextStyle(
+                          fontFamily: UiJ.fontbold,
+                          fontSize: 20,
+                          color: Colors.orange),
+                    )),
+                TextButton(
+                    onPressed: () {
+                      controller.changeindextab(1);
+                      controller.changeindexpage(7);
+                    },
+                    child: Text("Оформить \nзаказать",
+                        style: TextStyle(
+                            color: Colors.blue,
+                            fontSize: 15,
+                            fontFamily: UiJ.fontbold))),
+              ],
+              titleTextStyle:
+                  TextStyle(fontWeight: FontWeight.w200, fontSize: 45),
+            ),
           ),
-          actions: [
-            IconButton(
-                onPressed: () {},
-                icon: Icon(
-                  Icons.add_shopping_cart,
-                  color: Colors.blue,
-                  size: 50,
-                )),
-            Obx(() => Text(
-                  controller.orderlist.length.toString(),
-                  style: TextStyle(
-                      fontFamily: UiJ.fontbold,
-                      fontSize: 20,
-                      color: Colors.orange),
-                )),
-            TextButton(
-                onPressed: () {
-                  controller.changeindextab(1);
-                  controller.changeindexpage(7);
-                },
-                child: Text("Оформить \nзаказать",
-                    style: TextStyle(
-                        color: Colors.blue,
-                        fontSize: 15,
-                        fontFamily: UiJ.fontbold))),
-          ],
-          titleTextStyle: TextStyle(fontWeight: FontWeight.w200, fontSize: 45),
-        ),
-      ),
-      body: Obx(() => ListView(
+          body: ListView(
             children: [
               Container(
                   height: MediaQuery.of(context).size.height,
@@ -356,9 +334,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 ),
               ),
             ],
-          )),
-      drawer: DrowerPage(),
-    );
+          ),
+          drawer: getDrower(context),
+        ));
   }
 
   selectionPage(int page) {

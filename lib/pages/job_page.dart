@@ -60,21 +60,25 @@ class JobPage extends StatelessWidget {
                           tabs: _listjob
                               .map(
                                 (e) => Tab(
-                                    child: SizedBox(
+                                    child: Container(
                                         height:
                                             MediaQuery.of(context).size.height /
                                                 9,
                                         child: Card(
                                             child: Container(
+                                                margin: EdgeInsets.all(10),
+                                                padding: EdgeInsets.all(10),
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        color: Colors
+                                                            .blue.shade800)),
                                                 alignment: Alignment.centerLeft,
-                                                child: Padding(
-                                                    padding: EdgeInsets.all(20),
-                                                    child: Text(e.department!,
-                                                        style: TextStyle(
-                                                            color: Colors.black,
-                                                            fontSize: 20,
-                                                            fontFamily: UiJ
-                                                                .fontbold))))))),
+                                                child: Text(e.department!,
+                                                    style: TextStyle(
+                                                        color: Colors.black,
+                                                        fontSize: 20,
+                                                        fontFamily:
+                                                            UiJ.fontbold)))))),
                               )
                               .toList(),
                           contents: _listjob.map((e) {
@@ -98,8 +102,10 @@ class JobPage extends StatelessWidget {
                                     ),
                                     Expanded(
                                         child: ListView.builder(
+
                                       itemBuilder: (context, idx) {
                                         return Container(
+                                           margin: EdgeInsets.all(10),
                                             child: e.joblist![idx].title! ==
                                                     true
                                                 ? Text(
@@ -128,11 +134,13 @@ class JobPage extends StatelessWidget {
                                                             .description!,
                                                         style: TextStyle(
                                                           fontFamily: UiJ.font,
+
                                                           fontSize: 20,
                                                         ))
                                                   ])));
                                       },
-                                      itemExtent: 40,
+
+                                      // itemExtent: 100,
                                       itemCount: e.joblist!.length,
                                     ))
                                   ],
