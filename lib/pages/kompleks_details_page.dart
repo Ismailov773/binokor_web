@@ -137,6 +137,9 @@ class KompleksDetailesPage extends StatelessWidget {
                             ));
                           }).toList());
                     })),
+                SizedBox(
+                  height: 20,
+                ),
                 Container(
                     padding: EdgeInsets.only(left: 100),
                     alignment: Alignment.topLeft,
@@ -146,29 +149,81 @@ class KompleksDetailesPage extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                             fontFamily: UiJ.fontbold))),
                 Divider(),
+                SizedBox(
+                  height: 20,
+                ),
                 controller.listImageDom.length == 0
                     ? Center(
                         child: CircularProgressIndicator(),
                       )
                     : Container(
+                        padding: EdgeInsets.only(left: 100, right: 100),
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height,
                         child: layoutPicture()),
+                Divider(),
+                SizedBox(
+                  height: 20,
+                ),
               ],
             )),
           ],
         ))));
   }
 
+  showDialogPicture(BuildContext context, int idx) {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: true,
+      // false = user must tap button, true = tap outside dialog
+      builder: (BuildContext dialogContext) {
+        return AlertDialog(
+          title: Text('Проект дома'),
+          content: Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            child: Card(
+                elevation: 5,
+                child: Container(
+                    margin: EdgeInsets.all(10),
+                    padding: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.blue.shade800)),
+                    child: Image.network(
+                        '${UiJ.url}imagedata/download/images/${controller.listImageDom[idx].imagepath}'))),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Закрыть'),
+              onPressed: () {
+                Navigator.of(dialogContext).pop(); // Dismiss alert dialog
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   Widget layoutPicture() {
     return GridView.builder(
       itemCount: controller.listImageDom.length,
       itemBuilder: (context, idx) {
-        return Padding(
-          padding: EdgeInsets.only(left: 100, right: 100),
-          child: Image.network(
-              '${UiJ.url}imagedata/download/images/${controller.listImageDom[idx].imagepath}'),
-        );
+        return InkWell(
+            onTap: () {
+              showDialogPicture(context, idx);
+            },
+            child: Container(
+              child: Card(
+                  elevation: 5,
+                  child: Container(
+                      margin: EdgeInsets.all(10),
+                      padding: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.blue.shade800)),
+                      child: Image.network(
+                          '${UiJ.url}imagedata/download/images/${controller.listImageDom[idx].imagepath}'))),
+            ));
       },
       gridDelegate:
           SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
