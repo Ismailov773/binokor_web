@@ -45,49 +45,54 @@ class CatalogMainPage extends StatelessWidget {
                               height: MediaQuery.of(context).size.height / 8,
                               width: MediaQuery.of(context).size.width / 8,
                               child: InkWell(
-                                onTap: () {
-                                  controller.changeMake(_listMake[index]);
-                                  controller.changeindextab(0);
-                                  controller.changeindexpage(6);
-                                },
-                                child: Card(
+                                  onTap: () {
+                                    controller.changeMake(_listMake[index]);
+                                    controller.changeindextab(0);
+                                    controller.changeindexpage(6);
+                                  },
+                                  child: Card(
                                     elevation: 5,
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Padding(
-                                            padding: EdgeInsets.all(20),
-                                            child: Text(
-                                              _listMake[index].name!,
-                                              style: TextStyle(
-                                                  fontSize: 20,
-                                                  fontFamily: UiJ.fontbold),
-                                              textAlign: TextAlign.justify,
-                                            )),
-                                        Expanded(
-                                            child: Padding(
+                                    child: Container(
+                                      margin: EdgeInsets.all(10),
+                                        decoration: BoxDecoration(
+                                            border: Border.all(
+                                                color: Colors.blue.shade800)),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Padding(
                                                 padding: EdgeInsets.all(20),
-                                                child: Image.network(
-                                                  _listMake[index] == null
-                                                      ? ''
-                                                      : '${UiJ.url}make/download/makes/${_listMake[index].imagepath}',
-                                                  errorBuilder: (context,
-                                                      exception, stackTrace) {
-                                                    return Center(
-                                                      child:
-                                                          CircularProgressIndicator(),
-                                                    );
-                                                  },
-                                                ))),
-                                        Divider(),
-                                        SizedBox(
-                                          height: 15,
-                                        )
-
-                                      ],
-                                    )),
-                              ));
+                                                child: Text(
+                                                  _listMake[index].name!,
+                                                  style: TextStyle(
+                                                      fontSize: 20,
+                                                      fontFamily: UiJ.fontbold),
+                                                  textAlign: TextAlign.justify,
+                                                )),
+                                            Expanded(
+                                                child: Padding(
+                                                    padding: EdgeInsets.all(20),
+                                                    child: Image.network(
+                                                      _listMake[index] == null
+                                                          ? ''
+                                                          : '${UiJ.url}make/download/makes/${_listMake[index].imagepath}',
+                                                      errorBuilder: (context,
+                                                          exception,
+                                                          stackTrace) {
+                                                        return Center(
+                                                          child:
+                                                              CircularProgressIndicator(),
+                                                        );
+                                                      },
+                                                    ))),
+                                            Divider(),
+                                            SizedBox(
+                                              height: 15,
+                                            )
+                                          ],
+                                        )),
+                                  )));
                         });
                       }))),
         ],

@@ -180,18 +180,15 @@ class KompleksDetailesPage extends StatelessWidget {
         return AlertDialog(
           title: Text('Проект дома'),
           content: Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            child: Card(
-                elevation: 5,
-                child: Container(
-                    margin: EdgeInsets.all(10),
-                    padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.blue.shade800)),
-                    child: Image.network(
-                        '${UiJ.url}imagedata/download/images/${controller.listImageDom[idx].imagepath}'))),
-          ),
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
+              child: Container(
+                  margin: EdgeInsets.all(10),
+                  padding: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.blue.shade800)),
+                  child: Image.network(
+                      '${UiJ.url}imagedata/download/images/${controller.listImageDom[idx].imagepath}'))),
           actions: <Widget>[
             TextButton(
               child: Text('Закрыть'),
