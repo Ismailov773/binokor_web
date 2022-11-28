@@ -68,8 +68,7 @@ class KompleksDetailesPage extends StatelessWidget {
                             });
                           },
                           children: _listUrl.map((e) {
-                            return Container(
-                                child: Stack(
+                            return Stack(
                               // alignment: Alignment.center,
                               fit: StackFit.expand,
                               children: [
@@ -134,7 +133,7 @@ class KompleksDetailesPage extends StatelessWidget {
                                         ),
                                       )
                               ],
-                            ));
+                            );
                           }).toList());
                     })),
                 SizedBox(

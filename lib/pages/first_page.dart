@@ -32,8 +32,7 @@ class FirstPage extends StatelessWidget {
                   options: CarouselOptions(
                     height: MediaQuery.of(context).size.height /
                         (UiJ.sizeweight(context) ? 1.4 : 1.3),
-
-                    aspectRatio: 16/9,
+                    aspectRatio: 16 / 9,
                     viewportFraction: 0.5,
                     initialPage: _current,
                     enableInfiniteScroll: true,
@@ -48,7 +47,9 @@ class FirstPage extends StatelessWidget {
                         // print("${_current}");
                       });
                     },
-                    scrollDirection: Axis.horizontal,
+                    scrollDirection: MediaQuery.of(context).size.width < 600
+                        ? Axis.vertical
+                        : Axis.horizontal,
                   ))),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,

@@ -22,19 +22,26 @@ class CatalogMainPage extends StatelessWidget {
     return Obx(() {
       return Column(
         children: [
+          SizedBox(
+            height: 10,
+          ),
           Container(
-            padding: EdgeInsets.only(left: 100, right: 100),
+            padding: EdgeInsets.only(
+                left: MediaQuery.of(context).size.width / 9,
+                right: MediaQuery.of(context).size.width / 9),
             alignment: Alignment.topLeft,
             child: Text("Каталоги",
                 style: TextStyle(
-                    fontSize: 30,
+                    fontSize: MediaQuery.of(context).size.width > UiJ.widthSize ? 30 : 15,
                     fontWeight: FontWeight.bold,
                     fontFamily: UiJ.fontbold)),
           ),
           Divider(),
           Expanded(
               child: Padding(
-                  padding: EdgeInsets.only(left: 100, right: 100),
+                  padding: EdgeInsets.only(
+                      left: MediaQuery.of(context).size.width / 9,
+                      right: MediaQuery.of(context).size.width / 9),
                   child: GridView.builder(
                       itemCount: _listMake.length,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -42,8 +49,8 @@ class CatalogMainPage extends StatelessWidget {
                       itemBuilder: (context, index) {
                         return StatefulBuilder(builder: (context, setState) {
                           return Container(
-                              height: MediaQuery.of(context).size.height / 8,
-                              width: MediaQuery.of(context).size.width / 8,
+                              height: MediaQuery.of(context).size.height / 9,
+                              width: MediaQuery.of(context).size.width / 9,
                               child: InkWell(
                                   onTap: () {
                                     controller.changeMake(_listMake[index]);
@@ -53,7 +60,7 @@ class CatalogMainPage extends StatelessWidget {
                                   child: Card(
                                     elevation: 5,
                                     child: Container(
-                                      margin: EdgeInsets.all(10),
+                                        margin: EdgeInsets.all(10),
                                         decoration: BoxDecoration(
                                             border: Border.all(
                                                 color: Colors.blue.shade800)),
@@ -68,7 +75,7 @@ class CatalogMainPage extends StatelessWidget {
                                                   style: TextStyle(
                                                       fontSize: 20,
                                                       fontFamily: UiJ.fontbold),
-                                                  textAlign: TextAlign.justify,
+                                                  textAlign: TextAlign.start,
                                                 )),
                                             Expanded(
                                                 child: Padding(

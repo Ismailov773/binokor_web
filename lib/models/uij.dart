@@ -19,6 +19,8 @@ class UiJ {
   static final String lozung =
       'ЛИДЕР ПО ВЫСОКОТЕХНОЛОГИЧНОМУ ПРОИЗВОДСТВУ ЖЕЛЕЗОБЕТОННЫХ ИЗДЕЛИЙ ПО УЗБЕКИСТАНУ';
 
+  static final double widthSize = 600;
+
 // static final String prod_description = '    На сегодняшний день, компания \"DSK Binokor\" является одним из ведущих стройподрядчиков Узбекистана и производит различные массивные железобетонные изделия для сборного строительства, с использованием новейшего немецкого оборудования.';
 
   static callTelegram() async {
@@ -64,6 +66,7 @@ class UiJ {
       return false;
     }
   }
+
 }
 
 class HexColor extends Color {
@@ -76,4 +79,6 @@ class HexColor extends Color {
   }
 
   HexColor(final String hexColor) : super(_getColorFromHex(hexColor));
+
+
 }
