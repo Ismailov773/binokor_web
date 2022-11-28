@@ -34,7 +34,9 @@ class KompleksPage extends StatelessWidget {
           alignment: Alignment.topLeft,
           child: Text("Строительство",
               style: TextStyle(
-                  fontSize: MediaQuery.of(context).size.width > UiJ.widthSize ? 30 : 15,
+                  fontSize: MediaQuery.of(context).size.width > UiJ.widthSize
+                      ? 30
+                      : 15,
                   fontWeight: FontWeight.bold,
                   fontFamily: UiJ.fontbold)),
         ),
@@ -43,7 +45,7 @@ class KompleksPage extends StatelessWidget {
           height: 20,
         ),
         Expanded(
-            child:  ListView.builder(
+            child: ListView.builder(
                 itemCount: controller.listKompleks.length,
                 itemBuilder: (context, index) {
                   return Container(
@@ -56,26 +58,46 @@ class KompleksPage extends StatelessWidget {
                               },
                               child: Container(
                                   padding: EdgeInsets.all(10),
-                                  child: Column(
-                                    children: [
-                                      Row(
-                                        children: [
-                                          index % 2 == 0
-                                              ? getCar(index)
-                                              : getText(context, index),
-                                          SizedBox(
-                                            width: 30,
-                                          ),
-                                          index % 2 == 0
-                                              ? getText(context, index)
-                                              : getCar(index),
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                    ],
-                                  )))));
+                                  child:
+                                      MediaQuery.of(context).size.width >
+                                              UiJ.widthSize
+                                          ? Row(
+                                              children: [
+                                                index % 2 == 0
+                                                    ? getCar(index)
+                                                    : getText(context, index),
+                                                SizedBox(
+                                                  width: MediaQuery.of(context)
+                                                              .size
+                                                              .width >
+                                                          UiJ.widthSize
+                                                      ? 30
+                                                      : 15,
+                                                ),
+                                                index % 2 == 0
+                                                    ? getText(context, index)
+                                                    : getCar(index),
+                                              ],
+                                            )
+                                          : Column(
+                                              children: [
+                                                index % 2 == 0
+                                                    ? getCar(index)
+                                                    : getText(context, index),
+                                                SizedBox(
+                                                  width: MediaQuery.of(context)
+                                                              .size
+                                                              .width >
+                                                          UiJ.widthSize
+                                                      ? 30
+                                                      : 15,
+                                                ),
+                                                index % 2 == 0
+                                                    ? getText(context, index)
+                                                    : getCar(index),
+                                              ],
+                                            ),
+                                    ))));
                 })),
       ],
     );
@@ -116,7 +138,7 @@ class KompleksPage extends StatelessWidget {
             Container(
               child: Text(controller.listKompleks[index].title!,
                   style: TextStyle(
-                      fontSize: UiJ.sizeweight(context) ? 30 : 40,
+                      fontSize: MediaQuery.of(context).size.width > UiJ.widthSize ? 40 : 20,
                       fontWeight: FontWeight.w900,
                       fontFamily: UiJ.fontbold)),
               alignment: Alignment.topLeft,
@@ -128,7 +150,7 @@ class KompleksPage extends StatelessWidget {
               // padding: EdgeInsets.only(right: 400),
               child: Text(controller.listKompleks[index].description!,
                   style: TextStyle(
-                      fontSize: UiJ.sizeweight(context) ? 20 : 25,
+                      fontSize: MediaQuery.of(context).size.width > UiJ.widthSize ? 25 : 20,
                       fontFamily: UiJ.font)),
               alignment: Alignment.topLeft,
             ),
