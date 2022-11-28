@@ -18,11 +18,11 @@ class MenegersPage extends StatelessWidget {
     final Controller controller = Get.find();
     return Obx(() {
       _list = controller.listMeneger;
-      return main();
+      return main(context);
     });
   }
 
-  Widget main() {
+  Widget main(BuildContext context) {
     return Column(
       children: [
        Padding(padding: EdgeInsets.only(left: 100, right: 100), child:  Container(
@@ -31,7 +31,7 @@ class MenegersPage extends StatelessWidget {
             "Руководство:",
             style: TextStyle(
                 fontFamily: UiJ.fontbold,
-                fontSize: 30,
+                fontSize: MediaQuery.of(context).size.width > UiJ.widthSize ? 30 : 15,
                 fontWeight: FontWeight.bold),
           ),
         )),

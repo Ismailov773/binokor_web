@@ -34,7 +34,7 @@ class KompleksPage extends StatelessWidget {
           alignment: Alignment.topLeft,
           child: Text("Строительство",
               style: TextStyle(
-                  fontSize: UiJ.sizeweight(context) ? 20 : 30,
+                  fontSize: MediaQuery.of(context).size.width > UiJ.widthSize ? 30 : 15,
                   fontWeight: FontWeight.bold,
                   fontFamily: UiJ.fontbold)),
         ),

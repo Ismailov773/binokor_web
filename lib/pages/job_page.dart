@@ -34,7 +34,7 @@ class JobPage extends StatelessWidget {
                   "Вакансии",
                   style: TextStyle(
                       fontFamily: UiJ.fontbold,
-                      fontSize: 30,
+                      fontSize: MediaQuery.of(context).size.width > UiJ.widthSize ? 30 : 15,
                       fontWeight: FontWeight.bold),
                 ),
               )),

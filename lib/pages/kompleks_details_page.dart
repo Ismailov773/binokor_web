@@ -45,7 +45,7 @@ class KompleksDetailesPage extends StatelessWidget {
                       Icon(Icons.keyboard_arrow_left),
                       Text(controller.kompleks!.title!,
                           style: TextStyle(
-                              fontSize: UiJ.sizeweight(context) ? 25 : 30,
+                              fontSize: MediaQuery.of(context).size.width > UiJ.widthSize ? 30 : 15,
                               fontWeight: FontWeight.bold,
                               fontFamily: UiJ.fontbold)),
                     ],

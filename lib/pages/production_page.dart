@@ -19,7 +19,7 @@ class ProductionPage extends StatelessWidget {
               alignment: Alignment.topLeft,
               child: Text("Производство",
                   style: TextStyle(
-                      fontSize: 30,
+                      fontSize: MediaQuery.of(context).size.width > UiJ.widthSize ? 30 : 15,
                       fontWeight: FontWeight.bold,
                       fontFamily: UiJ.fontbold)),
             ),

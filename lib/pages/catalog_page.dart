@@ -68,7 +68,7 @@ class _CatalogPageState extends State<CatalogPage> {
                     icon: Icon(Icons.keyboard_arrow_left)),
                 Text("Каталоги",
                     style: TextStyle(
-                        fontSize: 30,
+                        fontSize: MediaQuery.of(context).size.width > UiJ.widthSize ? 30 : 15,
                         fontWeight: FontWeight.bold,
                         fontFamily: UiJ.fontbold)),
               ],

@@ -230,7 +230,7 @@ class _StudyPageState extends State<StudyPage> with TickerProviderStateMixin {
               alignment: Alignment.topLeft,
               child: Text("Обучение",
                   style: TextStyle(
-                      fontSize: UiJ.sizeweight(context) ? 20 : 30,
+                      fontSize: MediaQuery.of(context).size.width > UiJ.widthSize ? 30 : 15,
                       fontWeight: FontWeight.bold,
                       fontFamily: UiJ.fontbold)),
             ),

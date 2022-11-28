@@ -17,7 +17,7 @@ class ContactPage extends StatelessWidget {
             Container(
               child: Text('Адрес компании:',
                   style: TextStyle(
-                      fontSize: 30,
+                      fontSize: MediaQuery.of(context).size.width > UiJ.widthSize ? 30 : 15,
                       fontWeight: FontWeight.bold,
                       fontFamily: UiJ.fontbold)),
             ),

@@ -45,7 +45,7 @@ class CatalogMainPage extends StatelessWidget {
                   child: GridView.builder(
                       itemCount: _listMake.length,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 3),
+                          crossAxisCount:  MediaQuery.of(context).size.width>UiJ.widthSize?3:1),
                       itemBuilder: (context, index) {
                         return StatefulBuilder(builder: (context, setState) {
                           return Container(
@@ -73,7 +73,7 @@ class CatalogMainPage extends StatelessWidget {
                                                 child: Text(
                                                   _listMake[index].name!,
                                                   style: TextStyle(
-                                                      fontSize: 20,
+                                                      fontSize: MediaQuery.of(context).size.width>UiJ.widthSize?20:10,
                                                       fontFamily: UiJ.fontbold),
                                                   textAlign: TextAlign.start,
                                                 )),

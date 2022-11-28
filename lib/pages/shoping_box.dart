@@ -46,7 +46,7 @@ class ShopingBox extends StatelessWidget {
                     icon: Icon(Icons.keyboard_arrow_left)),
                 Text("Оформление заказа",
                     style: TextStyle(
-                        fontSize: 30,
+                        fontSize: MediaQuery.of(context).size.width > UiJ.widthSize ? 30 : 15,
                         fontWeight: FontWeight.bold,
                         fontFamily: UiJ.fontbold)),
               ],
