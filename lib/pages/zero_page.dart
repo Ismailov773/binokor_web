@@ -39,8 +39,8 @@ class _ZeroPageState extends State<ZeroPage> {
                     children: [
                       Image.asset(
                         'assets/images/logo1.png',
-                        width: MediaQuery.of(context).size.width/3,
-                        height: MediaQuery.of(context).size.height/3,
+                        width: MediaQuery.of(context).size.width / 3,
+                        height: MediaQuery.of(context).size.height / 3,
                       ),
                       Text(
                         UiJ.lozung,
@@ -64,9 +64,8 @@ class _ZeroPageState extends State<ZeroPage> {
   Future<Widget> getHomePage() async {
     _changeOpacity();
 
-    await initServices();
-
-    return await Future.delayed(Duration(seconds: 2), () {})
-        .then((value) => Home());
+    return await Future.delayed(Duration(seconds: 2), () async {
+      await initServices();
+    }).then((value) => Home());
   }
 }

@@ -4,10 +4,11 @@ import 'package:get/get_core/src/get_main.dart';
 
 Future<void> initServices() async {
   print('starting services ...');
+
   /// Here is where you put get_storage, hive, shared_pref initialization.
   /// or moor connection, or whatever that's async.
   await Get.putAsync(() => DbService().init());
-  // await Get.putAsync(SettingsService()).init();
+  //await Get.putAsync(SettingsService()).init());
   print('All services started...');
 }
 
@@ -21,9 +22,7 @@ class DbService extends GetxService {
     // print('$runtimeType ready!');
     return this;
   }
-
 }
-
 
 class SettingsService extends GetxService {
   void init() async {

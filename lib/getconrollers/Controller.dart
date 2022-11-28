@@ -92,12 +92,15 @@ class Controller extends GetxController {
 
   changeindexpage(int newindex) {
     indexpage.value = newindex;
-    // update();
+    // notifyChildrens();
+    update();
   }
 
   changeindextab(int newindex) {
     this.indextab.value = newindex;
-    // update();
+    // notifyChildrens();
+
+    update();
   }
 
   changeMake(Make newMake) {
@@ -130,6 +133,8 @@ class Controller extends GetxController {
 }
 
 class HomeBindings extends Bindings {
+
+
   @override
   void dependencies() {
     Get.lazyPut<Controller>(() => Controller());
