@@ -1,16 +1,15 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
+import '../getconrollers/Controller.dart';
+import '../models/ImageDom.dart';
 import '../models/uij.dart';
 
-List<Image> _items = [
-  Image.asset('assets/images/kompleks.png'),
-  Image.asset('assets/images/production.png'),
-  Image.asset('assets/images/production.png'),
-  Image.asset('assets/images/production.png'),
-];
 int _current = 0;
 CarouselController carouselController = CarouselController();
+final Controller controller = Get.find();
 
 class FirstPage extends StatelessWidget {
   const FirstPage({Key? key}) : super(key: key);
@@ -23,9 +22,51 @@ class FirstPage extends StatelessWidget {
         children: [
           Center(
               child: CarouselSlider(
-                  items: _items.map((e) {
+                  items: controller.listKompleks.map((e) {
                     return Builder(builder: (BuildContext context) {
-                      return Container(child: e);
+                      return InkWell(
+                          onTap: () {
+                            controller.changeKompleks(e);
+                            controller.changeindexpage(5);
+                          },
+                          child: Container(
+                              height: MediaQuery.of(context).size.height / 2,
+                              width: MediaQuery.of(context).size.width,
+                              child: ListView(
+                                // crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    padding: EdgeInsets.all(10),
+                                    child: Text(
+                                      e.title!,
+                                      style: TextStyle(
+                                          fontFamily: UiJ.fontbold,
+                                          fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .width >
+                                                  UiJ.widthSize
+                                              ? 30
+                                              : 20),
+                                    ),
+                                  ),
+                                  // Divider(),
+                                  Container(
+                                      child: Card(
+                                          elevation: 5,
+                                          child: Image.network(
+                                            '${UiJ.url}kompleks/download/house/${e.mainimagepath}',
+                                            // height: 50,
+                                            // width: 50,
+                                            errorBuilder: (context, exception,
+                                                stackTrace) {
+                                              return Center(
+                                                child:
+                                                    CircularProgressIndicator(),
+                                              );
+                                            },
+                                          )))
+                                ],
+                              )));
                     });
                   }).toList(),
                   carouselController: carouselController,
@@ -53,9 +94,9 @@ class FirstPage extends StatelessWidget {
                   ))),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: _items.map(
+            children: controller.listKompleks.map(
               (image) {
-                int index = _items.indexOf(image);
+                int index = controller.listKompleks.indexOf(image);
                 return InkWell(
                     onTap: () {
                       setState(() {
@@ -86,26 +127,3 @@ class FirstPage extends StatelessWidget {
     });
   }
 }
-
-// CarouselSlider.builder(
-// // key: _sliderKey,
-// itemCount: _items.length,
-// slideTransform: CubeTransform(),
-// slideIndicator: CircularSlideIndicator(
-// padding: EdgeInsets.only(bottom: 32),
-// ),
-// unlimitedMode: true,
-// enableAutoSlider: true,
-// autoSliderDelay: Duration(seconds: 2),
-// autoSliderTransitionCurve: Curves.fastOutSlowIn,
-// autoSliderTransitionTime: Duration(milliseconds: 1000),
-//
-// slideBuilder: (int index) {
-// return Container(
-// child: Card(
-// elevation: 5,
-// child: _items[index],
-// ),
-// );
-// },
-// ),
