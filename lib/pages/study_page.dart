@@ -223,9 +223,9 @@ class _StudyPageState extends State<StudyPage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Padding(
         padding: EdgeInsets.only(
-            left: MediaQuery.of(context).size.width > UiJ.widthSize ? 100 : 10,
+            left: MediaQuery.of(context).size.width > UiJ.widthSize ? 50 : 10,
             right:
-                MediaQuery.of(context).size.width > UiJ.widthSize ? 100 : 10),
+                MediaQuery.of(context).size.width > UiJ.widthSize ? 50 : 10),
         child: Column(
           children: [
             Container(
@@ -470,6 +470,8 @@ class _StudyPageState extends State<StudyPage> with TickerProviderStateMixin {
             itemCount: _listTeachers.length,
             itemBuilder: (BuildContext context, int index) {
               return Container(
+                width: MediaQuery.of(context).size.width / 4,
+                  height: MediaQuery.of(context).size.height / 5,
                   child: Card(
                 elevation: 5,
                 child: Padding(

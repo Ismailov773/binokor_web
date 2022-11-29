@@ -117,13 +117,14 @@ class Controller extends GetxController {
 
   changeKompleks(Kompleks newkompleks) {
     this.kompleks = newkompleks;
+    listImageDom.clear();
     {
       if (kompleks!.domSet!.length != 0) {
         for (Dom dom in kompleks!.domSet!) {
           for (ImageDom imageDom in dom.imageDataList!) {
-            if (imageDom.layout!) {
-              listImageDom.add(imageDom);
-            }
+            // if (imageDom.layout!) {
+            listImageDom.add(imageDom);
+            // }
           }
         }
       }
@@ -133,8 +134,6 @@ class Controller extends GetxController {
 }
 
 class HomeBindings extends Bindings {
-
-
   @override
   void dependencies() {
     Get.lazyPut<Controller>(() => Controller());
