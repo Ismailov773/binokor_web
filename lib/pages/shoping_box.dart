@@ -35,8 +35,13 @@ class ShopingBox extends StatelessWidget {
       children: [
         Container(
             alignment: Alignment.topLeft,
-            padding: EdgeInsets.only(left: MediaQuery.of(context).size.width > UiJ.widthSize ? 100 : 20,
-                right: MediaQuery.of(context).size.width > UiJ.widthSize ? 100 : 20),
+            padding: EdgeInsets.only(
+                left: MediaQuery.of(context).size.width > UiJ.widthSize
+                    ? 100
+                    : 20,
+                right: MediaQuery.of(context).size.width > UiJ.widthSize
+                    ? 100
+                    : 20),
             child: Row(
               children: [
                 IconButton(
@@ -47,7 +52,10 @@ class ShopingBox extends StatelessWidget {
                     icon: Icon(Icons.keyboard_arrow_left)),
                 Text("Оформление заказа",
                     style: TextStyle(
-                        fontSize: MediaQuery.of(context).size.width > UiJ.widthSize ? 30 : 15,
+                        fontSize:
+                            MediaQuery.of(context).size.width > UiJ.widthSize
+                                ? 30
+                                : 15,
                         fontWeight: FontWeight.bold,
                         fontFamily: UiJ.fontbold)),
               ],
@@ -59,7 +67,10 @@ class ShopingBox extends StatelessWidget {
                 alignment: Alignment.topCenter,
                 child: Text("Ваше заказы",
                     style: TextStyle(
-                        fontSize: 30,
+                        fontSize:
+                            MediaQuery.of(context).size.width > UiJ.widthSize
+                                ? 30
+                                : 15,
                         color: Colors.blue,
                         fontWeight: FontWeight.bold,
                         fontFamily: UiJ.fontbold))),
@@ -70,7 +81,13 @@ class ShopingBox extends StatelessWidget {
             ? Container()
             : Expanded(
                 child: Container(
-                padding: EdgeInsets.only(left: 50, right: 50),
+                padding: EdgeInsets.only(
+                    left: MediaQuery.of(context).size.width > UiJ.widthSize
+                        ? 50
+                        : 10,
+                    right: MediaQuery.of(context).size.width > UiJ.widthSize
+                        ? 50
+                        : 10),
                 child: dataGrid(),
               )),
         Expanded(flex: 3, child: otherParams(context)),
@@ -191,8 +208,8 @@ class ShopingBox extends StatelessWidget {
         builder: (context, setState) => Container(
             alignment: Alignment.topLeft,
             padding: EdgeInsets.only(
-                left: MediaQuery.of(context).size.width / 3,
-                right: MediaQuery.of(context).size.width / 3),
+                left: MediaQuery.of(context).size.width > UiJ.widthSize ? 50 : 10,
+                right: MediaQuery.of(context).size.width > UiJ.widthSize ? 20 : 10),
             child: Form(
                 key: _globalKeyOffer,
                 child: Column(
@@ -293,7 +310,7 @@ class ShopingBox extends StatelessWidget {
                         child: ElevatedButton(
                             style: ButtonStyle(
                                 backgroundColor:
-                                    MaterialStateProperty.all(Colors.blue)),
+                                    MaterialStateProperty.all(Colors.blue),),
                             onPressed: () async {
                               if (visible != false) return;
 
@@ -348,7 +365,7 @@ class ShopingBox extends StatelessWidget {
                                         child: Text(
                                         "Отправить заказ",
                                         style: TextStyle(
-                                            fontSize: 20, fontFamily: UiJ.font),
+                                            fontSize: MediaQuery.of(context).size.width > UiJ.widthSize ? 20 : 15, fontFamily: UiJ.font),
                                       )),
                               ],
                             ))),

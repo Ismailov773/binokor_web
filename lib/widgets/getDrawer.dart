@@ -123,14 +123,14 @@ class getDrawer extends StatelessWidget {
               },
             ),
             Divider(),
-            ListTile(
-              leading: Text(
-                'Обратная связь',
-                style: TextStyle(
-                    fontSize: 25, fontFamily: UiJ.font, color: Colors.black),
-              ),
-              onTap: () {},
-            ),
+            // ListTile(
+            //   leading: Text(
+            //     'Обратная связь',
+            //     style: TextStyle(
+            //         fontSize: 25, fontFamily: UiJ.font, color: Colors.black),
+            //   ),
+            //   onTap: () {},
+            // ),
           ],
         ));
   }

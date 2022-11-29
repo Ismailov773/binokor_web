@@ -222,8 +222,10 @@ class _StudyPageState extends State<StudyPage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: EdgeInsets.only(left: MediaQuery.of(context).size.width > UiJ.widthSize ? 100 : 20,
-            right: MediaQuery.of(context).size.width > UiJ.widthSize ? 100 : 20),
+        padding: EdgeInsets.only(
+            left: MediaQuery.of(context).size.width > UiJ.widthSize ? 100 : 10,
+            right:
+                MediaQuery.of(context).size.width > UiJ.widthSize ? 100 : 10),
         child: Column(
           children: [
             Container(
@@ -231,7 +233,10 @@ class _StudyPageState extends State<StudyPage> with TickerProviderStateMixin {
               alignment: Alignment.topLeft,
               child: Text("Обучение",
                   style: TextStyle(
-                      fontSize: MediaQuery.of(context).size.width > UiJ.widthSize ? 30 : 15,
+                      fontSize:
+                          MediaQuery.of(context).size.width > UiJ.widthSize
+                              ? 30
+                              : 15,
                       fontWeight: FontWeight.bold,
                       fontFamily: UiJ.fontbold)),
             ),
@@ -245,7 +250,10 @@ class _StudyPageState extends State<StudyPage> with TickerProviderStateMixin {
                     indicatorColor: Colors.amber,
                     //isScrollable: true,
                     labelStyle: TextStyle(
-                        fontSize: UiJ.sizeweight(context) ? 20 : 30,
+                        fontSize:
+                            MediaQuery.of(context).size.width > UiJ.widthSize
+                                ? 30
+                                : 15,
                         fontFamily: UiJ.font),
                     labelColor: Colors.black,
                     tabs: [
@@ -276,131 +284,176 @@ class _StudyPageState extends State<StudyPage> with TickerProviderStateMixin {
             child: Column(
           children: [
             Expanded(
-                child: Padding(padding: EdgeInsets.all(20),
-                child: VerticalTabs(
-                    indicatorColor: Colors.white,
-                    backgroundColor: Colors.white,
-                    tabBackgroundColor: Colors.white,
-                    tabsWidth: MediaQuery.of(context).size.width / 4,
-                    tabs: _listStudy
-                        .map((e) => Tab(
-                                child: Column(
+                child: Padding(
+                    padding: EdgeInsets.all(20),
+                    child: VerticalTabs(
+                        indicatorColor: Colors.white,
+                        backgroundColor: Colors.white,
+                        tabBackgroundColor: Colors.white,
+                        tabsWidth: MediaQuery.of(context).size.width / 4,
+                        tabs: _listStudy
+                            .map((e) => Tab(
+                                    child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                      Padding(
+                                          padding: EdgeInsets.all(10),
+                                          child: Text(e.title!,
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize:
+                                                      MediaQuery.of(context)
+                                                                  .size
+                                                                  .width >
+                                                              UiJ.widthSize
+                                                          ? 20
+                                                          : 15,
+                                                  fontFamily: UiJ.fontbold))),
+                                      // Divider()
+                                    ])))
+                            .toList(),
+                        contents: _listStudy.map((e) {
+                          return Padding(
+                              padding: EdgeInsets.all(20),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    child: Text(
+                                      e.titledesc!,
+                                      style: TextStyle(
+                                          fontFamily: UiJ.fontbold,
+                                          fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .width >
+                                                  UiJ.widthSize
+                                              ? 20
+                                              : 15),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  Container(
+                                      // height: 200,
+                                      child: Column(
+                                          children: e.desc!.map((e) {
+                                    return Text(
+                                      e,
+                                      textAlign: TextAlign.justify,
+                                      style: TextStyle(
+                                          fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .width >
+                                                  UiJ.widthSize
+                                              ? 20
+                                              : 15,
+                                          fontFamily: UiJ.font),
+                                    );
+                                  }).toList())),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  Container(
+                                    child: Text(
+                                      e.work!,
+                                      style: TextStyle(
+                                          fontFamily: UiJ.fontbold,
+                                          fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .width >
+                                                  UiJ.widthSize
+                                              ? 20
+                                              : 15),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  Container(
+                                      child: Column(
+                                    children: e.workdesc!.map((e) {
+                                      return RichText(
+                                          text: TextSpan(children: [
+                                        WidgetSpan(
+                                            child: Icon(
+                                          Icons.circle,
+                                          size: 15,
+                                        )),
+                                        WidgetSpan(
+                                            child: SizedBox(
+                                          width: 20,
+                                        )),
+                                        TextSpan(
+                                          text: e,
+                                          style: TextStyle(
+                                              fontSize: MediaQuery.of(context)
+                                                          .size
+                                                          .width >
+                                                      UiJ.widthSize
+                                                  ? 20
+                                                  : 15,
+                                              fontFamily: UiJ.font),
+                                        )
+                                      ]));
+                                    }).toList(),
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
-                                    children: [
-                                  Padding(
-                                      padding: EdgeInsets.all(10),
-                                      child: Text(e.title!,
+                                  )),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  Container(
+                                    child: Text(
+                                      e.practice!,
+                                      style: TextStyle(
+                                          fontFamily: UiJ.fontbold,
+                                          fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .width >
+                                                  UiJ.widthSize
+                                              ? 20
+                                              : 15),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  Container(
+                                      child: Column(
+                                    children: e.practicedesc!.map((e) {
+                                      return RichText(
+                                          text: TextSpan(children: [
+                                        WidgetSpan(
+                                            child: Icon(
+                                          Icons.circle,
+                                          size: 15,
+                                        )),
+                                        WidgetSpan(
+                                            child: SizedBox(
+                                          width: 20,
+                                        )),
+                                        TextSpan(
+                                          text: e,
                                           style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 20,
-                                              fontFamily: UiJ.fontbold))),
-                                  // Divider()
-                                ])))
-                        .toList(),
-                    contents: _listStudy.map((e) {
-                      return Padding(
-                          padding: EdgeInsets.all(20),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Container(
-                                child: Text(
-                                  e.titledesc!,
-                                  style: TextStyle(
-                                      fontFamily: UiJ.fontbold, fontSize: 20),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Container(
-                                  // height: 200,
-                                  child: Column(
-                                      children: e.desc!.map((e) {
-                                return Text(
-                                  e,
-                                  textAlign: TextAlign.justify,
-                                  style: TextStyle(
-                                      fontSize: 20, fontFamily: UiJ.font),
-                                );
-                              }).toList())),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Container(
-                                child: Text(
-                                  e.work!,
-                                  style: TextStyle(
-                                      fontFamily: UiJ.fontbold, fontSize: 20),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Container(
-                                  child: Column(
-                                children: e.workdesc!.map((e) {
-                                  return RichText(
-                                      text: TextSpan(children: [
-                                    WidgetSpan(
-                                        child: Icon(
-                                      Icons.circle,
-                                      size: 15,
-                                    )),
-                                    WidgetSpan(
-                                        child: SizedBox(
-                                      width: 20,
-                                    )),
-                                    TextSpan(
-                                      text: e,
-                                      style: TextStyle(
-                                          fontSize: 20, fontFamily: UiJ.font),
-                                    )
-                                  ]));
-                                }).toList(),
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                              )),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Container(
-                                child: Text(
-                                  e.practice!,
-                                  style: TextStyle(
-                                      fontFamily: UiJ.fontbold, fontSize: 20),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Container(
-                                  child: Column(
-                                children: e.practicedesc!.map((e) {
-                                  return RichText(
-                                      text: TextSpan(children: [
-                                    WidgetSpan(
-                                        child: Icon(
-                                      Icons.circle,
-                                      size: 15,
-                                    )),
-                                    WidgetSpan(
-                                        child: SizedBox(
-                                      width: 20,
-                                    )),
-                                    TextSpan(
-                                      text: e,
-                                      style: TextStyle(
-                                          fontSize: 20, fontFamily: UiJ.font),
-                                    )
-                                  ]));
-                                }).toList(),
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                              )),
-                            ],
-                          ));
-                    }).toList()))),
+                                              fontSize: MediaQuery.of(context)
+                                                          .size
+                                                          .width >
+                                                      UiJ.widthSize
+                                                  ? 20
+                                                  : 15,
+                                              fontFamily: UiJ.font),
+                                        )
+                                      ]));
+                                    }).toList(),
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                  )),
+                                ],
+                              ));
+                        }).toList()))),
           ],
         )),
       ],
@@ -408,63 +461,72 @@ class _StudyPageState extends State<StudyPage> with TickerProviderStateMixin {
   }
 
   Widget teachers() {
-    return Padding(padding: EdgeInsets.all(20),
-    child: GridView.builder(
-        gridDelegate:
-            SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
-        itemCount: _listTeachers.length,
-        itemBuilder: (BuildContext context, int index) {
-          return Container(
-              child: Card(
-            elevation: 5,
-            child: Padding(
-              padding: EdgeInsets.all(20),
-              child: Column(
-                children: [
-                  Container(
-                    child: Image.asset(
-                      _listTeachers[index].imagepath,
-                      width: MediaQuery.of(context).size.width / 4,
-                      height: MediaQuery.of(context).size.height / 4,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                    child: Text(
-                      _listTeachers[index].name,
-                      style: TextStyle(
-                        fontSize: 25,
-                        fontFamily: UiJ.font,
+    return Padding(
+        padding: EdgeInsets.all(20),
+        child: GridView.builder(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount:
+                    MediaQuery.of(context).size.width > UiJ.widthSize ? 3 : 1),
+            itemCount: _listTeachers.length,
+            itemBuilder: (BuildContext context, int index) {
+              return Container(
+                  child: Card(
+                elevation: 5,
+                child: Padding(
+                  padding: EdgeInsets.all(20),
+                  child: Column(
+                    children: [
+                      Container(
+                        child: Image.asset(
+                          _listTeachers[index].imagepath,
+                          width: MediaQuery.of(context).size.width / 4,
+                          height: MediaQuery.of(context).size.height / 4,
+                        ),
                       ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                    child: Text(
-                      _listTeachers[index].post,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontFamily: UiJ.fontbold,
+                      SizedBox(
+                        height: 20,
                       ),
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ));
-        }));
+                      Container(
+                        child: Text(
+                          _listTeachers[index].name,
+                          style: TextStyle(
+                            fontSize: MediaQuery.of(context).size.width >
+                                    UiJ.widthSize
+                                ? 25
+                                : 15,
+                            fontFamily: UiJ.font,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                        child: Text(
+                          _listTeachers[index].post,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: MediaQuery.of(context).size.width >
+                                    UiJ.widthSize
+                                ? 20
+                                : 15,
+                            fontFamily: UiJ.fontbold,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ));
+            }));
   }
 
   Widget sertificate() {
     return GridView.builder(
         itemCount: _listSertificate.length,
-        gridDelegate:
-            SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount:
+                MediaQuery.of(context).size.width > UiJ.widthSize ? 3 : 1),
         itemBuilder: (BuildContext context, int index) {
           return Container(
             padding: EdgeInsets.all(10),
