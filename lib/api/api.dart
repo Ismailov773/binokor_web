@@ -5,8 +5,17 @@ import 'package:http/http.dart' as http;
 import '../models/uij.dart';
 
 class Api {
+  // Map<String, String> header = {
+  //   "Content-Type": "application/json",
+  // };
+
   Map<String, String> header = {
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json',
+
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Credentials': 'true',
+    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Origin, Content-Type, Accept'
   };
 
   Future<List<dynamic>> getall(String url) async {

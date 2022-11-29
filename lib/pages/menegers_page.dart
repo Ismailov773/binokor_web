@@ -7,6 +7,7 @@ import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import '../getconrollers/Controller.dart';
 import '../models/Meneger.dart';
 import '../models/uij.dart';
+import '../widgets/getDrawer.dart';
 
 List<Meneger> _list = [];
 
@@ -25,17 +26,26 @@ class MenegersPage extends StatelessWidget {
   Widget main(BuildContext context) {
     return Column(
       children: [
-       Padding(padding: EdgeInsets.only(left: MediaQuery.of(context).size.width > UiJ.widthSize ? 100 : 20,
-    right: MediaQuery.of(context).size.width > UiJ.widthSize ? 100 : 20), child:  Container(
-          alignment: Alignment.topLeft,
-          child: Text(
-            "Руководство:",
-            style: TextStyle(
-                fontFamily: UiJ.fontbold,
-                fontSize: MediaQuery.of(context).size.width > UiJ.widthSize ? 30 : 15,
-                fontWeight: FontWeight.bold),
-          ),
-        )),
+        Padding(
+            padding: EdgeInsets.only(
+                left: MediaQuery.of(context).size.width > UiJ.widthSize
+                    ? 100
+                    : 20,
+                right: MediaQuery.of(context).size.width > UiJ.widthSize
+                    ? 100
+                    : 20),
+            child: Container(
+              alignment: Alignment.topLeft,
+              child: Text(
+                "Руководство:",
+                style: TextStyle(
+                    fontFamily: UiJ.fontbold,
+                    fontSize: MediaQuery.of(context).size.width > UiJ.widthSize
+                        ? 30
+                        : 15,
+                    fontWeight: FontWeight.bold),
+              ),
+            )),
         Divider(),
         SizedBox(
           height: 50,
@@ -65,7 +75,8 @@ class MenegersPage extends StatelessWidget {
                                           //     borderRadius:
                                           //         BorderRadius.circular(15)),
                                           child: Image.network(
-                                              '${UiJ.url}meneger/download/meneger/${_list[index].imagepath}',
+                                              '${UiJ.url}meneger/download/meneger/${controller.listMeneger[index].imagepath}',
+                                              headers: UiJ.header_azur_image,
                                               width: 300,
                                               height: 300, errorBuilder:
                                                   (context, exception,
