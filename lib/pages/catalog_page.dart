@@ -45,7 +45,8 @@ class _CatalogPageState extends State<CatalogPage> {
   Widget build(BuildContext context) {
     // _tabcontroller = TabController(length: 2, vsync: this);
     return Padding(
-      padding: EdgeInsets.only(left: 50, right: 50),
+      padding: EdgeInsets.only(left: MediaQuery.of(context).size.width > UiJ.widthSize ? 100 : 20,
+          right: MediaQuery.of(context).size.width > UiJ.widthSize ? 100 : 20),
       child: main(),
     );
   }

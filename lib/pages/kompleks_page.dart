@@ -19,7 +19,9 @@ class KompleksPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(left: 100, right: 100),
+      padding: EdgeInsets.only(
+          left: MediaQuery.of(context).size.width > UiJ.widthSize ? 100 : 20,
+          right: MediaQuery.of(context).size.width > UiJ.widthSize ? 100 : 20),
       child: Obx(() => main(context)),
     );
   }
@@ -57,47 +59,52 @@ class KompleksPage extends StatelessWidget {
                                 controller.changeindexpage(5);
                               },
                               child: Container(
-                                  padding: EdgeInsets.all(10),
-                                  child:
-                                      MediaQuery.of(context).size.width >
-                                              UiJ.widthSize
-                                          ? Row(
-                                              children: [
-                                                index % 2 == 0
-                                                    ? getCar(index)
-                                                    : getText(context, index),
-                                                SizedBox(
-                                                  width: MediaQuery.of(context)
-                                                              .size
-                                                              .width >
-                                                          UiJ.widthSize
-                                                      ? 30
-                                                      : 15,
-                                                ),
-                                                index % 2 == 0
-                                                    ? getText(context, index)
-                                                    : getCar(index),
-                                              ],
-                                            )
-                                          : Column(
-                                              children: [
-                                                index % 2 == 0
-                                                    ? getCar(index)
-                                                    : getText(context, index),
-                                                SizedBox(
-                                                  width: MediaQuery.of(context)
-                                                              .size
-                                                              .width >
-                                                          UiJ.widthSize
-                                                      ? 30
-                                                      : 15,
-                                                ),
-                                                index % 2 == 0
-                                                    ? getText(context, index)
-                                                    : getCar(index),
-                                              ],
-                                            ),
-                                    ))));
+                                padding: EdgeInsets.all(10),
+                                height: MediaQuery.of(context).size.width <
+                                        UiJ.widthSize
+                                    ? MediaQuery.of(context).size.height
+                                    : null,
+                                child: MediaQuery.of(context).size.width >
+                                        UiJ.widthSize
+                                    ? Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          index % 2 == 0
+                                              ? getCar(index)
+                                              : getText(context, index),
+                                          SizedBox(
+                                            width: MediaQuery.of(context)
+                                                        .size
+                                                        .width >
+                                                    UiJ.widthSize
+                                                ? 30
+                                                : 15,
+                                          ),
+                                          index % 2 == 0
+                                              ? getText(context, index)
+                                              : getCar(index),
+                                        ],
+                                      )
+                                    : Column(
+                                        children: [
+                                          index % 2 == 0
+                                              ? getCar(index)
+                                              : getText(context, index),
+                                          SizedBox(
+                                            width: MediaQuery.of(context)
+                                                        .size
+                                                        .width >
+                                                    UiJ.widthSize
+                                                ? 30
+                                                : 15,
+                                          ),
+                                          index % 2 == 0
+                                              ? getText(context, index)
+                                              : getCar(index),
+                                        ],
+                                      ),
+                              ))));
                 })),
       ],
     );
@@ -109,6 +116,8 @@ class KompleksPage extends StatelessWidget {
             elevation: 5,
             child: Image.network(
               '${UiJ.url}kompleks/download/house/${controller.listKompleks[index].mainimagepath}',
+              // height: 50,
+              // width: 50,
               errorBuilder: (context, exception, stackTrace) {
                 return Center(
                   child: CircularProgressIndicator(),
@@ -138,7 +147,10 @@ class KompleksPage extends StatelessWidget {
             Container(
               child: Text(controller.listKompleks[index].title!,
                   style: TextStyle(
-                      fontSize: MediaQuery.of(context).size.width > UiJ.widthSize ? 40 : 20,
+                      fontSize:
+                          MediaQuery.of(context).size.width > UiJ.widthSize
+                              ? 40
+                              : 20,
                       fontWeight: FontWeight.w900,
                       fontFamily: UiJ.fontbold)),
               alignment: Alignment.topLeft,
@@ -150,7 +162,10 @@ class KompleksPage extends StatelessWidget {
               // padding: EdgeInsets.only(right: 400),
               child: Text(controller.listKompleks[index].description!,
                   style: TextStyle(
-                      fontSize: MediaQuery.of(context).size.width > UiJ.widthSize ? 25 : 20,
+                      fontSize:
+                          MediaQuery.of(context).size.width > UiJ.widthSize
+                              ? 25
+                              : 20,
                       fontFamily: UiJ.font)),
               alignment: Alignment.topLeft,
             ),
@@ -159,7 +174,10 @@ class KompleksPage extends StatelessWidget {
             ),
             Container(
                 alignment: Alignment.topLeft,
-                padding: EdgeInsets.only(right: 400),
+                padding: EdgeInsets.only(
+                    right: MediaQuery.of(context).size.width > UiJ.widthSize
+                        ? 400
+                        : 20),
                 child: RichText(
                   text: TextSpan(children: [
                     WidgetSpan(
@@ -184,7 +202,10 @@ class KompleksPage extends StatelessWidget {
                 )),
             Container(
                 alignment: Alignment.topLeft,
-                padding: EdgeInsets.only(right: 400),
+                padding: EdgeInsets.only(
+                    right: MediaQuery.of(context).size.width > UiJ.widthSize
+                        ? 400
+                        : 20),
                 child: RichText(
                   text: TextSpan(children: [
                     WidgetSpan(
@@ -208,7 +229,10 @@ class KompleksPage extends StatelessWidget {
                 )),
             Container(
                 alignment: Alignment.topLeft,
-                padding: EdgeInsets.only(right: 400),
+                padding: EdgeInsets.only(
+                    right: MediaQuery.of(context).size.width > UiJ.widthSize
+                        ? 400
+                        : 20),
                 child: RichText(
                   text: TextSpan(children: [
                     WidgetSpan(

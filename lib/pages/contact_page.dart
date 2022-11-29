@@ -10,7 +10,8 @@ class ContactPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: EdgeInsets.only(left: 100, right: 100, top: 30),
+        padding: EdgeInsets.only(left: MediaQuery.of(context).size.width > UiJ.widthSize ? 100 : 20,
+            right: MediaQuery.of(context).size.width > UiJ.widthSize ? 100 : 20, top: 30),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

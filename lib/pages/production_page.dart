@@ -9,7 +9,10 @@ class ProductionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: EdgeInsets.only(left: 100, right: 100),
+        padding: EdgeInsets.only(
+            left: MediaQuery.of(context).size.width > UiJ.widthSize ? 100 : 20,
+            right:
+                MediaQuery.of(context).size.width > UiJ.widthSize ? 100 : 20),
         child: ListView(
           children: [
             SizedBox(
@@ -19,7 +22,10 @@ class ProductionPage extends StatelessWidget {
               alignment: Alignment.topLeft,
               child: Text("Производство",
                   style: TextStyle(
-                      fontSize: MediaQuery.of(context).size.width > UiJ.widthSize ? 30 : 15,
+                      fontSize:
+                          MediaQuery.of(context).size.width > UiJ.widthSize
+                              ? 30
+                              : 15,
                       fontWeight: FontWeight.bold,
                       fontFamily: UiJ.fontbold)),
             ),
@@ -31,7 +37,9 @@ class ProductionPage extends StatelessWidget {
               child: Text(
                 '    На сегодняшний день, компания \"DSK Binokor\" является одним из ведущих стройподрядчиков Узбекистана и производит различные массивные железобетонные изделия для сборного строительства, с использованием новейшего немецкого оборудования.',
                 textAlign: TextAlign.justify,
-                style: TextStyle(fontSize: UiJ.sizeweight(context)?20:25, fontFamily: UiJ.font),
+                style: TextStyle(
+                    fontSize: UiJ.sizeweight(context) ? 20 : 25,
+                    fontFamily: UiJ.font),
               ),
             ),
             SizedBox(
@@ -60,7 +68,7 @@ class ProductionPage extends StatelessWidget {
                         alignment: Alignment.center,
                         child: Text("Производственная система",
                             style: TextStyle(
-                                fontSize: UiJ.sizeweight(context)?20:25,
+                                fontSize: UiJ.sizeweight(context) ? 20 : 25,
                                 fontWeight: FontWeight.bold,
                                 fontFamily: UiJ.fontbold)),
                       ),
@@ -71,7 +79,9 @@ class ProductionPage extends StatelessWidget {
                         child: Text(
                           '        Непрерывно инвестируя и расширяя производственные линии, мы обладаем высоким конкурентным преимуществом благодаря широкому ассортименту продукции, качеству и новейшим технологиям в производстве плит перекрытий и трехслойных панельных стен, которые являются основными элементами сборного строительства.     \n         Мы располагаем собственной транспортной системой на территории завода, а также подъездными железнодорожными путями. На заводе регулярно проводятся работы по модернизации и улучшению условий труда.',
                           textAlign: TextAlign.justify,
-                          style: TextStyle(fontSize: UiJ.sizeweight(context)?20:25, fontFamily: UiJ.font),
+                          style: TextStyle(
+                              fontSize: UiJ.sizeweight(context) ? 20 : 25,
+                              fontFamily: UiJ.font),
                         ),
                       ),
                       SizedBox(
@@ -81,7 +91,7 @@ class ProductionPage extends StatelessWidget {
                         alignment: Alignment.center,
                         child: Text("Современные тенденции строительства",
                             style: TextStyle(
-                                fontSize: UiJ.sizeweight(context)?20:25,
+                                fontSize: UiJ.sizeweight(context) ? 20 : 25,
                                 fontWeight: FontWeight.bold,
                                 fontFamily: UiJ.fontbold)),
                       ),
@@ -91,7 +101,9 @@ class ProductionPage extends StatelessWidget {
                       Container(
                           child: Text(
                         '        Сегодняшняя архитектура строительства из сборных элементов позволяет существенно сократить сроки возведения объектов, благодаря предварительному заводскому изготовлению.\n        Производимые нами стеновые панели и перекрытия значительно повышают качество строительства. В особенности, обладая:',
-                        style: TextStyle(fontSize: UiJ.sizeweight(context)?20:25, fontFamily: UiJ.font),
+                        style: TextStyle(
+                            fontSize: UiJ.sizeweight(context) ? 20 : 25,
+                            fontFamily: UiJ.font),
                       )),
                       SizedBox(
                         height: 20,
@@ -115,7 +127,9 @@ class ProductionPage extends StatelessWidget {
                                       'улучшенными теплотехническими свойствами;')
                             ])
                           ],
-                          style: TextStyle(fontSize: UiJ.sizeweight(context)?20:25, fontFamily: UiJ.font),
+                          style: TextStyle(
+                              fontSize: UiJ.sizeweight(context) ? 20 : 25,
+                              fontFamily: UiJ.font),
                         ),
                       ),
                       RichText(
@@ -135,7 +149,9 @@ class ProductionPage extends StatelessWidget {
                               TextSpan(text: 'огнеупорностью;')
                             ])
                           ],
-                          style: TextStyle(fontSize: UiJ.sizeweight(context)?20:25, fontFamily: UiJ.font),
+                          style: TextStyle(
+                              fontSize: UiJ.sizeweight(context) ? 20 : 25,
+                              fontFamily: UiJ.font),
                         ),
                       ),
                       RichText(
@@ -157,7 +173,9 @@ class ProductionPage extends StatelessWidget {
                                       'устойчивостью к атмосферным воздействиям;')
                             ])
                           ],
-                          style: TextStyle(fontSize: UiJ.sizeweight(context)?20:25, fontFamily: UiJ.font),
+                          style: TextStyle(
+                              fontSize: UiJ.sizeweight(context) ? 20 : 25,
+                              fontFamily: UiJ.font),
                         ),
                       ),
                       RichText(
@@ -179,7 +197,9 @@ class ProductionPage extends StatelessWidget {
                                       'повышенной сейсмостойкостью (до 9.2 балла);')
                             ])
                           ],
-                          style: TextStyle(fontSize: UiJ.sizeweight(context)?20:25, fontFamily: UiJ.font),
+                          style: TextStyle(
+                              fontSize: UiJ.sizeweight(context) ? 20 : 25,
+                              fontFamily: UiJ.font),
                         ),
                       )
                     ],
@@ -216,7 +236,7 @@ class ProductionPage extends StatelessWidget {
                         alignment: Alignment.center,
                         child: Text("Технологичность",
                             style: TextStyle(
-                                fontSize: UiJ.sizeweight(context)?20:25,
+                                fontSize: UiJ.sizeweight(context) ? 20 : 25,
                                 fontWeight: FontWeight.bold,
                                 fontFamily: UiJ.fontbold)),
                       ),
@@ -237,7 +257,7 @@ class ProductionPage extends StatelessWidget {
                         alignment: Alignment.center,
                         child: Text("Контроль качества",
                             style: TextStyle(
-                                fontSize: UiJ.sizeweight(context)?20:25,
+                                fontSize: UiJ.sizeweight(context) ? 20 : 25,
                                 fontWeight: FontWeight.bold,
                                 fontFamily: UiJ.fontbold)),
                       ),
@@ -248,7 +268,9 @@ class ProductionPage extends StatelessWidget {
                         child: Text(
                           '        Чтобы избежать возможного брака при поставке на объект (трещин или сколов), все изделия проходят обязательный контроль качества при поступлении на склад и перед отправкой заказчику. Наша компания производит (.....) типовые изделия, соответствующие ГОСТу (.....)',
                           textAlign: TextAlign.justify,
-                          style: TextStyle(fontSize: UiJ.sizeweight(context)?20:25, fontFamily: UiJ.font),
+                          style: TextStyle(
+                              fontSize: UiJ.sizeweight(context) ? 20 : 25,
+                              fontFamily: UiJ.font),
                         ),
                       ),
                     ],

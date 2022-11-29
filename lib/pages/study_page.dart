@@ -222,7 +222,8 @@ class _StudyPageState extends State<StudyPage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: EdgeInsets.only(left: 100, right: 100),
+        padding: EdgeInsets.only(left: MediaQuery.of(context).size.width > UiJ.widthSize ? 100 : 20,
+            right: MediaQuery.of(context).size.width > UiJ.widthSize ? 100 : 20),
         child: Column(
           children: [
             Container(

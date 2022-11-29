@@ -31,7 +31,8 @@ class KompleksDetailesPage extends StatelessWidget {
                 child: Column(
           children: [
             Container(
-              padding: EdgeInsets.only(top: 10, left: 100, right: 100),
+              padding: EdgeInsets.only(top: 10, left: MediaQuery.of(context).size.width > UiJ.widthSize ? 100 : 20,
+                    right: MediaQuery.of(context).size.width > UiJ.widthSize ? 100 : 20),
               // width: 100,
               height: 50,
               alignment: Alignment.topLeft,

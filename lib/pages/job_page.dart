@@ -27,7 +27,8 @@ class JobPage extends StatelessWidget {
         // mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Padding(
-              padding: EdgeInsets.only(left: 100, right: 100),
+              padding: EdgeInsets.only(left: MediaQuery.of(context).size.width > UiJ.widthSize ? 100 : 20,
+    right: MediaQuery.of(context).size.width > UiJ.widthSize ? 100 : 20),
               child: Container(
                 alignment: Alignment.topLeft,
                 child: Text(
