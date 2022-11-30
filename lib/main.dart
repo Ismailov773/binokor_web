@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:binokor_web/getconrollers/initservices.dart';
 import 'package:binokor_web/pages/zero_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,7 +19,7 @@ class MyHttpOverrides extends HttpOverrides {
   }
 }
 
-void main() {
+void main() async{
   // HttpClient client = HttpClient();
   // client.badCertificateCallback =
   //     (X509Certificate cert, String host, int port) => true;

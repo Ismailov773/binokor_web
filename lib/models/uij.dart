@@ -8,7 +8,8 @@ class UiJ {
   static final color = HexColor("#686868");
   static final font = 'Play'; //sans-serif
   static final fontbold = 'PlayBold';
-   static final String url = 'https://dsk-webapp.azurewebsites.net/';
+  static final String url = "https://dsk-webapp.azurewebsites.net/";
+
   //static final String url = 'http://localhost:8087/';
   static final String adress =
       '100083, Узбекистан, г.Ташкент, Бектемирский р-н, ул. Зироат 91';
@@ -21,10 +22,8 @@ class UiJ {
 
   static final double widthSize = 600;
 
-  static final header_azur_image =  {
-  'Content-Type':
-  'application/octet-stream'
-  };
+  static final header_azur_image = {'Content-Type': 'application/octet-stream'};
+
 // static final String prod_description = '    На сегодняшний день, компания \"DSK Binokor\" является одним из ведущих стройподрядчиков Узбекистана и производит различные массивные железобетонные изделия для сборного строительства, с использованием новейшего немецкого оборудования.';
 
   static callTelegram() async {
@@ -70,7 +69,6 @@ class UiJ {
       return false;
     }
   }
-
 }
 
 class HexColor extends Color {
@@ -83,6 +81,4 @@ class HexColor extends Color {
   }
 
   HexColor(final String hexColor) : super(_getColorFromHex(hexColor));
-
-
 }

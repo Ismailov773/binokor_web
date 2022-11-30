@@ -16,18 +16,19 @@ class DbService extends GetxService {
   final Controller controller = Get.put(Controller());
 
   Future<DbService> init() async {
-    controller.onInit();
 
-    await 2.delay();
+     controller.onInit();
+
+    // await 2.delay();
     // print('$runtimeType ready!');
     return this;
   }
 }
 
-class SettingsService extends GetxService {
-  void init() async {
-    print('$runtimeType delays 1 sec');
-    await 1.delay();
-    print('$runtimeType ready!');
-  }
-}
+// class SettingsService extends GetxService {
+//   void init() async {
+//     print('$runtimeType delays 1 sec');
+//     await 1.delay();
+//     print('$runtimeType ready!');
+//   }
+// }

@@ -20,7 +20,9 @@ class ZeroPage extends StatefulWidget {
 
 class _ZeroPageState extends State<ZeroPage> {
   @override
-  void initState() {}
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,9 +65,9 @@ class _ZeroPageState extends State<ZeroPage> {
 
   Future<Widget> getHomePage() async {
     _changeOpacity();
+    await initServices();
 
-    return await Future.delayed(Duration(seconds: 2), () async {
-      await initServices();
+    return await Future.delayed(Duration(seconds: 3), () async {
     }).then((value) => Home());
   }
 }

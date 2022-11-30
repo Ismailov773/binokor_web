@@ -52,7 +52,13 @@ class NewsPage extends StatelessWidget {
         ),
         Expanded(
             child: Padding(
-                padding: EdgeInsets.only(left: 100, right: 100),
+                padding: EdgeInsets.only(
+                    left: MediaQuery.of(context).size.width > UiJ.widthSize
+                        ? 100
+                        : 20,
+                    right: MediaQuery.of(context).size.width > UiJ.widthSize
+                        ? 100
+                        : 20),
                 child: ListView.builder(
                     itemCount: _listnews.length,
                     itemBuilder: (context, index) {

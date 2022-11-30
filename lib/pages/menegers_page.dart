@@ -76,7 +76,7 @@ class MenegersPage extends StatelessWidget {
                                           //         BorderRadius.circular(15)),
                                           child: Image.network(
                                               '${UiJ.url}meneger/download/meneger/${controller.listMeneger[index].imagepath}',
-                                              headers: UiJ.header_azur_image,
+                                              // headers: UiJ.header_azur_image,
                                               width: 300,
                                               height: 300, errorBuilder:
                                                   (context, exception,
