@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-import '../models/Dom.dart';
 import '../models/ImageDom.dart';
-import '../models/Kompleks.dart';
 import '../models/uij.dart';
 
 DateFormat formattedDate = DateFormat('dd-MM-yyyy');

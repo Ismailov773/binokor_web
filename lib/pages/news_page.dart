@@ -37,6 +37,7 @@ class NewsPage extends StatelessWidget {
                     ? 100
                     : 20),
             child: Container(
+              padding: EdgeInsets.only(top: 20),
               alignment: Alignment.topLeft,
               child: Text(
                 "Новости",

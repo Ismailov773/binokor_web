@@ -18,6 +18,7 @@ class FirstPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return StatefulBuilder(builder: (context, setState) {
       return Container(
+        // color: Colors.grey[900],
           child: Column(
         children: [
           Center(
@@ -27,7 +28,9 @@ class FirstPage extends StatelessWidget {
                       return InkWell(
                           onTap: () {
                             controller.changeKompleks(e);
-                            controller.changeindexpage(5);
+                             controller.changeindexpage(5);
+                            //controller.changeindexpage(1);
+                            controller.changeindextab(2);
                           },
                           child: Container(
                               height: MediaQuery.of(context).size.height / 2,
@@ -41,6 +44,7 @@ class FirstPage extends StatelessWidget {
                                       e.title!,
                                       style: TextStyle(
                                           fontFamily: UiJ.fontbold,
+                                          color: Colors.grey[900],
                                           fontSize: MediaQuery.of(context)
                                                       .size
                                                       .width >
@@ -52,22 +56,22 @@ class FirstPage extends StatelessWidget {
                                   Container(
                                       child: Card(
                                           elevation: 5,
-                                          child: Image.asset(
-                                              'assets/images/production.png')))
-                                  // Container(
-                                  // child: Card(
-                                  //     elevation: 5,
-                                  //     child: Image.network(
-                                  //       '${UiJ.url}kompleks/download/house/${e.mainimagepath}',
-                                  //       fit: BoxFit.cover,
-                                  //       errorBuilder: (context, exception,
-                                  //           stackTrace) {
-                                  //         return Center(
-                                  //           child:
-                                  //               CircularProgressIndicator(),
-                                  //         );
-                                  //       },
-                                  //     )))
+                                          child: Container(
+                                              decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                      color: Colors.blue.shade800)),
+                                              margin: EdgeInsets.all(10),
+                                              child: Image.network(
+                                            '${UiJ.url}kompleks/download/house/${e.mainimagepath}',
+                                            fit: BoxFit.cover,
+                                            errorBuilder: (context, exception,
+                                                stackTrace) {
+                                              return Center(
+                                                child:
+                                                    CircularProgressIndicator(),
+                                              );
+                                            },
+                                              ))))
                                 ],
                               )));
                     });
@@ -88,6 +92,7 @@ class FirstPage extends StatelessWidget {
                     onPageChanged: (int? value, page) {
                       setState(() {
                         _current = value!;
+
                         // print("${_current}");
                       });
                     },
@@ -105,6 +110,7 @@ class FirstPage extends StatelessWidget {
                       setState(() {
                         _current = index;
                         carouselController.jumpToPage(index);
+
                       });
                     },
                     child: Container(

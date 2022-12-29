@@ -30,6 +30,7 @@ class JobPage extends StatelessWidget {
               padding: EdgeInsets.only(left: MediaQuery.of(context).size.width > UiJ.widthSize ? 100 : 20,
     right: MediaQuery.of(context).size.width > UiJ.widthSize ? 100 : 20),
               child: Container(
+                padding: EdgeInsets.only(top: 20),
                 alignment: Alignment.topLeft,
                 child: Text(
                   "Вакансии",
