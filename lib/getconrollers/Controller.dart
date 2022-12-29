@@ -26,15 +26,29 @@ class Controller extends GetxController {
   Make? make;
   List<Orderb> orderlist = <Orderb>[].obs;
 
+
+  @override
+  onInit() {
+    super.onInit();
+
+    fetchListKompleks();
+    fetchListMeneger();
+    fetchListMake();
+    fetchListjob();
+    fetchListnews();
+    indexpage.value = 1;
+    indextab.value = 0;
+  }
+
   Future<LightUser> postLightUser(String url, LightUser user) async {
     return await api.postLightUser(url, user);
   }
 
   fetchListKompleks() async {
-    var komplek = await api.getKomleks();
+    var komplek = await api.getKomleks("kompleks/get");
     if (komplek != null) {
       listKompleks.value = komplek;
-      listKompleks.value.sort((a, b) => a.id!.compareTo(b.id!));
+      // listKompleks.value.sort((a, b) => a.id!.compareTo(b.id!));
     }
   }
 
@@ -78,17 +92,7 @@ class Controller extends GetxController {
     }
   }
 
-  @override
-  onInit() {
-    fetchListKompleks();
-    fetchListMeneger();
-    fetchListMake();
-    fetchListjob();
-    fetchListnews();
-    indexpage.value = 1;
-    indextab.value = 0;
-    super.onInit();
-  }
+
 
   changeindexpage(int newindex) {
     indexpage.value = newindex;

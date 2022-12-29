@@ -32,7 +32,9 @@ class CatalogMainPage extends StatelessWidget {
             alignment: Alignment.topLeft,
             child: Text("Каталоги",
                 style: TextStyle(
-                    fontSize: MediaQuery.of(context).size.width > UiJ.widthSize ? 30 : 15,
+                    fontSize: MediaQuery.of(context).size.width > UiJ.widthSize
+                        ? 30
+                        : 15,
                     fontWeight: FontWeight.bold,
                     fontFamily: UiJ.fontbold)),
           ),
@@ -45,7 +47,10 @@ class CatalogMainPage extends StatelessWidget {
                   child: GridView.builder(
                       itemCount: _listMake.length,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount:  MediaQuery.of(context).size.width>UiJ.widthSize?3:1),
+                          crossAxisCount:
+                              MediaQuery.of(context).size.width > UiJ.widthSize
+                                  ? 3
+                                  : 1),
                       itemBuilder: (context, index) {
                         return StatefulBuilder(builder: (context, setState) {
                           return Container(
@@ -73,7 +78,13 @@ class CatalogMainPage extends StatelessWidget {
                                                 child: Text(
                                                   _listMake[index].name!,
                                                   style: TextStyle(
-                                                      fontSize: MediaQuery.of(context).size.width>UiJ.widthSize?20:10,
+                                                      fontSize:
+                                                          MediaQuery.of(context)
+                                                                      .size
+                                                                      .width >
+                                                                  UiJ.widthSize
+                                                              ? 20
+                                                              : 10,
                                                       fontFamily: UiJ.fontbold),
                                                   textAlign: TextAlign.start,
                                                 )),
@@ -93,10 +104,6 @@ class CatalogMainPage extends StatelessWidget {
                                                         );
                                                       },
                                                     ))),
-                                            Divider(),
-                                            SizedBox(
-                                              height: 15,
-                                            )
                                           ],
                                         )),
                                   )));

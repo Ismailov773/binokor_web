@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 
-import 'api/repository.dart';
 import 'getconrollers/Controller.dart';
 import 'models/uij.dart';
 
@@ -19,11 +18,11 @@ class MyHttpOverrides extends HttpOverrides {
   }
 }
 
-void main() async{
+void main() async {
   // HttpClient client = HttpClient();
   // client.badCertificateCallback =
   //     (X509Certificate cert, String host, int port) => true;
-  HttpOverrides.global = MyHttpOverrides();
+  // HttpOverrides.global = MyHttpOverrides();
   WidgetsFlutterBinding.ensureInitialized();
 
   runApp(MyApp());
@@ -35,22 +34,20 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return RepositoryProvider(
-        create: (context) => Repository(),
-        child: GetMaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: UiJ.companyName,
-          theme: ThemeData(
-            backgroundColor: Colors.black, bottomAppBarColor: Colors.black,
-            visualDensity: VisualDensity.adaptivePlatformDensity,
-            //primarySwatch: Colors.black87,
-          ),
-          initialRoute: '/',
-          initialBinding: HomeBindings(),
-          getPages: [
-            GetPage(name: '/', page: () => ZeroPage()),
-            // GetPage(name: '/kompleksdetails', page: () => KompleksDetailesPage()),
-          ],
-        ));
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: UiJ.companyName,
+      theme: ThemeData(
+        backgroundColor: Colors.black, bottomAppBarColor: Colors.black,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+        //primarySwatch: Colors.black87,
+      ),
+      initialRoute: '/',
+      initialBinding: HomeBindings(),
+      getPages: [
+        GetPage(name: '/', page: () => ZeroPage()),
+        // GetPage(name: '/kompleksdetails', page: () => KompleksDetailesPage()),
+      ],
+    );
   }
 }
