@@ -34,18 +34,24 @@ class _AboutMenu_DropDownState extends State<AboutMenu_DropDown> {
   Widget build(BuildContext context) {
     return PopupMenuButton<Menu>(
         position: PopupMenuPosition.under,
-        elevation: 0,
+        elevation: 5,
         offset: const Offset(0, 20),
 
-        child: Text(
-          "О Компании",
-          style: TextStyle(fontSize: UiJ.sizeweight(context) ? 20 : 25),
-        ),
+        // icon: Icon(Icons.arrow_drop_down),
+        //iconSize: 20,
+        child: Row(children: [
+          Text(
+            "О Компании",
+            style: TextStyle(fontSize: UiJ.sizeweight(context) ? 20 : 25),
+          ),
+          Icon(Icons.arrow_drop_down)
+        ]),
         itemBuilder: (BuildContext context) => <PopupMenuEntry<Menu>>[
               PopupMenuItem(
                   onTap: () {
                     controller.changeindexpage(2);
-                    controller.changeindextab(0);;
+                    controller.changeindextab(0);
+                    ;
                   },
                   textStyle:
                       TextStyle(fontSize: UiJ.sizeweight(context) ? 20 : 25),

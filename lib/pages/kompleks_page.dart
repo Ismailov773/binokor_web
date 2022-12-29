@@ -49,6 +49,7 @@ class KompleksPage extends StatelessWidget {
                 itemCount: controller.listKompleks.length,
                 itemBuilder: (context, index) {
                   return Container(
+                    // padding: EdgeInsets.all(40),
                       child: Card(
                           child: InkWell(
                               onTap: () {
@@ -57,7 +58,7 @@ class KompleksPage extends StatelessWidget {
                                 controller.changeindexpage(5);
                               },
                               child: Container(
-                                padding: EdgeInsets.all(10),
+                                padding: EdgeInsets.all(20),
                                 height: MediaQuery.of(context).size.width <
                                         UiJ.widthSize
                                     ? MediaQuery.of(context).size.height

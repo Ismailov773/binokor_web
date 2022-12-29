@@ -54,6 +54,7 @@ class ContactPage extends StatelessWidget {
                         WidgetSpan(
                             child: Icon(Icons.location_on_rounded,
                                 color: Colors.blue)),
+                        WidgetSpan(child: SizedBox(width: 10,)),
                         TextSpan(
                             text: '${UiJ.adress}',
                             style: TextStyle(

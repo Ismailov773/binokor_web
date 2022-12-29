@@ -224,8 +224,7 @@ class _StudyPageState extends State<StudyPage> with TickerProviderStateMixin {
     return Padding(
         padding: EdgeInsets.only(
             left: MediaQuery.of(context).size.width > UiJ.widthSize ? 50 : 10,
-            right:
-                MediaQuery.of(context).size.width > UiJ.widthSize ? 50 : 10),
+            right: MediaQuery.of(context).size.width > UiJ.widthSize ? 50 : 10),
         child: Column(
           children: [
             Container(
@@ -297,19 +296,25 @@ class _StudyPageState extends State<StudyPage> with TickerProviderStateMixin {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                      Padding(
-                                          padding: EdgeInsets.all(10),
-                                          child: Text(e.title!,
-                                              style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize:
-                                                      MediaQuery.of(context)
-                                                                  .size
-                                                                  .width >
-                                                              UiJ.widthSize
-                                                          ? 20
-                                                          : 15,
-                                                  fontFamily: UiJ.fontbold))),
+                                      Container(
+                                        height: 80,
+                                          width: MediaQuery.of(context).size.width,
+                                          child: Card(
+                                          child: Padding(
+                                              padding: EdgeInsets.all(10),
+                                              child: Container(
+                                                  child: Text(e.title!,
+                                                      style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width >
+                                                                  UiJ.widthSize
+                                                              ? 20
+                                                              : 15,
+                                                          fontFamily:
+                                                              UiJ.fontbold)))))),
                                       // Divider()
                                     ])))
                             .toList(),
@@ -470,56 +475,56 @@ class _StudyPageState extends State<StudyPage> with TickerProviderStateMixin {
             itemCount: _listTeachers.length,
             itemBuilder: (BuildContext context, int index) {
               return Container(
-                width: MediaQuery.of(context).size.width / 4,
+                  width: MediaQuery.of(context).size.width / 4,
                   height: MediaQuery.of(context).size.height / 5,
                   child: Card(
-                elevation: 5,
-                child: Padding(
-                  padding: EdgeInsets.all(20),
-                  child: Column(
-                    children: [
-                      Container(
-                        child: Image.asset(
-                          _listTeachers[index].imagepath,
-                          width: MediaQuery.of(context).size.width / 4,
-                          height: MediaQuery.of(context).size.height / 4,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Container(
-                        child: Text(
-                          _listTeachers[index].name,
-                          style: TextStyle(
-                            fontSize: MediaQuery.of(context).size.width >
-                                    UiJ.widthSize
-                                ? 25
-                                : 15,
-                            fontFamily: UiJ.font,
+                    elevation: 5,
+                    child: Padding(
+                      padding: EdgeInsets.all(20),
+                      child: Column(
+                        children: [
+                          Container(
+                            child: Image.asset(
+                              _listTeachers[index].imagepath,
+                              width: MediaQuery.of(context).size.width / 4,
+                              height: MediaQuery.of(context).size.height / 4,
+                            ),
                           ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Container(
-                        child: Text(
-                          _listTeachers[index].post,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: MediaQuery.of(context).size.width >
-                                    UiJ.widthSize
-                                ? 20
-                                : 15,
-                            fontFamily: UiJ.fontbold,
+                          SizedBox(
+                            height: 20,
                           ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ));
+                          Container(
+                            child: Text(
+                              _listTeachers[index].name,
+                              style: TextStyle(
+                                fontSize: MediaQuery.of(context).size.width >
+                                        UiJ.widthSize
+                                    ? 25
+                                    : 15,
+                                fontFamily: UiJ.font,
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Container(
+                            child: Text(
+                              _listTeachers[index].post,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: MediaQuery.of(context).size.width >
+                                        UiJ.widthSize
+                                    ? 20
+                                    : 15,
+                                fontFamily: UiJ.fontbold,
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ));
             }));
   }
 

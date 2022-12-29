@@ -12,7 +12,7 @@ class UiJ {
 
   static final String url = 'https://api.dsk.uz:8089/';
   static final String adress =
-      '100083, Узбекистан, г.Ташкент, Бектемирский р-н, ул. Зироат 91';
+      'г.Ташкент, Янгихаётский район, ул.Зироат, дом 4, 100083, Узбекистан';
   static final String phone = '+998 71 205 0853';
   static final String telegram = 't.me/dsk_binokor_uzb';
   static final String inhstagram = '';

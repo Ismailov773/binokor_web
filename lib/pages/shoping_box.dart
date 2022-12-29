@@ -34,6 +34,7 @@ class ShopingBox extends StatelessWidget {
     return Column(
       children: [
         Container(
+          margin: EdgeInsets.all(20),
             alignment: Alignment.topLeft,
             padding: EdgeInsets.only(
                 left: MediaQuery.of(context).size.width > UiJ.widthSize
