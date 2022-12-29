@@ -63,12 +63,14 @@ class NewsPage extends StatelessWidget {
                 child: ListView.builder(
                     itemCount: _listnews.length,
                     itemBuilder: (context, index) {
-                      return InkWell(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                                child: Row(
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                              child: InkWell(
+                            child: Padding(
+                                padding: EdgeInsets.all(20),
+                                child:Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               // mainAxisAlignment: MainAxisAlignment.start,
                               children: [
@@ -115,7 +117,9 @@ class NewsPage extends StatelessWidget {
                                                   DateTime.parse(
                                                       _listnews[index]
                                                           .datacreate!)),
-                                              style: TextStyle(fontSize: 20),
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontFamily: UiJ.fontbold),
                                             ),
                                             alignment: Alignment.topRight,
                                           ),
@@ -141,15 +145,15 @@ class NewsPage extends StatelessWidget {
                                         ])),
                               ],
                             )),
-                            Divider()
-                          ],
-                        ),
-                        onTap: () {
-                          if (_listnews[index].imagenews!.length != 0) {
-                            showDialogphoto(
-                                context, "Фото новости", _listnews[index]);
-                          }
-                        },
+                            onTap: () {
+                              if (_listnews[index].imagenews!.length != 0) {
+                                showDialogphoto(
+                                    context, "Фото новости", _listnews[index]);
+                              }
+                            },
+                          )),
+                          Divider()
+                        ],
                       );
                     })))
       ],
