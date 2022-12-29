@@ -82,9 +82,7 @@ class MenegersPage extends StatelessWidget {
                                               height: 300, errorBuilder:
                                                   (context, exception,
                                                       stackTrace) {
-                                        return Center(
-                                          child: CircularProgressIndicator(),
-                                        );
+                                        return Icon(Icons.people_alt, size: 300,);
                                       }))))),
                           SizedBox(
                             width: 150,
