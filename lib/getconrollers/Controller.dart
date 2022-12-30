@@ -87,8 +87,9 @@ class Controller extends GetxController {
     final loadednews = json.map((e) => News.fromJson(e)).toList();
 
     if (loadednews != null) {
+
       listnews.value = loadednews;
-      listnews.value.sort((a, b) => a.id!.compareTo(b.id!));
+       listnews.value.sort((a, b) => b.datacreate!.compareTo(a.datacreate!));
     }
   }
 
