@@ -1,5 +1,4 @@
 import 'package:binokor_web/getconrollers/Controller.dart';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -9,7 +8,6 @@ import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 import '../models/Catalog.dart';
-import '../models/Make.dart';
 import '../models/Orderb.dart';
 import '../models/uij.dart';
 
@@ -45,7 +43,8 @@ class _CatalogPageState extends State<CatalogPage> {
   Widget build(BuildContext context) {
     // _tabcontroller = TabController(length: 2, vsync: this);
     return Padding(
-      padding: EdgeInsets.only(left: MediaQuery.of(context).size.width > UiJ.widthSize ? 100 : 20,
+      padding: EdgeInsets.only(
+          left: MediaQuery.of(context).size.width > UiJ.widthSize ? 100 : 20,
           right: MediaQuery.of(context).size.width > UiJ.widthSize ? 100 : 20),
       child: main(),
     );
@@ -69,7 +68,10 @@ class _CatalogPageState extends State<CatalogPage> {
                     icon: Icon(Icons.keyboard_arrow_left)),
                 Text("Каталоги",
                     style: TextStyle(
-                        fontSize: MediaQuery.of(context).size.width > UiJ.widthSize ? 30 : 15,
+                        fontSize:
+                            MediaQuery.of(context).size.width > UiJ.widthSize
+                                ? 30
+                                : 15,
                         fontWeight: FontWeight.bold,
                         fontFamily: UiJ.fontbold)),
               ],
@@ -255,20 +257,23 @@ class _CatalogPageState extends State<CatalogPage> {
                         SizedBox(
                           width: 10,
                         ),
-                        FloatingActionButton(
-                          onPressed: () {
-                            setState(() {
-                              if (count > 0) {
-                                count--;
-                              }
-                            });
-                          },
-                          child: Icon(
-                            Icons.remove,
-                            size: 20,
-                            color: Colors.white,
-                          ),
-                        ),
+                        SizedBox(
+                            width: 30,
+                            height: 30,
+                            child: FloatingActionButton(
+                              onPressed: () {
+                                setState(() {
+                                  if (count > 0) {
+                                    count--;
+                                  }
+                                });
+                              },
+                              child: Icon(
+                                Icons.remove,
+                                size: 20,
+                                color: Colors.white,
+                              ),
+                            )),
                         SizedBox(
                           width: 10,
                         ),
@@ -282,18 +287,21 @@ class _CatalogPageState extends State<CatalogPage> {
                         SizedBox(
                           width: 10,
                         ),
-                        FloatingActionButton(
-                          onPressed: () {
-                            setState(() {
-                              count++;
-                            });
-                          },
-                          child: Icon(
-                            Icons.add,
-                            size: 20,
-                            color: Colors.white,
-                          ),
-                        ),
+                        SizedBox(
+                            width: 30,
+                            height: 30,
+                            child: FloatingActionButton(
+                              onPressed: () {
+                                setState(() {
+                                  count++;
+                                });
+                              },
+                              child: Icon(
+                                Icons.add,
+                                size: 20,
+                                color: Colors.white,
+                              ),
+                            )),
                         // SizedBox(
                         //   width: 20,
                         // ),

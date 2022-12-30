@@ -53,8 +53,8 @@ class CatalogMainPage extends StatelessWidget {
                                   : 1),
                       itemBuilder: (context, index) {
                         return StatefulBuilder(builder: (context, setState) {
-                          return Container(
-                              height: MediaQuery.of(context).size.height / 9,
+                          return SizedBox(
+                              height: MediaQuery.of(context).size.height / 20,
                               width: MediaQuery.of(context).size.width / 9,
                               child: InkWell(
                                   onTap: () {
@@ -77,6 +77,7 @@ class CatalogMainPage extends StatelessWidget {
                                                 padding: EdgeInsets.all(20),
                                                 child: Text(
                                                   _listMake[index].name!,
+
                                                   style: TextStyle(
                                                       fontSize:
                                                           MediaQuery.of(context)
