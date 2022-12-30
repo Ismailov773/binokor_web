@@ -163,50 +163,64 @@ class KompleksDetailesPage extends StatelessWidget {
 
   Widget projecttab(BuildContext context) {
     return Expanded(
-        child: ListView(
-      children: [
-        controller.listImageDom.length == 0
-            ? Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height,
-                child: Center(child: CircularProgressIndicator()))
-            : Container(
-                padding: EdgeInsets.only(
-                    left: MediaQuery.of(context).size.width > UiJ.widthSize
-                        ? 50
-                        : 20,
-                    right: MediaQuery.of(context).size.width > UiJ.widthSize
-                        ? 50
-                        : 20),
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height,
-                child: layoutPicture(context, true)),
-      ],
-    ));
+        child: Padding(
+            padding: EdgeInsets.only(
+                left: MediaQuery.of(context).size.width / 10,
+                right: MediaQuery.of(context).size.width / 10,
+                top: 100),
+            child: ListView(
+              children: [
+                controller.listImageDom.length == 0
+                    ? Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height,
+                        child: Center(child: CircularProgressIndicator()))
+                    : Container(
+                        padding: EdgeInsets.only(
+                            left: MediaQuery.of(context).size.width >
+                                    UiJ.widthSize
+                                ? 50
+                                : 20,
+                            right: MediaQuery.of(context).size.width >
+                                    UiJ.widthSize
+                                ? 50
+                                : 20),
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height,
+                        child: layoutPicture(context, true)),
+              ],
+            )));
   }
 
   Widget historyImage(BuildContext context) {
     return Expanded(
-        child: ListView(
-      children: [
-        controller.listImageDom.length == 0
-            ? Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height,
-                child: Center(child: CircularProgressIndicator()))
-            : Container(
-                padding: EdgeInsets.only(
-                    left: MediaQuery.of(context).size.width > UiJ.widthSize
-                        ? 50
-                        : 20,
-                    right: MediaQuery.of(context).size.width > UiJ.widthSize
-                        ? 50
-                        : 20),
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height,
-                child: layoutPicture(context, false)),
-      ],
-    ));
+        child: Padding(
+            padding: EdgeInsets.only(
+                left: MediaQuery.of(context).size.width / 10,
+                right: MediaQuery.of(context).size.width / 10,
+                top: 100),
+            child: ListView(
+              children: [
+                controller.listImageDom.length == 0
+                    ? Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height,
+                        child: Center(child: CircularProgressIndicator()))
+                    : Container(
+                        padding: EdgeInsets.only(
+                            left: MediaQuery.of(context).size.width >
+                                    UiJ.widthSize
+                                ? 50
+                                : 20,
+                            right: MediaQuery.of(context).size.width >
+                                    UiJ.widthSize
+                                ? 50
+                                : 20),
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height,
+                        child: layoutPicture(context, false)),
+              ],
+            )));
   }
 
   showDialogPicture(BuildContext context, int idx) {
