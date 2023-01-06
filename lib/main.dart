@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 
 import 'getconrollers/Controller.dart';
 import 'models/uij.dart';
+import 'package:url_strategy/url_strategy.dart';
 
 class MyHttpOverrides extends HttpOverrides {
   @override
@@ -23,6 +24,7 @@ void main() async {
   // HttpOverrides.global = MyHttpOverrides();
   WidgetsFlutterBinding.ensureInitialized();
 
+  setPathUrlStrategy();
   runApp(MyApp());
 }
 
