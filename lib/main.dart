@@ -1,9 +1,7 @@
 import 'dart:io';
 
-import 'package:binokor_web/getconrollers/initservices.dart';
 import 'package:binokor_web/pages/zero_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 
 import 'getconrollers/Controller.dart';

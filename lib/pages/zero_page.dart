@@ -32,27 +32,38 @@ class _ZeroPageState extends State<ZeroPage> {
           if (snapshot.hasData) {
             return snapshot.data as Widget;
           } else {
-            return Scaffold(
-                backgroundColor: Colors.white,
-                body: Center(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        'assets/images/logo1.png',
-                        width: MediaQuery.of(context).size.width / 3,
-                        height: MediaQuery.of(context).size.height / 3,
+            return Stack(
+              fit: StackFit.expand,
+              children: [
+                Container(
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage('assets/images/backround.png'),
+                          fit: BoxFit.cover,
+                        ))),
+                Scaffold(
+                    backgroundColor: Colors.transparent,
+                    body: Center(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            'assets/images/logo1.png',
+                            width: MediaQuery.of(context).size.width / 3,
+                            height: MediaQuery.of(context).size.height / 3,
+                          ),
+                          Text(
+                            UiJ.lozung,
+                            style: TextStyle(
+                                fontSize: UiJ.sizeweight(context) ? 20 : 50,
+                                fontFamily: UiJ.fontbold),
+                          )
+                        ],
                       ),
-                      Text(
-                        UiJ.lozung,
-                        style: TextStyle(
-                            fontSize: UiJ.sizeweight(context) ? 20 : 30,
-                            fontFamily: UiJ.font),
-                      )
-                    ],
-                  ),
-                ));
+                    )),
+              ],
+            );
           }
         });
   }
@@ -67,7 +78,7 @@ class _ZeroPageState extends State<ZeroPage> {
     _changeOpacity();
     await initServices();
 
-    return await Future.delayed(Duration(seconds: 3), () async {
-    }).then((value) => Home());
+    return await Future.delayed(Duration(seconds: 2), () async {})
+        .then((value) => Home());
   }
 }

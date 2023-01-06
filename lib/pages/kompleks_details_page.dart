@@ -162,8 +162,7 @@ class KompleksDetailesPage extends StatelessWidget {
   }
 
   Widget projecttab(BuildContext context) {
-    return Expanded(
-        child: Padding(
+    return Padding(
             padding: EdgeInsets.only(
                 left: MediaQuery.of(context).size.width / 10,
                 right: MediaQuery.of(context).size.width / 10,
@@ -189,12 +188,11 @@ class KompleksDetailesPage extends StatelessWidget {
                         height: MediaQuery.of(context).size.height,
                         child: layoutPicture(context, true)),
               ],
-            )));
+            ));
   }
 
   Widget historyImage(BuildContext context) {
-    return Expanded(
-        child: Padding(
+    return Padding(
             padding: EdgeInsets.only(
                 left: MediaQuery.of(context).size.width / 10,
                 right: MediaQuery.of(context).size.width / 10,
@@ -220,7 +218,7 @@ class KompleksDetailesPage extends StatelessWidget {
                         height: MediaQuery.of(context).size.height,
                         child: layoutPicture(context, false)),
               ],
-            )));
+            ));
   }
 
   showDialogPicture(BuildContext context, int idx) {

@@ -51,17 +51,28 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     tabController.index = controller.indextab.toInt();
     return Obx(() => Scaffold(
-          backgroundColor: Colors.white,
+          extendBodyBehindAppBar: true,
           appBar: PreferredSize(
-            preferredSize: Size.fromHeight(MediaQuery.of(context).size.width >  UiJ.widthSize?  _scrollPosition == 0 ? 150 : 80: 50),
+            preferredSize: Size.fromHeight(
+                MediaQuery.of(context).size.width > UiJ.widthSize
+                    ? _scrollPosition == 0
+                        ? 150
+                        : 80
+                    : 50),
             child: AppBar(
-              backgroundColor: Colors.white,
+              backgroundColor: Colors.transparent,
               centerTitle: false,
-              elevation: 5,
+              elevation: 0,
               iconTheme: IconThemeData(color: Colors.black, size: 40),
               flexibleSpace: Padding(
                 padding: EdgeInsets.only(left: 100),
                 child: Row(children: [
+                  // Container(
+                  //     decoration: BoxDecoration(
+                  //         image: DecorationImage(
+                  //           image: AssetImage('assets/images/backround.png'),
+                  //           fit: BoxFit.cover,
+                  //         ))),
                   InkWell(
                     onTap: () {
                       tabController.index = 0;
@@ -80,7 +91,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                         (UiJ.sizeweight(context) ? 17 : 10),
                   ),
                   // Spacer(),
-                  MediaQuery.of(context).size.width <  UiJ.widthSize
+                  MediaQuery.of(context).size.width < UiJ.widthSize
                       ? Container()
                       : TabBar(
                           controller: tabController,
@@ -172,14 +183,18 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                     icon: Icon(
                       Icons.add_shopping_cart,
                       color: Colors.blue,
-                      size: MediaQuery.of(context).size.width <  UiJ.widthSize ? 30 : 50,
+                      size: MediaQuery.of(context).size.width < UiJ.widthSize
+                          ? 15
+                          : 20,
                     )),
                 Obx(() => Text(
                       controller.orderlist.length.toString(),
                       style: TextStyle(
                           fontFamily: UiJ.fontbold,
                           fontSize:
-                              MediaQuery.of(context).size.width <  UiJ.widthSize ? 15 : 20,
+                              MediaQuery.of(context).size.width < UiJ.widthSize
+                                  ? 20
+                                  : 20,
                           color: Colors.orange),
                     )),
                 TextButton(
@@ -190,98 +205,81 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                     child: Text("Оформить \nзаказать",
                         style: TextStyle(
                             color: Colors.blue,
-                            fontSize:  MediaQuery.of(context).size.width <  UiJ.widthSize?10 :15,
+                            fontSize: MediaQuery.of(context).size.width <
+                                    UiJ.widthSize
+                                ? 10
+                                : 15,
                             fontFamily: UiJ.fontbold))),
               ],
-              titleTextStyle:
-                  TextStyle(fontWeight: FontWeight.w200, fontSize:   MediaQuery.of(context).size.width <  UiJ.widthSize? 20:45),
+              titleTextStyle: TextStyle(
+                  fontWeight: FontWeight.w200,
+                  fontSize: MediaQuery.of(context).size.width < UiJ.widthSize
+                      ? 20
+                      : 45),
             ),
           ),
-          body: ListView(
-            controller: _scrollController,
-            children: [
-              Container(
-                  height: MediaQuery.of(context).size.height,
-                  child: selectionPage(controller.indexpage.value)),
-              SizedBox(
-                height: 50,
-              ),
-              Container(
-                color: Colors.black,
-                padding: EdgeInsets.only(left: 100, right: 100, top: 50),
-                child: Column(
-                  children: [
-                    Container(
-                        alignment: Alignment.topLeft,
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text('Адрес компании:',
-                                  style: TextStyle(
-                                      fontSize:
-                                          UiJ.sizeweight(context) ? 25 : 30,
-                                      fontFamily: UiJ.fontbold,
-                                      color: Colors.white)),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              RichText(
-                                text: TextSpan(children: [
-                                  WidgetSpan(
-                                      child: Icon(Icons.location_on_rounded,
-                                          color: Colors.blue)),
-                                  TextSpan(
-                                      text: '${UiJ.adress}',
-                                      style: TextStyle(
-                                          fontSize:
-                                              UiJ.sizeweight(context) ? 20 : 25,
-                                          fontWeight: FontWeight.w200,
-                                          fontFamily: UiJ.font,
-                                          color: Colors.white))
-                                ]),
-                              )
-                            ])),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Container(
-                        alignment: Alignment.topLeft,
-                        child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Icon(
-                                Icons.phone,
-                                color: Colors.blue,
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              RichText(
-                                text: TextSpan(children: [
-                                  TextSpan(
-                                      text: '${UiJ.phone}  ',
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w200,
-                                          fontFamily: UiJ.font,
-                                          color: Colors.white)),
-                                ]),
-                              )
-                            ])),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Container(
-                      alignment: Alignment.topLeft,
-                      child: InkWell(
-                          onTap: () {
-                            UiJ.callTelegram;
-                          },
+          body: Stack(fit: StackFit.expand, children: [
+            Container(
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+              image: AssetImage('assets/images/backround.png'),
+              fit: BoxFit.cover,
+            ))),
+            ListView(
+              controller: _scrollController,
+              children: [
+                Container(
+                    height: MediaQuery.of(context).size.height,
+                    child: selectionPage(controller.indexpage.value)),
+                SizedBox(
+                  height: 50,
+                ),
+                Container(
+                  color: Colors.black,
+                  padding: EdgeInsets.only(left: 100, right: 100, top: 50),
+                  child: Column(
+                    children: [
+                      Container(
+                          alignment: Alignment.topLeft,
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('Адрес компании:',
+                                    style: TextStyle(
+                                        fontSize:
+                                            UiJ.sizeweight(context) ? 25 : 30,
+                                        fontFamily: UiJ.fontbold,
+                                        color: Colors.white)),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                RichText(
+                                  text: TextSpan(children: [
+                                    WidgetSpan(
+                                        child: Icon(Icons.location_on_rounded,
+                                            color: Colors.blue)),
+                                    TextSpan(
+                                        text: '${UiJ.adress}',
+                                        style: TextStyle(
+                                            fontSize: UiJ.sizeweight(context)
+                                                ? 20
+                                                : 25,
+                                            fontWeight: FontWeight.w200,
+                                            fontFamily: UiJ.font,
+                                            color: Colors.white))
+                                  ]),
+                                )
+                              ])),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Container(
+                          alignment: Alignment.topLeft,
                           child: Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Icon(
-                                  Icons.telegram,
+                                  Icons.phone,
                                   color: Colors.blue,
                                 ),
                                 SizedBox(
@@ -290,64 +288,97 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                 RichText(
                                   text: TextSpan(children: [
                                     TextSpan(
-                                        text: UiJ.telegram,
+                                        text: '${UiJ.phone}  ',
                                         style: TextStyle(
                                             fontSize: 20,
                                             fontWeight: FontWeight.w200,
                                             fontFamily: UiJ.font,
-                                            color: Colors.white))
+                                            color: Colors.white)),
                                   ]),
                                 )
                               ])),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Container(
-                      alignment: Alignment.topLeft,
-                      child: InkWell(
-                          onTap: () {
-                            // UiJ.callTelegram;
-                          },
-                          child: Column(
-                            children: [
-                              Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Icon(
-                                      Icons.email,
-                                      color: Colors.blue,
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    RichText(
-                                      text: TextSpan(children: [
-                                        TextSpan(
-                                            text: "info@dsk.uz",
-                                            style: TextStyle(
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.w200,
-                                                fontFamily: UiJ.font,
-                                                color: Colors.white))
-                                      ]),
-                                    ),
-                                  ]),
-                              Container(
-                                alignment: Alignment.center,
-                                child: Text(
-                                  "Copyright © 2020 Template by DSK BINOKOR",
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                              )
-                            ],
-                          )),
-                    )
-                  ],
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Container(
+                        alignment: Alignment.topLeft,
+                        child: InkWell(
+                            onTap: () {
+                              UiJ.callTelegram;
+                            },
+                            child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Icon(
+                                    Icons.telegram,
+                                    color: Colors.blue,
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  RichText(
+                                    text: TextSpan(children: [
+                                      TextSpan(
+                                          text: UiJ.telegram,
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.w200,
+                                              fontFamily: UiJ.font,
+                                              color: Colors.white))
+                                    ]),
+                                  )
+                                ])),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Container(
+                        alignment: Alignment.topLeft,
+                        child: InkWell(
+                            onTap: () {
+                              // UiJ.callTelegram;
+                            },
+                            child: Column(
+                              children: [
+                                Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Icon(
+                                        Icons.email,
+                                        color: Colors.blue,
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      RichText(
+                                        text: TextSpan(children: [
+                                          TextSpan(
+                                              text: "info@dsk.uz",
+                                              style: TextStyle(
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.w200,
+                                                  fontFamily: UiJ.font,
+                                                  color: Colors.white))
+                                        ]),
+                                      ),
+                                    ]),
+                                Container(
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    "Copyright © 2020 Template by DSK BINOKOR",
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                )
+                              ],
+                            )),
+                      )
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          ),
+              ],
+            )
+          ]),
           drawer: getDrawer(),
         ));
   }
