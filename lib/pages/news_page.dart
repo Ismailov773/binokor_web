@@ -29,13 +29,7 @@ class NewsPage extends StatelessWidget {
     return Column(
       children: [
         Padding(
-            padding: EdgeInsets.only(
-                left: MediaQuery.of(context).size.width > UiJ.widthSize
-                    ? 100
-                    : 20,
-                right: MediaQuery.of(context).size.width > UiJ.widthSize
-                    ? 100
-                    : 20),
+            padding: EdgeInsets.only(left: 100, right: 100),
             child: Container(
               padding: EdgeInsets.only(top: 20),
               alignment: Alignment.topLeft,
@@ -51,26 +45,34 @@ class NewsPage extends StatelessWidget {
         SizedBox(
           height: 30,
         ),
-        Expanded(
-            child: Padding(
-                padding: EdgeInsets.only(
-                    left: MediaQuery.of(context).size.width > UiJ.widthSize
-                        ? 100
-                        : 20,
-                    right: MediaQuery.of(context).size.width > UiJ.widthSize
-                        ? 100
-                        : 20),
-                child: ListView.builder(
-                    itemCount: _listnews.length,
-                    itemBuilder: (context, index) {
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                              child: InkWell(
-                            child: Padding(
-                                padding: EdgeInsets.all(20),
-                                child:Row(
+        MediaQuery.of(context).size.width > UiJ.widthSize
+            ? listWeb(context)
+            : listPhone(context)
+      ],
+    );
+  }
+
+  Widget listWeb(context) {
+    return Expanded(
+        child: Padding(
+            padding: EdgeInsets.only(
+                left: MediaQuery.of(context).size.width > UiJ.widthSize
+                    ? 100
+                    : 20,
+                right: MediaQuery.of(context).size.width > UiJ.widthSize
+                    ? 100
+                    : 20),
+            child: ListView.builder(
+                itemCount: _listnews.length,
+                itemBuilder: (context, index) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                          child: InkWell(
+                        child: Padding(
+                            padding: EdgeInsets.all(20),
+                            child: Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               // mainAxisAlignment: MainAxisAlignment.start,
                               children: [
@@ -145,19 +147,98 @@ class NewsPage extends StatelessWidget {
                                         ])),
                               ],
                             )),
-                            onTap: () {
-                              if (_listnews[index].imagenews!.length != 0) {
-                                showDialogphoto(
-                                    context, "Фото новости", _listnews[index]);
-                              }
-                            },
-                          )),
-                          Divider()
+                        onTap: () {
+                          if (_listnews[index].imagenews!.length != 0) {
+                            showDialogphoto(
+                                context, "Фото новости", _listnews[index]);
+                          }
+                        },
+                      )),
+                      Divider()
+                    ],
+                  );
+                })));
+  }
+
+  Widget listPhone(context) {
+    return Expanded(
+        child: Padding(
+            padding: EdgeInsets.only(left: 20, right: 20),
+            child: ListView.builder(
+                itemCount: _listnews.length,
+                itemBuilder: (context, index) {
+                  return InkWell(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                              // decoration: BoxDecoration(
+                              //     borderRadius: BorderRadius.circular(15)),
+                              child: Card(
+                                  // shape: RoundedRectangleBorder(
+                                  //     borderRadius: BorderRadius.circular(15)),
+                                  elevation: 5,
+                                  child: Container(
+
+                                      // padding: EdgeInsets.all(20),
+                                      // decoration: BoxDecoration(
+                                      //     borderRadius:
+                                      //         BorderRadius.circular(15)),
+                                      child: Image.network(
+                                          '${UiJ.url}news/download/news/${_listnews[index].imagepath}',
+                                          width: 500,
+                                          height: 300, errorBuilder:
+                                              (context, exception, stackTrace) {
+                                    return Center(
+                                      child: CircularProgressIndicator(),
+                                    );
+                                  })))),
+                          SizedBox(
+                            width: 50,
+                          ),
+                          Container(
+                              child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  // mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                Container(
+                                  child: Text(
+                                    formattedDate.format(DateTime.parse(
+                                        _listnews[index].datacreate!)),
+                                    style: TextStyle(
+                                        fontSize: 15, fontFamily: UiJ.fontbold),
+                                  ),
+                                  alignment: Alignment.topRight,
+                                ),
+
+                                Container(
+                                    child: Text(
+                                  _listnews[index].title!,
+                                  style: TextStyle(
+                                      fontFamily: UiJ.fontbold,
+                                      fontSize: 20,
+                                      color: Colors.indigoAccent),
+                                )),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Text(_listnews[index].description!,
+                                    textAlign: TextAlign.justify,
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w200,
+                                        fontFamily: UiJ.font))
+                                // Spacer(),
+                              ])),
                         ],
-                      );
-                    })))
-      ],
-    );
+                      ),
+                      onTap: () {
+                        if (_listnews[index].imagenews!.length != 0) {
+                          showDialogphoto(
+                              context, "Фото новости", _listnews[index]);
+                        }
+                      });
+                })));
   }
 
   Future<void> showDialogphoto(
