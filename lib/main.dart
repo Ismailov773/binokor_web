@@ -38,7 +38,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: UiJ.companyName,
       theme: ThemeData(
-        backgroundColor: Colors.black, bottomAppBarColor: Colors.black,
+        backgroundColor: Colors.black,
+        bottomAppBarColor: Colors.black,
+        textTheme: TextTheme(),
+        fontFamily: UiJ.font,
+        // textTheme: TextTheme(bodyText1: ),
         visualDensity: VisualDensity.adaptivePlatformDensity,
         //primarySwatch: Colors.black87,
       ),

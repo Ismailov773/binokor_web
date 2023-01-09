@@ -38,9 +38,9 @@ class _ZeroPageState extends State<ZeroPage> {
                 Container(
                     decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: AssetImage('assets/images/backround.png'),
-                          fit: BoxFit.cover,
-                        ))),
+                  image: AssetImage('assets/images/backround.png'),
+                  fit: BoxFit.cover,
+                ))),
                 Scaffold(
                     backgroundColor: Colors.transparent,
                     body: Center(
@@ -53,12 +53,13 @@ class _ZeroPageState extends State<ZeroPage> {
                             width: MediaQuery.of(context).size.width / 3,
                             height: MediaQuery.of(context).size.height / 3,
                           ),
-                          Text(
+                          Expanded(
+                              child: Text(
                             UiJ.lozung,
                             style: TextStyle(
                                 fontSize: UiJ.sizeweight(context) ? 20 : 50,
                                 fontFamily: UiJ.fontbold),
-                          )
+                          ))
                         ],
                       ),
                     )),

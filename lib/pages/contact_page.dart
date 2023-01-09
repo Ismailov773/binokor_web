@@ -209,8 +209,7 @@ class ContactPage extends StatelessWidget {
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         child: ListView(children: [
-          Expanded(
-              child: RichText(
+           RichText(
                   text: TextSpan(children: [
             WidgetSpan(
                 child: Icon(Icons.location_on_rounded, color: Colors.blue)),
@@ -222,9 +221,9 @@ class ContactPage extends StatelessWidget {
                         : 15,
                     fontWeight: FontWeight.w200,
                     fontFamily: UiJ.font))
-          ]))),
+          ])),
           SizedBox(
-            height: 50,
+            height: 10,
           ),
           Container(
               alignment: Alignment.topLeft,
@@ -261,7 +260,7 @@ class ContactPage extends StatelessWidget {
                     )
                   ])),
           SizedBox(
-            height: 50,
+            height: 10,
           ),
           Container(
             alignment: Alignment.topLeft,
@@ -304,7 +303,7 @@ class ContactPage extends StatelessWidget {
                     ])),
           ),
           SizedBox(
-            height: 50,
+            height: 10,
           ),
           Container(
             alignment: Alignment.topLeft,
