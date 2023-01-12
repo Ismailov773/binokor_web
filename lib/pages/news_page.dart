@@ -10,6 +10,7 @@ import '../models/News.dart';
 import '../models/uij.dart';
 
 List<News> _listnews = [];
+String imagepath = '';
 
 DateFormat formattedDate = DateFormat('dd-MM-yyyy');
 
@@ -149,8 +150,12 @@ class NewsPage extends StatelessWidget {
                             )),
                         onTap: () {
                           if (_listnews[index].imagenews!.length != 0) {
-                            showDialogphoto(
-                                context, "Фото новости", _listnews[index]);
+                            if (_listnews[index].imagenews!.length > 0) {
+                              imagepath =
+                                  _listnews[index].imagenews![0].imagepath!;
+                            }
+                            showDialogphoto(context, _listnews[index].title!,
+                                _listnews[index]);
                           }
                         },
                       )),
@@ -234,8 +239,12 @@ class NewsPage extends StatelessWidget {
                       ),
                       onTap: () {
                         if (_listnews[index].imagenews!.length != 0) {
-                          showDialogphoto(
-                              context, "Фото новости", _listnews[index]);
+                          if (_listnews[index].imagenews!.length > 0) {
+                            imagepath =
+                                _listnews[index].imagenews![0].imagepath!;
+                          }
+                          showDialogphoto(context, _listnews[index].title!,
+                              _listnews[index]);
                         }
                       });
                 })));
@@ -248,60 +257,78 @@ class NewsPage extends StatelessWidget {
       barrierDismissible: false,
       // false = user must tap button, true = tap outside dialog
       builder: (BuildContext dialogContext) {
-        return AlertDialog(
-          title: Column(
-            children: [
-              Text(
-                title,
-                style: TextStyle(fontSize: 25, fontFamily: UiJ.fontbold),
-              ),
-              Divider(),
-            ],
-          ),
-          content: SizedBox(
-              width: MediaQuery.of(context).size.width / 1.1,
-              child: ListView.builder(
-                itemCount: news.imagenews!.length,
-                itemBuilder: (context, idx) {
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Image.network(
-                            '${UiJ.url}news/download/imagenews/${news.imagenews![idx].imagepath}',
-                            // height: MediaQuery.of(context).size.height /
-                            //     (news.imagenews!.length > 2 ? 4 : 2),
-                            errorBuilder: (context, exception, stackTrace) {
-                              return Center(
-                                child: CircularProgressIndicator(),
-                              );
-                            },
-                          ),
-                          SizedBox(
-                            width: 20,
-                          ),
-                        ],
-                      ),
-                      Divider()
-                    ],
-                  );
-                },
-              )),
-          actions: <Widget>[
-            TextButton(
-              child: Text(
-                'Закрыть',
-                style: TextStyle(fontSize: 20, fontFamily: UiJ.fontbold),
-              ),
-              onPressed: () {
-                Navigator.of(dialogContext).pop(); // Dismiss alert dialog
-              },
+        return StatefulBuilder(builder: (context, setState) {
+          return AlertDialog(
+            title: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: TextStyle(fontSize: 25, fontFamily: UiJ.fontbold),
+                ),
+                Divider(),
+              ],
             ),
-          ],
-        );
+            content: SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: Row(
+                  children: [
+                    Expanded(
+                        child: ListView.builder(
+                      itemCount: news.imagenews!.length,
+                      itemBuilder: (context, idx) {
+                        return InkWell(
+                            onTap: () {
+                              setState(() {
+                                imagepath = news.imagenews![idx].imagepath!;
+                              });
+                            },
+                            child: Card(
+                                child: Container(
+                              padding: EdgeInsets.all(10),
+                              child: Image.network(
+                                '${UiJ.url}news/download/imagenews/${news.imagenews![idx].imagepath}',
+                                height: MediaQuery.of(context).size.height / 5,
+                                width: MediaQuery.of(context).size.width / 4,
+                                errorBuilder: (context, exception, stackTrace) {
+                                  return Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                },
+                              ),
+                            )));
+                      },
+                    )),
+                    VerticalDivider(),
+                    Expanded(
+                        flex: 3,
+                        child: Card(
+                            elevation: 5,
+                            child: Container(
+                                padding: EdgeInsets.all(10),
+                                child: Image.network(
+                                    '${UiJ.url}news/download/imagenews/${imagepath}',
+                                    errorBuilder:
+                                        (context, exception, stackTrace) {
+                                  return Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                }))))
+                  ],
+                )),
+            actions: <Widget>[
+              TextButton(
+                child: Text(
+                  'Закрыть',
+                  style: TextStyle(fontSize: 20, fontFamily: UiJ.fontbold),
+                ),
+                onPressed: () {
+                  Navigator.of(dialogContext).pop(); // Dismiss alert dialog
+                },
+              ),
+            ],
+          );
+        });
       },
     );
   }
