@@ -11,6 +11,7 @@ class UiJ {
   //static final String url = "https://dsk-webapp.azurewebsites.net/";
 
   static final String url = 'https://api.dsk.uz:8089/';
+  //static final String url = 'http://localhost:8089/';
   static final String adress =
       'г.Ташкент, Янгихаётский район, ул.Зироат, дом 4, 100083, Узбекистан';
   static final String phone = '+998 71 205 0853';
