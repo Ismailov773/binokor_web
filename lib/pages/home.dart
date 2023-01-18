@@ -1,7 +1,7 @@
 import 'package:binokor_web/getconrollers/Controller.dart';
 import 'package:binokor_web/pages/catalog_main_page.dart';
 import 'package:binokor_web/pages/job_page.dart';
-import 'package:binokor_web/pages/kompleks_details_page1.dart';
+import 'package:binokor_web/pages/kompleks_details_page.dart';
 import 'package:binokor_web/pages/production_page.dart';
 import 'package:binokor_web/pages/shoping_box.dart';
 import 'package:binokor_web/pages/study_page.dart';
@@ -407,7 +407,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
       case 4:
         return JobPage();
       case 5:
-        return KompleksDetailesPage1();
+        return KompleksDetailesPage();
       case 6:
         return CatalogPage();
       case 7:

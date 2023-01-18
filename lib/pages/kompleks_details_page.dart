@@ -31,8 +31,8 @@ Map<String, String> _listCard = {
 CarouselController carouselController = CarouselController();
 int _current = 0;
 
-class KompleksDetailesPage1 extends StatelessWidget {
-  const KompleksDetailesPage1({Key? key}) : super(key: key);
+class KompleksDetailesPage extends StatelessWidget {
+  const KompleksDetailesPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
