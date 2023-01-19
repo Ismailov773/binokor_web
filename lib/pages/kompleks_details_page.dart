@@ -72,6 +72,7 @@ class KompleksDetailesPage extends StatelessWidget {
                   return InkWell(
                       onTap: () {
                         if (e.key == 'Основной') {
+                          controller.changePageKompleks(1);
                           controller.changeindextab(2);
                           controller.changeindexpage(8);
                         } else if (e.key == 'Проекты') {
@@ -101,7 +102,7 @@ class KompleksDetailesPage extends StatelessWidget {
                           SizedBox(
                             height: 10,
                           ),
-                          Container(
+                          Expanded(
                               child: Image.network(e.value,
                                   errorBuilder:
                                       (context, exception, stackTrace) => Icon(
@@ -123,8 +124,6 @@ class KompleksDetailesPage extends StatelessWidget {
                     initialPage: _current,
                     enableInfiniteScroll: true,
                     autoPlay: false,
-                    autoPlayInterval: Duration(seconds: 5),
-                    autoPlayAnimationDuration: Duration(milliseconds: 5000),
                     autoPlayCurve: Curves.fastOutSlowIn,
                     enlargeCenterPage: true,
                     onPageChanged: (int? value, page) {

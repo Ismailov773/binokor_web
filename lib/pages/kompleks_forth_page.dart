@@ -7,18 +7,31 @@ import '../getconrollers/Controller.dart';
 import '../models/ImageDom.dart';
 import '../models/uij.dart';
 
-final Controller controller = Get.find();
-List<ImageDom> _listProject = controller.pageKomleks == 1
-    ? controller.listImageDom
-        .where((p0) => p0.layout == true && p0.web == true)
-        .toList()
-    : controller.listImageDom
-        .where((p0) => p0.layout == false && p0.web == true)
-        .toList();
- String path = _listProject.length == 0 ? '' : _listProject[0].imagepath!;
-
-class KompleksForthPage extends StatelessWidget {
+class KompleksForthPage extends StatefulWidget {
   const KompleksForthPage({Key? key}) : super(key: key);
+
+  @override
+  State<KompleksForthPage> createState() => _KompleksForthPageState();
+}
+
+class _KompleksForthPageState extends State<KompleksForthPage> {
+  final Controller controller = Get.find();
+
+  List<ImageDom> _listProject = [];
+  String path = '';
+
+  @override
+  void initState() {
+    super.initState();
+    _listProject = controller.pageKomleks == 1
+        ? controller.listImageDom
+            .where((p0) => p0.layout == true && p0.web == true)
+            .toList()
+        : controller.listImageDom
+            .where((p0) => p0.layout == false && p0.web == true)
+            .toList();
+    path = _listProject.length == 0 ? '' : _listProject[0].imagepath!;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,8 +76,9 @@ class KompleksForthPage extends StatelessWidget {
                     right: MediaQuery.of(context).size.width > UiJ.widthSize
                         ? 50
                         : 20),
-                child: StatefulBuilder(builder: (context, setSatet){
+                child: StatefulBuilder(builder: (context, setSatet) {
                   return Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Expanded(
                           child: ListView(
@@ -72,32 +86,33 @@ class KompleksForthPage extends StatelessWidget {
                               // itemExtent: 4,
                               children: _listProject.map((e) {
                                 return InkWell(
-                                    onTap: (){
-                                      setSatet((){
+                                    onTap: () {
+                                      setSatet(() {
                                         path = e.imagepath!;
                                       });
                                     },
-                                    child:  Container(
+                                    child: Container(
                                         child: Card(
-                                          elevation: 5,
-                                          child: Container(
-                                            padding: EdgeInsets.all(10),
-                                            child: Image.network(
-                                              '${UiJ.url}imagedata/download/images/${e.imagepath}',
-                                              fit: BoxFit.fill,
-                                            ),
-                                          ),
-                                        )));
+                                      elevation: 5,
+                                      child: Container(
+                                        padding: EdgeInsets.all(10),
+                                        child: Image.network(
+                                          '${UiJ.url}imagedata/download/images/${e.imagepath}',
+                                          fit: BoxFit.fill,
+                                        ),
+                                      ),
+                                    )));
                               }).toList())),
                       Expanded(
                           flex: 4,
                           child: Image.network(
                               '${UiJ.url}imagedata/download/images/${path}',
+                              fit: BoxFit.fill,
                               errorBuilder: (context, exception, stackTrace) {
-                                return Center(
-                                  child: CircularProgressIndicator(),
-                                );
-                              }))
+                            return Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          }))
                     ],
                   );
                 })))
