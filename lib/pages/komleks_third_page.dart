@@ -42,8 +42,11 @@ class KompleksThirdPage extends StatelessWidget {
         Expanded(
             child: CarouselSlider(
           options: CarouselOptions(
-            viewportFraction: 0.8,
+            viewportFraction: 1,
             aspectRatio: 16 / 9,
+            autoPlay: true,
+            autoPlayInterval: Duration(seconds: 5),
+            autoPlayAnimationDuration: Duration(milliseconds: 5000),
           ),
           items: [
             Container(
