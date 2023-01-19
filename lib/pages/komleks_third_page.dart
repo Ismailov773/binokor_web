@@ -18,12 +18,6 @@ class KompleksThirdPage extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Container(
-          padding: EdgeInsets.only(
-              top: 10,
-              left: MediaQuery.of(context).size.width > UiJ.widthSize ? 50 : 20,
-              right:
-                  MediaQuery.of(context).size.width > UiJ.widthSize ? 50 : 20),
-          // width: 100,
           height: 50,
           alignment: Alignment.topLeft,
           child: InkWell(
