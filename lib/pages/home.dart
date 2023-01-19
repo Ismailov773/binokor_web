@@ -1,7 +1,9 @@
 import 'package:binokor_web/getconrollers/Controller.dart';
 import 'package:binokor_web/pages/catalog_main_page.dart';
 import 'package:binokor_web/pages/job_page.dart';
+import 'package:binokor_web/pages/komleks_third_page.dart';
 import 'package:binokor_web/pages/kompleks_details_page.dart';
+import 'package:binokor_web/pages/kompleks_forth_page.dart';
 import 'package:binokor_web/pages/production_page.dart';
 import 'package:binokor_web/pages/shoping_box.dart';
 import 'package:binokor_web/pages/study_page.dart';
@@ -231,6 +233,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               children: [
                 Container(
                     height: MediaQuery.of(context).size.height,
+                    width: MediaQuery.of(context).size.width,
                     child: selectionPage(controller.indexpage.value)),
                 SizedBox(
                   height: 50,
@@ -412,6 +415,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         return CatalogPage();
       case 7:
         return ShopingBox();
+      case 8:
+        return KompleksThirdPage();
+      case 9:
+        return KompleksForthPage();
     }
   }
 }

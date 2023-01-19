@@ -25,6 +25,9 @@ class Controller extends GetxController {
   var listImageDom = <ImageDom>[].obs;
   Make? make;
   List<Orderb> orderlist = <Orderb>[].obs;
+  String titleKompleks = '';
+  int pageKomleks = 0;
+
 
 
   @override
@@ -110,6 +113,14 @@ class Controller extends GetxController {
 
   changeMake(Make newMake) {
     this.make = newMake;
+  }
+
+  changetitleKompleks(String title){
+    this.titleKompleks = title;
+  }
+
+  changePageKompleks(int i){
+    this.pageKomleks = i;
   }
 
   addOrder(Orderb order) {

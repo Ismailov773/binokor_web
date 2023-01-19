@@ -69,23 +69,51 @@ class KompleksDetailesPage extends StatelessWidget {
         Expanded(
             child: CarouselSlider(
                 items: _listCard.entries.map((e) {
-                  return Column(
-                    children: [
-                      Container(
-                          child: Text(e.key,
-                              style: TextStyle(
-                                  fontSize: MediaQuery.of(context).size.width >
-                                          UiJ.widthSize
-                                      ? 30
-                                      : 15,
-                                  fontFamily: UiJ.fontbold))),
-                      SizedBox(height: 10,),
-                      Container(
-                          child: Image.network(e.value,
-                              errorBuilder: (context, exception, stackTrace) =>
-                                  Icon(Icons.business,size: MediaQuery.of(context).size.width/8, color: Colors.blue,)))
-                    ],
-                  );
+                  return InkWell(
+                      onTap: () {
+                        if (e.key == 'Основной') {
+                          controller.changeindextab(2);
+                          controller.changeindexpage(8);
+                        } else if (e.key == 'Проекты') {
+                          controller.changetitleKompleks('Проекты');
+                          controller.changePageKompleks(1);
+                          controller.changeindextab(2);
+                          controller.changeindexpage(9);
+                        } else if (e.key == 'Процесс сторительство') {
+                          controller
+                              .changetitleKompleks('Процесс сторительство');
+                          controller.changePageKompleks(2);
+                          controller.changeindextab(2);
+                          controller.changeindexpage(9);
+                        }
+                      },
+                      child: Column(
+                        children: [
+                          Container(
+                              child: Text(e.key,
+                                  style: TextStyle(
+                                      fontSize:
+                                          MediaQuery.of(context).size.width >
+                                                  UiJ.widthSize
+                                              ? 30
+                                              : 15,
+                                      fontFamily: UiJ.fontbold))),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Container(
+                              child: Image.network(e.value,
+                                  errorBuilder:
+                                      (context, exception, stackTrace) => Icon(
+                                            Icons.business,
+                                            size: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                8,
+                                            color: Colors.blue,
+                                          )))
+                        ],
+                      ));
                 }).toList(),
                 options: CarouselOptions(
                     height: MediaQuery.of(context).size.height /
