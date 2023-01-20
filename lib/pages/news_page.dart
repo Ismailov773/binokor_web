@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:hovering/hovering.dart';
 import 'package:intl/intl.dart';
 
 import '../getconrollers/Controller.dart';
@@ -69,96 +70,101 @@ class NewsPage extends StatelessWidget {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
+                      HoverContainer(
+                          hoverColor: UiJ.hovercolor,
+                          cursor: MouseCursor.defer,
                           child: InkWell(
-                        child: Padding(
-                            padding: EdgeInsets.all(20),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              // mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Expanded(
-                                    // padding: EdgeInsets.only(left: 100, right: 100),
-                                    // margin: EdgeInsets.all(20),
-                                    child: Container(
-                                        // decoration: BoxDecoration(
-                                        //     borderRadius: BorderRadius.circular(15)),
-                                        child: Card(
-                                            // shape: RoundedRectangleBorder(
+                            child: Padding(
+                                padding: EdgeInsets.all(20),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  // mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Expanded(
+                                        // padding: EdgeInsets.only(left: 100, right: 100),
+                                        // margin: EdgeInsets.all(20),
+                                        child: Container(
+                                            // decoration: BoxDecoration(
                                             //     borderRadius: BorderRadius.circular(15)),
-                                            elevation: 5,
-                                            child: Container(
+                                            child: Card(
+                                                // shape: RoundedRectangleBorder(
+                                                //     borderRadius: BorderRadius.circular(15)),
+                                                elevation: 5,
+                                                child: Container(
 
-                                                // padding: EdgeInsets.all(20),
-                                                // decoration: BoxDecoration(
-                                                //     borderRadius:
-                                                //         BorderRadius.circular(15)),
-                                                child: Image.network(
-                                                    '${UiJ.url}news/download/news/${_listnews[index].imagepath}',
-                                                    width: 500,
-                                                    height: 300, errorBuilder:
-                                                        (context, exception,
+                                                    // padding: EdgeInsets.all(20),
+                                                    // decoration: BoxDecoration(
+                                                    //     borderRadius:
+                                                    //         BorderRadius.circular(15)),
+                                                    child: Image.network(
+                                                        '${UiJ.url}news/download/news/${_listnews[index].imagepath}',
+                                                        width: 500,
+                                                        height: 300,
+                                                        errorBuilder: (context,
+                                                            exception,
                                                             stackTrace) {
-                                              return Center(
-                                                child:
-                                                    CircularProgressIndicator(),
-                                              );
-                                            }))))),
-                                SizedBox(
-                                  width: 50,
-                                ),
-                                Expanded(
-                                    flex: 3,
-                                    child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        // mainAxisAlignment: MainAxisAlignment.start,
-                                        children: [
-                                          Container(
-                                            child: Text(
-                                              formattedDate.format(
-                                                  DateTime.parse(
-                                                      _listnews[index]
-                                                          .datacreate!)),
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  fontFamily: UiJ.fontbold),
-                                            ),
-                                            alignment: Alignment.topRight,
-                                          ),
+                                                  return Center(
+                                                    child:
+                                                        CircularProgressIndicator(),
+                                                  );
+                                                }))))),
+                                    SizedBox(
+                                      width: 50,
+                                    ),
+                                    Expanded(
+                                        flex: 3,
+                                        child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            // mainAxisAlignment: MainAxisAlignment.start,
+                                            children: [
+                                              Container(
+                                                child: Text(
+                                                  formattedDate.format(
+                                                      DateTime.parse(
+                                                          _listnews[index]
+                                                              .datacreate!)),
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontFamily: UiJ.fontbold),
+                                                ),
+                                                alignment: Alignment.topRight,
+                                              ),
 
-                                          Container(
-                                              child: Text(
-                                            _listnews[index].title!,
-                                            style: TextStyle(
-                                                fontFamily: UiJ.fontbold,
-                                                fontSize: 30,
-                                                color: Colors.indigoAccent),
-                                          )),
-                                          SizedBox(
-                                            height: 20,
-                                          ),
-                                          Text(_listnews[index].description!,
-                                              textAlign: TextAlign.justify,
-                                              style: TextStyle(
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.w200,
-                                                  fontFamily: UiJ.font))
-                                          // Spacer(),
-                                        ])),
-                              ],
-                            )),
-                        onTap: () {
-                          if (_listnews[index].imagenews!.length != 0) {
-                            if (_listnews[index].imagenews!.length > 0) {
-                              imagepath =
-                                  _listnews[index].imagenews![0].imagepath!;
-                            }
-                            showDialogphoto(context, _listnews[index].title!,
-                                _listnews[index]);
-                          }
-                        },
-                      )),
+                                              Container(
+                                                  child: Text(
+                                                _listnews[index].title!,
+                                                style: TextStyle(
+                                                    fontFamily: UiJ.fontbold,
+                                                    fontSize: 30,
+                                                    color: Colors.indigoAccent),
+                                              )),
+                                              SizedBox(
+                                                height: 20,
+                                              ),
+                                              Text(
+                                                  _listnews[index].description!,
+                                                  textAlign: TextAlign.justify,
+                                                  style: TextStyle(
+                                                      fontSize: 20,
+                                                      fontWeight:
+                                                          FontWeight.w200,
+                                                      fontFamily: UiJ.font))
+                                              // Spacer(),
+                                            ])),
+                                  ],
+                                )),
+                            onTap: () {
+                              if (_listnews[index].imagenews!.length != 0) {
+                                if (_listnews[index].imagenews!.length > 0) {
+                                  imagepath =
+                                      _listnews[index].imagenews![0].imagepath!;
+                                }
+                                showDialogphoto(context,
+                                    _listnews[index].title!, _listnews[index]);
+                              }
+                            },
+                          )),
                       Divider()
                     ],
                   );
@@ -172,81 +178,86 @@ class NewsPage extends StatelessWidget {
             child: ListView.builder(
                 itemCount: _listnews.length,
                 itemBuilder: (context, index) {
-                  return InkWell(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                              // decoration: BoxDecoration(
-                              //     borderRadius: BorderRadius.circular(15)),
-                              child: Card(
-                                  // shape: RoundedRectangleBorder(
+                  return HoverContainer(
+                      hoverColor: UiJ.hovercolor,
+                      child: InkWell(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                  // decoration: BoxDecoration(
                                   //     borderRadius: BorderRadius.circular(15)),
-                                  elevation: 5,
-                                  child: Container(
+                                  child: Card(
+                                      // shape: RoundedRectangleBorder(
+                                      //     borderRadius: BorderRadius.circular(15)),
+                                      elevation: 5,
+                                      child: Container(
 
-                                      // padding: EdgeInsets.all(20),
-                                      // decoration: BoxDecoration(
-                                      //     borderRadius:
-                                      //         BorderRadius.circular(15)),
-                                      child: Image.network(
-                                          '${UiJ.url}news/download/news/${_listnews[index].imagepath}',
-                                          width: 500,
-                                          height: 300, errorBuilder:
-                                              (context, exception, stackTrace) {
-                                    return Center(
-                                      child: CircularProgressIndicator(),
-                                    );
-                                  })))),
-                          SizedBox(
-                            width: 50,
+                                          // padding: EdgeInsets.all(20),
+                                          // decoration: BoxDecoration(
+                                          //     borderRadius:
+                                          //         BorderRadius.circular(15)),
+                                          child: Image.network(
+                                              '${UiJ.url}news/download/news/${_listnews[index].imagepath}',
+                                              width: 500,
+                                              height: 300, errorBuilder:
+                                                  (context, exception,
+                                                      stackTrace) {
+                                        return Center(
+                                          child: CircularProgressIndicator(),
+                                        );
+                                      })))),
+                              SizedBox(
+                                width: 50,
+                              ),
+                              Container(
+                                  child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      // mainAxisAlignment: MainAxisAlignment.start,
+                                      children: [
+                                    Container(
+                                      child: Text(
+                                        formattedDate.format(DateTime.parse(
+                                            _listnews[index].datacreate!)),
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            fontFamily: UiJ.fontbold),
+                                      ),
+                                      alignment: Alignment.topRight,
+                                    ),
+
+                                    Container(
+                                        child: Text(
+                                      _listnews[index].title!,
+                                      style: TextStyle(
+                                          fontFamily: UiJ.fontbold,
+                                          fontSize: 20,
+                                          color: Colors.indigoAccent),
+                                    )),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    Text(_listnews[index].description!,
+                                        textAlign: TextAlign.justify,
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w200,
+                                            fontFamily: UiJ.font))
+                                    // Spacer(),
+                                  ])),
+                            ],
                           ),
-                          Container(
-                              child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  // mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                Container(
-                                  child: Text(
-                                    formattedDate.format(DateTime.parse(
-                                        _listnews[index].datacreate!)),
-                                    style: TextStyle(
-                                        fontSize: 15, fontFamily: UiJ.fontbold),
-                                  ),
-                                  alignment: Alignment.topRight,
-                                ),
-
-                                Container(
-                                    child: Text(
-                                  _listnews[index].title!,
-                                  style: TextStyle(
-                                      fontFamily: UiJ.fontbold,
-                                      fontSize: 20,
-                                      color: Colors.indigoAccent),
-                                )),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                Text(_listnews[index].description!,
-                                    textAlign: TextAlign.justify,
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w200,
-                                        fontFamily: UiJ.font))
-                                // Spacer(),
-                              ])),
-                        ],
-                      ),
-                      onTap: () {
-                        if (_listnews[index].imagenews!.length != 0) {
-                          if (_listnews[index].imagenews!.length > 0) {
-                            imagepath =
-                                _listnews[index].imagenews![0].imagepath!;
-                          }
-                          showDialogphoto(context, _listnews[index].title!,
-                              _listnews[index]);
-                        }
-                      });
+                          onTap: () {
+                            if (_listnews[index].imagenews!.length != 0) {
+                              if (_listnews[index].imagenews!.length > 0) {
+                                imagepath =
+                                    _listnews[index].imagenews![0].imagepath!;
+                              }
+                              showDialogphoto(context, _listnews[index].title!,
+                                  _listnews[index]);
+                            }
+                          }));
                 })));
   }
 

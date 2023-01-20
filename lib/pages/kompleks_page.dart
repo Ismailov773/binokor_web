@@ -2,6 +2,7 @@ import 'package:binokor_web/getconrollers/Controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hovering/hovering.dart';
 import 'package:intl/intl.dart';
 
 import '../models/ImageDom.dart';
@@ -49,7 +50,8 @@ class KompleksPage extends StatelessWidget {
                 itemCount: controller.listKompleks.length,
                 itemBuilder: (context, index) {
                   return Container(
-                    // padding: EdgeInsets.all(40),
+
+                      // padding: EdgeInsets.all(40),
                       child: Card(
                           child: InkWell(
                               onTap: () {
@@ -57,8 +59,11 @@ class KompleksPage extends StatelessWidget {
                                     controller.listKompleks[index]);
                                 controller.changeindexpage(5);
                               },
-                              child: Container(
+                              child: HoverContainer(
                                 padding: EdgeInsets.all(20),
+                                hoverColor: UiJ.hovercolor,
+                                cursor: MouseCursor.defer,
+
                                 height: MediaQuery.of(context).size.width <
                                         UiJ.widthSize
                                     ? MediaQuery.of(context).size.height

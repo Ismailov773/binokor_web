@@ -6,6 +6,8 @@ class UiJ {
   static final companyName = 'ООО \"DSK Binokor\"';
 
   static final color = HexColor("#686868");
+  static final hovercolor = Colors.yellow[50];
+
   static final font = 'Play'; //sans-serif
   static final fontbold = 'PlayBold';
   //static final String url = "https://dsk-webapp.azurewebsites.net/";

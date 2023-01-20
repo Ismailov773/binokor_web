@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:hovering/hovering.dart';
 
 import '../getconrollers/Controller.dart';
 import '../models/Make.dart';
@@ -33,7 +34,7 @@ class CatalogMainPage extends StatelessWidget {
                 height: 10,
               ),
               Container(
-                padding:   EdgeInsets.only(top: 20),
+                padding: EdgeInsets.only(top: 20),
                 alignment: Alignment.topLeft,
                 child: Text("Каталоги",
                     style: TextStyle(
@@ -47,80 +48,77 @@ class CatalogMainPage extends StatelessWidget {
               Divider(),
               Expanded(
                   child: GridView.builder(
-                          itemCount: _listMake.length,
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount:
-                                      MediaQuery.of(context).size.width >
-                                              UiJ.widthSize
-                                          ? 4
-                                          : 1),
-                          itemBuilder: (context, index) {
-                            return StatefulBuilder(
-                                builder: (context, setState) {
-                              return SizedBox(
-                                  // height:
-                                  //     200,
-                                  // width: MediaQuery.of(context).size.width / 9,
-                                  child: InkWell(
-                                      onTap: () {
-                                        controller.changeMake(_listMake[index]);
-                                        controller.changeindextab(0);
-                                        controller.changeindexpage(6);
-                                      },
-                                      child: Card(
-                                        elevation: 5,
-                                        child: Container(
-                                            margin: EdgeInsets.all(10),
-                                            decoration: BoxDecoration(
-                                                border: Border.all(
-                                                    color:
-                                                        Colors.blue.shade800)),
+                      itemCount: _listMake.length,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount:
+                              MediaQuery.of(context).size.width > UiJ.widthSize
+                                  ? 4
+                                  : 1),
+                      itemBuilder: (context, index) {
+                        return StatefulBuilder(builder: (context, setState) {
+                          return SizedBox(
+                              // height:
+                              //     200,
+                              // width: MediaQuery.of(context).size.width / 9,
+                              child: InkWell(
+                                  onTap: () {
+                                    controller.changeMake(_listMake[index]);
+                                    controller.changeindextab(0);
+                                    controller.changeindexpage(6);
+                                  },
+                                  child: Card(
+                                    elevation: 5,
+                                    child: Container(
+                                        // hoverColor: Colors.blue,
+                                        //   color: Colors.red,
+                                        margin: EdgeInsets.all(10),
+                                        decoration: BoxDecoration(
+                                            border: Border.all(
+                                                color: Colors.blue.shade800)),
+                                        child: HoverContainer(
+                                            hoverColor: UiJ.hovercolor,
+                                          cursor: MouseCursor.defer,
+
                                             child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              children: [
-                                                Padding(
-                                                    padding: EdgeInsets.all(20),
-                                                    child: Text(
-                                                      _listMake[index].name!,
-                                                      style: TextStyle(
-                                                          fontSize: MediaQuery.of(
-                                                                          context)
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Padding(
+                                                padding: EdgeInsets.all(20),
+                                                child: Text(
+                                                  _listMake[index].name!,
+                                                  style: TextStyle(
+                                                      fontSize:
+                                                          MediaQuery.of(context)
                                                                       .size
                                                                       .width >
                                                                   UiJ.widthSize
                                                               ? 20
                                                               : 10,
-                                                          fontFamily:
-                                                              UiJ.fontbold),
-                                                      textAlign:
-                                                          TextAlign.start,
-                                                    )),
-                                                Expanded(
-                                                    child: Padding(
-                                                        padding:
-                                                            EdgeInsets.all(20),
-                                                        child: Image.network(
-                                                          _listMake[index] ==
-                                                                  null
-                                                              ? ''
-                                                              : '${UiJ.url}make/download/makes/${_listMake[index].imagepath}',
-                                                          errorBuilder:
-                                                              (context,
-                                                                  exception,
-                                                                  stackTrace) {
-                                                            return Center(
-                                                              child:
-                                                                  CircularProgressIndicator(),
-                                                            );
-                                                          },
-                                                        ))),
-                                              ],
-                                            )),
-                                      )));
-                            });
-                          })),
+                                                      fontFamily: UiJ.fontbold),
+                                                  textAlign: TextAlign.start,
+                                                )),
+                                            Expanded(
+                                                child: Padding(
+                                                    padding: EdgeInsets.all(20),
+                                                    child: Image.network(
+                                                      _listMake[index] == null
+                                                          ? ''
+                                                          : '${UiJ.url}make/download/makes/${_listMake[index].imagepath}',
+                                                      errorBuilder: (context,
+                                                          exception,
+                                                          stackTrace) {
+                                                        return Center(
+                                                          child:
+                                                              CircularProgressIndicator(),
+                                                        );
+                                                      },
+                                                    ))),
+                                          ],
+                                        ))),
+                                  )));
+                        });
+                      })),
             ],
           );
         }));
