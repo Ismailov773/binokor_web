@@ -63,7 +63,6 @@ class KompleksPage extends StatelessWidget {
                                 padding: EdgeInsets.all(20),
                                 hoverColor: UiJ.hovercolor,
                                 cursor: MouseCursor.defer,
-
                                 height: MediaQuery.of(context).size.width <
                                         UiJ.widthSize
                                     ? MediaQuery.of(context).size.height
@@ -153,7 +152,7 @@ class KompleksPage extends StatelessWidget {
                   style: TextStyle(
                       fontSize:
                           MediaQuery.of(context).size.width > UiJ.widthSize
-                              ? 40
+                              ? 30
                               : 20,
                       fontWeight: FontWeight.w900,
                       fontFamily: UiJ.fontbold)),
@@ -165,12 +164,8 @@ class KompleksPage extends StatelessWidget {
             Container(
               // padding: EdgeInsets.only(right: 400),
               child: Text(controller.listKompleks[index].description!,
-                  style: TextStyle(
-                      fontSize:
-                          MediaQuery.of(context).size.width > UiJ.widthSize
-                              ? 25
-                              : 20,
-                      fontFamily: UiJ.font)),
+                  style: TextStyle(fontSize: 15, fontFamily: UiJ.font),
+                  textAlign: TextAlign.justify),
               alignment: Alignment.topLeft,
             ),
             SizedBox(
