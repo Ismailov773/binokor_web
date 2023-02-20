@@ -19,6 +19,7 @@ class KompleksThirdPage extends StatelessWidget {
       children: [
         Container(
           height: 50,
+          padding: EdgeInsets.only(left: 20),
           alignment: Alignment.topLeft,
           child: InkWell(
               onTap: () {
@@ -42,29 +43,33 @@ class KompleksThirdPage extends StatelessWidget {
         Expanded(
             child: CarouselSlider(
           options: CarouselOptions(
-            viewportFraction: 1,
+            viewportFraction: 0.8,
             aspectRatio: 16 / 9,
+            enableInfiniteScroll: true,
             autoPlay: true,
             autoPlayInterval: Duration(seconds: 5),
             autoPlayAnimationDuration: Duration(milliseconds: 5000),
           ),
           items: [
             Container(
+              padding: EdgeInsets.all(5),
               child: Image.network(
                 '${UiJ.url}kompleks/download/house/${controller.kompleks!.mainimagepath}',
                 fit: BoxFit.fill,
               ),
             ),
             Container(
+                padding: EdgeInsets.all(5),
                 child: Image.network(
-              '${UiJ.url}kompleks/download/house/${controller.kompleks!.mainimagepathfirst}',
-              fit: BoxFit.fill,
-            )),
+                  '${UiJ.url}kompleks/download/house/${controller.kompleks!.mainimagepathfirst}',
+                  fit: BoxFit.fill,
+                )),
             Container(
+                padding: EdgeInsets.all(5),
                 child: Image.network(
-              '${UiJ.url}kompleks/download/house/${controller.kompleks!.mainimagepathsecond}',
-              fit: BoxFit.fill,
-            )),
+                  '${UiJ.url}kompleks/download/house/${controller.kompleks!.mainimagepathsecond}',
+                  fit: BoxFit.fill,
+                )),
           ],
         )),
       ],

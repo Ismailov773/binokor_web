@@ -60,7 +60,7 @@ class KompleksPage extends StatelessWidget {
                                 controller.changeindexpage(5);
                               },
                               child: HoverContainer(
-                                padding: EdgeInsets.all(20),
+                                padding: EdgeInsets.all(10),
                                 hoverColor: UiJ.hovercolor,
                                 cursor: MouseCursor.defer,
                                 height: MediaQuery.of(context).size.width <
@@ -361,33 +361,3 @@ class KompleksPage extends StatelessWidget {
     );
   }
 }
-
-//
-//   BlocConsumer<KompleksBloc, DskState>(
-//   builder: (context, state) {
-//   if (state is DskEmtyState) {
-//   return Center(child: Text("No data!"));
-//   }
-//   if (state is DskLoadingState) {
-//   return Center(child: CircularProgressIndicator());
-//   }
-//   if (state is HouseLoadedSatate) {
-//   _listKompleks = state.loadedHouse;
-//   if (_listKompleks.length != 0) {
-//   _listKompleks.sort((a, b) => a.id!.compareTo(b.id!));
-//   return Container(
-//   alignment: Alignment.center,
-//   padding: EdgeInsets.only(left: 100, right: 100),
-//   child: main(context),
-//   );
-//   }
-//   }
-//   if (state is DskErrorState) {
-//   return Center(
-//   child: Text("Сервер не работает!"),
-//   );
-//   }
-//   return SizedBox.shrink();
-//   },
-//   listener: (context, state) {});
-// }
