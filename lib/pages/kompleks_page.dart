@@ -27,8 +27,8 @@ class KompleksPage extends StatelessWidget {
 
   Widget main(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
+      // mainAxisAlignment: MainAxisAlignment.center,
+      // crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Container(
           padding: EdgeInsets.only(top: 20),
@@ -46,6 +46,7 @@ class KompleksPage extends StatelessWidget {
           height: 20,
         ),
         Expanded(
+
             child: ListView.builder(
                 itemCount: controller.listKompleks.length,
                 itemBuilder: (context, index) {

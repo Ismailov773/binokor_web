@@ -6,6 +6,8 @@ import 'package:get/get_core/src/get_main.dart';
 import '../getconrollers/Controller.dart';
 import '../models/ImageDom.dart';
 import '../models/uij.dart';
+import 'catalog_main_page.dart';
+import 'news_page.dart';
 
 int _current = 0;
 CarouselController carouselController = CarouselController();
@@ -36,9 +38,7 @@ class FirstPage extends StatelessWidget {
                 )),
           )
         : StatefulBuilder(builder: (context, setState) {
-            return Container(
-                // color: Colors.grey[900],
-                child: Column(
+            return ListView(
               children: [
                 Center(
                     child: CarouselSlider(
@@ -124,41 +124,62 @@ class FirstPage extends StatelessWidget {
                                   ? Axis.vertical
                                   : Axis.horizontal,
                         ))),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: controller.listKompleks.map(
-                    (image) {
-                      int index = controller.listKompleks.indexOf(image);
-                      return InkWell(
-                          onTap: () {
-                            setState(() {
-                              _current = index;
-                              carouselController.jumpToPage(index);
-                            });
-                          },
-                          child: Container(
-                            width: 40,
-                            height: 10,
-                            margin: EdgeInsets.symmetric(
-                                vertical: 20.0, horizontal: 10.0),
-                            decoration: BoxDecoration(
-                              shape: BoxShape.rectangle,
-                              borderRadius: BorderRadius.circular(5),
-                              border: Border.all(
-                                color: _current == index
-                                    ? Colors.red
-                                    : Colors.black,
-                                width: 1,
-                              ),
-                              color:
-                                  _current == index ? Colors.red : Colors.white,
-                            ),
-                          ));
-                    },
-                  ).toList(), // this was the part the I had to add
-                ),
+                Container(
+                    height: 50,
+                    width: MediaQuery.of(context).size.width,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: controller.listKompleks.map(
+                        (image) {
+                          int index = controller.listKompleks.indexOf(image);
+                          return InkWell(
+                              onTap: () {
+                                setState(() {
+                                  _current = index;
+                                  carouselController.jumpToPage(index);
+                                });
+                              },
+                              child: Container(
+                                width: 40,
+                                height: 10,
+                                margin: EdgeInsets.symmetric(
+                                    vertical: 20.0, horizontal: 10.0),
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.rectangle,
+                                  borderRadius: BorderRadius.circular(5),
+                                  border: Border.all(
+                                    color: _current == index
+                                        ? Colors.red
+                                        : Colors.black,
+                                    width: 1,
+                                  ),
+                                  color: _current == index
+                                      ? Colors.red
+                                      : Colors.white,
+                                ),
+                              ));
+                        },
+                      ).toList(), // this was the part the I had to add
+                    )),
+                // SizedBox(
+                //   height: 10,
+                // ),
+                // Container(
+                //     height: MediaQuery.of(context).size.height,
+                //     width: MediaQuery.of(context).size.width,
+                //     child: NewsPage()),
+                // SizedBox(
+                //   height: 10,
+                // ),
+                // Container(
+                //     height: MediaQuery.of(context).size.height,
+                //     width: MediaQuery.of(context).size.width,
+                //     child: CatalogMainPage()),
+                // SizedBox(
+                //   height: 10,
+                // ),
               ],
-            ));
+            );
           });
   }
 }

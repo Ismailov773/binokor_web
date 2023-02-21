@@ -28,7 +28,7 @@ class NewsPage extends StatelessWidget {
   }
 
   Widget main(BuildContext context) {
-    return Column(
+    return ListView(
       children: [
         Padding(
             padding: EdgeInsets.only(left: 100, right: 100),
@@ -47,9 +47,12 @@ class NewsPage extends StatelessWidget {
         SizedBox(
           height: 30,
         ),
-        MediaQuery.of(context).size.width > UiJ.widthSize
-            ? listWeb(context)
-            : listPhone(context)
+        Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            child: MediaQuery.of(context).size.width > UiJ.widthSize
+                ? listWeb(context)
+                : listPhone(context))
       ],
     );
   }
@@ -58,9 +61,8 @@ class NewsPage extends StatelessWidget {
     return Expanded(
         child: Padding(
             padding: EdgeInsets.only(
-                left: MediaQuery.of(context).size.width > UiJ.widthSize
-                    ? 50
-                    : 20,
+                left:
+                    MediaQuery.of(context).size.width > UiJ.widthSize ? 50 : 20,
                 right: MediaQuery.of(context).size.width > UiJ.widthSize
                     ? 50
                     : 20),
@@ -83,18 +85,15 @@ class NewsPage extends StatelessWidget {
                                     Expanded(
                                         // padding: EdgeInsets.only(left: 100, right: 100),
                                         // margin: EdgeInsets.all(20),
-                                        child:  Image.network(
-                                                        '${UiJ.url}news/download/news/${_listnews[index].imagepath}',
-                                                        width: double.infinity,
-                                                        height: 300,
-                                                        errorBuilder: (context,
-                                                            exception,
-                                                            stackTrace) {
-                                                  return Center(
-                                                    child:
-                                                        CircularProgressIndicator(),
-                                                  );
-                                                })),
+                                        child: Image.network(
+                                            '${UiJ.url}news/download/news/${_listnews[index].imagepath}',
+                                            width: double.infinity,
+                                            height: 300, errorBuilder: (context,
+                                                exception, stackTrace) {
+                                      return Center(
+                                        child: CircularProgressIndicator(),
+                                      );
+                                    })),
                                     SizedBox(
                                       width: 50,
                                     ),

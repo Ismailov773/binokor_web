@@ -17,6 +17,7 @@ import 'package:marquee/marquee.dart';
 import '../models/uij.dart';
 import '../widgets/aboutMenu_dropdown.dart';
 
+import 'adress_page.dart';
 import 'catalog_page.dart';
 import 'contact_page.dart';
 import 'first_page.dart';
@@ -36,7 +37,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   final controller = Get.put(Controller());
   ScrollController _scrollController = ScrollController();
   double _scrollPosition = 0;
-
 
   @override
   void initState() {
@@ -237,182 +237,25 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   height: 50,
                   width: MediaQuery.of(context).size.width,
                   child: Marquee(
-                  text: controller.listnews[0].title!,
-                  style: TextStyle(fontSize: 20, color: Colors.blue[600]),
-                  scrollAxis: Axis.horizontal,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  blankSpace: MediaQuery.of(context).size.width,
-                  velocity: 100.0,
-                  pauseAfterRound: Duration(seconds: 5),
-                  startPadding: 10.0,
-                  accelerationDuration: Duration(seconds: 1),
-                  accelerationCurve: Curves.linear,
-                  decelerationDuration: Duration(milliseconds: 500),
-                  decelerationCurve: Curves.easeOut,
-                ),),
+                    text: controller.listnews[0].title!,
+                    style: TextStyle(fontSize: 20, color: Colors.blue[600]),
+                    scrollAxis: Axis.horizontal,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    blankSpace: MediaQuery.of(context).size.width,
+                    velocity: 100.0,
+                    pauseAfterRound: Duration(seconds: 5),
+                    startPadding: 10.0,
+                    accelerationDuration: Duration(seconds: 1),
+                    accelerationCurve: Curves.linear,
+                    decelerationDuration: Duration(milliseconds: 500),
+                    decelerationCurve: Curves.easeOut,
+                  ),
+                ),
                 Container(
                     height: MediaQuery.of(context).size.height,
                     width: MediaQuery.of(context).size.width,
                     child: selectionPage(controller.indexpage.value)),
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                    height: MediaQuery.of(context).size.height,
-                    width: MediaQuery.of(context).size.width,
-                    child: NewsPage()),
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                    height: MediaQuery.of(context).size.height,
-                    width: MediaQuery.of(context).size.width,
-                    child: CatalogMainPage()),
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  color: Colors.black,
-                  padding: EdgeInsets.only(left: 100, right: 100, top: 50),
-                  child: Column(
-                    children: [
-                      Container(
-                          alignment: Alignment.topLeft,
-                          child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text('Адрес компании:',
-                                    style: TextStyle(
-                                        fontSize:
-                                            UiJ.sizeweight(context) ? 25 : 30,
-                                        fontFamily: UiJ.fontbold,
-                                        color: Colors.white)),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                RichText(
-                                  text: TextSpan(children: [
-                                    WidgetSpan(
-                                        child: Icon(Icons.location_on_rounded,
-                                            color: Colors.blue)),
-                                    TextSpan(
-                                        text: '${UiJ.adress}',
-                                        style: TextStyle(
-                                            fontSize: UiJ.sizeweight(context)
-                                                ? 20
-                                                : 25,
-                                            fontWeight: FontWeight.w200,
-                                            fontFamily: UiJ.font,
-                                            color: Colors.white))
-                                  ]),
-                                )
-                              ])),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Container(
-                          alignment: Alignment.topLeft,
-                          child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Icon(
-                                  Icons.phone,
-                                  color: Colors.blue,
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                RichText(
-                                  text: TextSpan(children: [
-                                    TextSpan(
-                                        text: '${UiJ.phone}  ',
-                                        style: TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w200,
-                                            fontFamily: UiJ.font,
-                                            color: Colors.white)),
-                                  ]),
-                                )
-                              ])),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Container(
-                        alignment: Alignment.topLeft,
-                        child: InkWell(
-                            onTap: () {
-                              UiJ.callTelegram;
-                            },
-                            child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Icon(
-                                    Icons.telegram,
-                                    color: Colors.blue,
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  RichText(
-                                    text: TextSpan(children: [
-                                      TextSpan(
-                                          text: UiJ.telegram,
-                                          style: TextStyle(
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.w200,
-                                              fontFamily: UiJ.font,
-                                              color: Colors.white))
-                                    ]),
-                                  )
-                                ])),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Container(
-                        alignment: Alignment.topLeft,
-                        child: InkWell(
-                            onTap: () {
-                              // UiJ.callTelegram;
-                            },
-                            child: Column(
-                              children: [
-                                Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Icon(
-                                        Icons.email,
-                                        color: Colors.blue,
-                                      ),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      RichText(
-                                        text: TextSpan(children: [
-                                          TextSpan(
-                                              text: "info@dsk.uz",
-                                              style: TextStyle(
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.w200,
-                                                  fontFamily: UiJ.font,
-                                                  color: Colors.white))
-                                        ]),
-                                      ),
-                                    ]),
-                                Container(
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    "Copyright © 2020 Template by DSK BINOKOR",
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                )
-                              ],
-                            )),
-                      )
-                    ],
-                  ),
-                ),
+                AdressPage()
               ],
             )
           ]),
