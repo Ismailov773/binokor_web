@@ -12,6 +12,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:marquee/marquee.dart';
 
 import '../models/uij.dart';
 import '../widgets/aboutMenu_dropdown.dart';
@@ -35,6 +36,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   final controller = Get.put(Controller());
   ScrollController _scrollController = ScrollController();
   double _scrollPosition = 0;
+
 
   @override
   void initState() {
@@ -232,11 +234,42 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               controller: _scrollController,
               children: [
                 Container(
+                  height: 50,
+                  width: MediaQuery.of(context).size.width,
+                  child: Marquee(
+                  text: controller.listnews[0].title!,
+                  style: TextStyle(fontSize: 20, color: Colors.blue[600]),
+                  scrollAxis: Axis.horizontal,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  blankSpace: MediaQuery.of(context).size.width,
+                  velocity: 100.0,
+                  pauseAfterRound: Duration(seconds: 5),
+                  startPadding: 10.0,
+                  accelerationDuration: Duration(seconds: 1),
+                  accelerationCurve: Curves.linear,
+                  decelerationDuration: Duration(milliseconds: 500),
+                  decelerationCurve: Curves.easeOut,
+                ),),
+                Container(
                     height: MediaQuery.of(context).size.height,
                     width: MediaQuery.of(context).size.width,
                     child: selectionPage(controller.indexpage.value)),
                 SizedBox(
-                  height: 50,
+                  height: 10,
+                ),
+                Container(
+                    height: MediaQuery.of(context).size.height,
+                    width: MediaQuery.of(context).size.width,
+                    child: NewsPage()),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                    height: MediaQuery.of(context).size.height,
+                    width: MediaQuery.of(context).size.width,
+                    child: CatalogMainPage()),
+                SizedBox(
+                  height: 10,
                 ),
                 Container(
                   color: Colors.black,

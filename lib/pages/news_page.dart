@@ -59,10 +59,10 @@ class NewsPage extends StatelessWidget {
         child: Padding(
             padding: EdgeInsets.only(
                 left: MediaQuery.of(context).size.width > UiJ.widthSize
-                    ? 100
+                    ? 50
                     : 20,
                 right: MediaQuery.of(context).size.width > UiJ.widthSize
-                    ? 100
+                    ? 50
                     : 20),
             child: ListView.builder(
                 itemCount: _listnews.length,
@@ -83,22 +83,9 @@ class NewsPage extends StatelessWidget {
                                     Expanded(
                                         // padding: EdgeInsets.only(left: 100, right: 100),
                                         // margin: EdgeInsets.all(20),
-                                        child: Container(
-                                            // decoration: BoxDecoration(
-                                            //     borderRadius: BorderRadius.circular(15)),
-                                            child: Card(
-                                                // shape: RoundedRectangleBorder(
-                                                //     borderRadius: BorderRadius.circular(15)),
-                                                elevation: 5,
-                                                child: Container(
-
-                                                    // padding: EdgeInsets.all(20),
-                                                    // decoration: BoxDecoration(
-                                                    //     borderRadius:
-                                                    //         BorderRadius.circular(15)),
-                                                    child: Image.network(
+                                        child:  Image.network(
                                                         '${UiJ.url}news/download/news/${_listnews[index].imagepath}',
-                                                        width: 500,
+                                                        width: double.infinity,
                                                         height: 300,
                                                         errorBuilder: (context,
                                                             exception,
@@ -107,12 +94,12 @@ class NewsPage extends StatelessWidget {
                                                     child:
                                                         CircularProgressIndicator(),
                                                   );
-                                                }))))),
+                                                })),
                                     SizedBox(
                                       width: 50,
                                     ),
                                     Expanded(
-                                        flex: 3,
+                                        flex: 4,
                                         child: Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
