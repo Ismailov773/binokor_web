@@ -22,7 +22,7 @@ class Api {
     Uri uri = Uri.parse("${UiJ.url}${url}");
     final response = await http.get(uri);
 
-    if (response.statusCode == 200) {
+    if (response.statusCode == 200 || response.statusCode == 201) {
       final List<dynamic> json = jsonDecode(utf8.decode(response.bodyBytes));
 
       return json; //json.map((e) => Catalog.fromJson(e)).toList();

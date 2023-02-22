@@ -32,7 +32,6 @@ class Controller extends GetxController {
 
   @override
   onInit() {
-    super.onInit();
 
     fetchListKompleks();
     fetchListMeneger();
@@ -41,6 +40,9 @@ class Controller extends GetxController {
     fetchListnews();
     indexpage.value = 1;
     indextab.value = 0;
+
+    super.onInit();
+
   }
 
   Future<LightUser> postLightUser(String url, LightUser user) async {
