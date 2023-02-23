@@ -236,20 +236,25 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 Container(
                   height: 50,
                   width: MediaQuery.of(context).size.width,
-                  child: Marquee(
-                    text: controller.listnews[0].title!,
-                    style: TextStyle(fontSize: 20, color: Colors.blue[600]),
-                    scrollAxis: Axis.horizontal,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    blankSpace: MediaQuery.of(context).size.width,
-                    velocity: 100.0,
-                    pauseAfterRound: Duration(seconds: 5),
-                    startPadding: 10.0,
-                    accelerationDuration: Duration(seconds: 1),
-                    accelerationCurve: Curves.linear,
-                    decelerationDuration: Duration(milliseconds: 500),
-                    decelerationCurve: Curves.easeOut,
-                  ),
+                  child: InkWell(
+                      onTap: () {
+                        controller.changeindexpage(3);
+                        controller.changeindextab(0);
+                      },
+                      child: Marquee(
+                        text: controller.listnews[0].title!,
+                        style: TextStyle(fontSize: 20, color: Colors.blue[600]),
+                        scrollAxis: Axis.horizontal,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        blankSpace: MediaQuery.of(context).size.width,
+                        velocity: 100.0,
+                        pauseAfterRound: Duration(seconds: 5),
+                        startPadding: 10.0,
+                        accelerationDuration: Duration(seconds: 1),
+                        accelerationCurve: Curves.linear,
+                        decelerationDuration: Duration(milliseconds: 500),
+                        decelerationCurve: Curves.easeOut,
+                      )),
                 ),
                 Container(
                     height: MediaQuery.of(context).size.height,
