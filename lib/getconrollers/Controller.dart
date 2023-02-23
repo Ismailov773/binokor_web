@@ -40,7 +40,6 @@ class Controller extends GetxController {
     fetchListnews();
     indexpage.value = 1;
     indextab.value = 0;
-
     super.onInit();
 
   }

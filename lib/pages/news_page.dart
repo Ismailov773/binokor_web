@@ -57,8 +57,7 @@ class NewsPage extends StatelessWidget {
   }
 
   Widget listWeb(context) {
-    return Expanded(
-        child: Padding(
+    return Padding(
             padding: EdgeInsets.only(
                 left:
                     MediaQuery.of(context).size.width > UiJ.widthSize ? 50 : 20,
@@ -153,12 +152,11 @@ class NewsPage extends StatelessWidget {
                       Divider()
                     ],
                   );
-                })));
+                }));
   }
 
   Widget listPhone(context) {
-    return Expanded(
-        child: Padding(
+    return Padding(
             padding: EdgeInsets.only(left: 20, right: 20),
             child: ListView.builder(
                 itemCount: _listnews.length,
@@ -243,7 +241,7 @@ class NewsPage extends StatelessWidget {
                                   _listnews[index]);
                             }
                           }));
-                })));
+                }));
   }
 
   Future<void> showDialogphoto(

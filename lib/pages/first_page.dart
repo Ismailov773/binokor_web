@@ -1,13 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 import '../getconrollers/Controller.dart';
-import '../models/ImageDom.dart';
 import '../models/uij.dart';
-import 'catalog_main_page.dart';
-import 'news_page.dart';
 
 int _current = 0;
 CarouselController carouselController = CarouselController();
